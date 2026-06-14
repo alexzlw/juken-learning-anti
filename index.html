@@ -463,7 +463,221 @@
         text-align: center;
       }
     }
+
+    /* Supabase 連携ダッシュボード */
+    .dashboard-panel {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 20px 25px;
+      box-shadow: var(--shadow);
+      margin-bottom: 25px;
+      border: 2px solid var(--color-primary-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1 1 200px;
+    }
+    .student-info .avatar {
+      font-size: 2.2rem;
+      background: var(--color-primary-light);
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .student-info h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-main);
+    }
+    .switch-btn {
+      font-family: var(--font-family);
+      background: none;
+      border: none;
+      color: var(--color-primary);
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      margin-top: 4px;
+      display: inline-block;
+    }
+    .switch-btn:hover {
+      color: var(--text-main);
+    }
+    .progress-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 2 1 400px;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .stat-label {
+      width: 100px;
+      font-weight: bold;
+      color: var(--text-sub);
+    }
+    .progress-bar-container {
+      background: #e4e8f0;
+      height: 14px;
+      width: 140px;
+      border-radius: 7px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar {
+      background: var(--color-primary);
+      height: 100%;
+      border-radius: 7px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    .stat-val {
+      font-weight: bold;
+      color: var(--text-main);
+      width: 80px;
+    }
+    .quiz-best {
+      font-size: 0.8rem;
+      background: #fff2e6;
+      color: #ff9f43;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    /* お名前入力モーダル */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      transition: opacity 0.3s ease;
+    }
+    .login-modal-content {
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 30px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      border: 4px solid var(--color-primary-light);
+      text-align: center;
+      position: relative;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .login-modal-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+    .login-modal-desc {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+    .login-input {
+      font-family: var(--font-family);
+      font-size: 1.1rem;
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: 2px solid var(--text-sub);
+      width: 100%;
+      margin-bottom: 20px;
+      outline: none;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .login-input:focus {
+      border-color: var(--color-primary);
+    }
+    .login-submit-btn {
+      font-family: var(--font-family);
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      background: var(--color-primary);
+      border: none;
+      padding: 10px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: transform 0.2s, background 0.2s;
+      width: 100%;
+    }
+    .login-submit-btn:hover {
+      transform: translateY(-2px);
+      background: var(--color-primary);
+      filter: brightness(1.1);
+    }
+
+    /* 「読んだよ！」チェックボタン */
+    .read-toggle-container {
+      margin-top: 30px;
+      border-top: 2px dashed #e4e8f0;
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .read-toggle-btn {
+      font-family: var(--font-family);
+      font-weight: bold;
+      font-size: 0.95rem;
+      padding: 10px 25px;
+      border-radius: 25px;
+      border: 2px solid var(--color-success);
+      background: white;
+      color: var(--color-success);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+    .read-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
+    }
+    .read-toggle-btn.completed {
+      background: var(--color-success);
+      color: white;
+      border-color: var(--color-success);
+    }
+    .read-toggle-btn.completed::before {
+      content: "🎉";
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -475,6 +689,37 @@
   </header>
 
   <div class="container">
+    
+    <!-- Supabase 連携ダッシュボード -->
+    <div id="student-dashboard" class="dashboard-panel" style="display: none;">
+      <div class="student-info">
+        <span class="avatar">👤</span>
+        <div>
+          <h3 id="student-display-name">ゲスト君</h3>
+          <button class="switch-btn" onclick="openLoginModal()">👤 べつの名前で学ぶ</button>
+        </div>
+      </div>
+      <div class="progress-stats">
+        <div class="stat-item">
+          <div class="stat-label">🧭 社会の進捗</div>
+          <div class="progress-bar-container"><div id="progress-social" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="progress-text-social" class="stat-val">0% (0/5)</span>
+          <span id="quiz-best-social" class="quiz-best">🏆 ベスト: 未挑戦</span>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">🧪 理科の進捗</div>
+          <div class="progress-bar-container"><div id="progress-science" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="progress-text-science" class="stat-val">0% (0/5)</span>
+          <span id="quiz-best-science" class="quiz-best">🏆 ベスト: 未挑戦</span>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">📖 国語の進捗</div>
+          <div class="progress-bar-container"><div id="progress-japanese" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="progress-text-japanese" class="stat-val">0% (0/5)</span>
+          <span id="quiz-best-japanese" class="quiz-best">🏆 ベスト: 未挑戦</span>
+        </div>
+      </div>
+    </div>
     
     <!-- コントロールパネル -->
     <div class="control-panel">
@@ -1294,6 +1539,278 @@
   </div>
 
   <script>
+    // Supabase 連携設定
+    const supabaseUrl = 'https://flbmnuoldkdcgumyecnk.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsYm1udW9sZGtkY2d1bXllY25rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNjQwMDAsImV4cCI6MjA5Njg0MDAwMH0.jlMKW3Gkx4EJOvOm1_U3zGmPrnefPGPqHW6MvZiqF-k';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    let currentStudent = null;
+    let readingProgressData = []; // Array of { subject, tab_index }
+    let quizHighScores = { social: null, science: null, japanese: null };
+
+    // 学生のログイン状態を確認
+    function checkStudentLogin() {
+      const savedName = localStorage.getItem('active_student_name');
+      if (savedName) {
+        loadStudentData(savedName);
+      } else {
+        openLoginModal();
+      }
+    }
+
+    function openLoginModal() {
+      let modal = document.getElementById('login-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'login-modal';
+        modal.className = 'login-modal';
+        modal.innerHTML = `
+          <div class="login-modal-content">
+            <div class="login-modal-title">ようこそ！学習ポータルへ</div>
+            <div class="login-modal-desc">お名前を入力して勉強をスタートしよう！<br>がんばった記録が保存されるよ。</div>
+            <input type="text" id="student-name-input" class="login-input" placeholder="お名前 (例: けんた)" maxlength="15">
+            <button class="login-submit-btn" onclick="submitLogin()">勉強をはじめる！</button>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      } else {
+        modal.style.display = 'flex';
+      }
+      
+      const input = document.getElementById('student-name-input');
+      if (input && currentStudent) {
+        input.value = currentStudent;
+      }
+    }
+
+    function closeLoginModal() {
+      const modal = document.getElementById('login-modal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    async function submitLogin() {
+      const input = document.getElementById('student-name-input');
+      const name = input.value.trim();
+      if (!name) {
+        alert("お名前を入力してね！");
+        return;
+      }
+      
+      const btn = document.querySelector('.login-submit-btn');
+      btn.disabled = true;
+      btn.textContent = "登録中...";
+      
+      try {
+        const { data: student, error: selectError } = await supabaseClient
+          .from('students_gem')
+          .select('name')
+          .eq('name', name)
+          .maybeSingle();
+          
+        if (selectError) throw selectError;
+        
+        if (!student) {
+          const { error: insertError } = await supabaseClient
+            .from('students_gem')
+            .insert({ name: name });
+            
+          if (insertError) throw insertError;
+        }
+        
+        await loadStudentData(name);
+      } catch (e) {
+        console.error("Error logging in:", e);
+        alert("データベース接続に失敗しました。オフラインモードで開始します。");
+        closeLoginModal();
+        currentStudent = name;
+        document.getElementById('student-display-name').textContent = `${name} 君 (オフライン)`;
+        document.getElementById('student-dashboard').style.display = 'flex';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "勉強をはじめる！";
+      }
+    }
+
+    async function loadStudentData(studentName) {
+      currentStudent = studentName;
+      localStorage.setItem('active_student_name', studentName);
+      document.getElementById('student-display-name').textContent = `${studentName} 君の部屋`;
+      document.getElementById('student-dashboard').style.display = 'flex';
+      
+      closeLoginModal();
+      
+      try {
+        const { data: readData, error: readError } = await supabaseClient
+          .from('reading_history_gem')
+          .select('subject, tab_index')
+          .eq('student_name', studentName);
+          
+        if (readError) throw readError;
+        readingProgressData = readData || [];
+      } catch (e) {
+        console.error("Failed to load reading progress:", e);
+        readingProgressData = [];
+      }
+      
+      try {
+        const { data: quizData, error: quizError } = await supabaseClient
+          .from('quiz_history_gem')
+          .select('subject, score')
+          .eq('student_name', studentName);
+          
+        if (quizError) throw quizError;
+        
+        quizHighScores = { social: null, science: null, japanese: null };
+        if (quizData) {
+          quizData.forEach(row => {
+            const sub = row.subject;
+            const score = row.score;
+            if (quizHighScores[sub] === null || score > quizHighScores[sub]) {
+              quizHighScores[sub] = score;
+            }
+          });
+        }
+      } catch (e) {
+        console.error("Failed to load quiz scores:", e);
+      }
+      
+      updateDashboardUI();
+      updateReadButtonsUI();
+    }
+
+    function updateDashboardUI() {
+      const subjects = ['social', 'science', 'japanese'];
+      subjects.forEach(sub => {
+        const readCount = readingProgressData.filter(item => item.subject === sub).length;
+        const totalTabs = 5;
+        const pct = Math.round((readCount / totalTabs) * 100);
+        
+        const bar = document.getElementById(`progress-${sub}`);
+        if (bar) bar.style.width = `${pct}%`;
+        
+        const txt = document.getElementById(`progress-text-${sub}`);
+        if (txt) txt.textContent = `${pct}% (${readCount}/${totalTabs})`;
+        
+        const best = quizHighScores[sub];
+        const bestTxt = document.getElementById(`quiz-best-${sub}`);
+        if (bestTxt) {
+          if (best !== null) {
+            bestTxt.textContent = `🏆 ベスト: ${best}点`;
+          } else {
+            bestTxt.textContent = `🏆 ベスト: 未挑戦`;
+          }
+        }
+      });
+    }
+
+    function updateReadButtonsUI() {
+      const buttons = document.querySelectorAll('.read-toggle-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('completed');
+        btn.querySelector('span').textContent = 'このページを読んだよ！';
+      });
+      
+      readingProgressData.forEach(item => {
+        const btn = document.getElementById(`btn-read-${item.subject}-${item.tab_index}`);
+        if (btn) {
+          btn.classList.add('completed');
+          btn.querySelector('span').textContent = '読了済み！';
+        }
+      });
+    }
+
+    function initReadButtons() {
+      const socialCards = document.querySelectorAll('#social-content .section-card');
+      socialCards.forEach((card, idx) => appendReadButton(card, 'social', idx));
+
+      const scienceCards = document.querySelectorAll('#science-content .section-card');
+      scienceCards.forEach((card, idx) => appendReadButton(card, 'science', idx));
+
+      const japaneseCards = document.querySelectorAll('#japanese-content .section-card');
+      japaneseCards.forEach((card, idx) => appendReadButton(card, 'japanese', idx));
+    }
+
+    function appendReadButton(card, subject, tabIndex) {
+      if (card.querySelector('.read-toggle-container')) return;
+      
+      const container = document.createElement('div');
+      container.className = 'read-toggle-container';
+      
+      const button = document.createElement('button');
+      button.className = 'read-toggle-btn';
+      button.id = `btn-read-${subject}-${tabIndex}`;
+      button.innerHTML = `<span>このページを読んだよ！</span>`;
+      button.onclick = () => togglePageRead(subject, tabIndex);
+      
+      container.appendChild(button);
+      card.appendChild(container);
+    }
+
+    async function togglePageRead(subject, tabIndex) {
+      if (!currentStudent) {
+        alert("お名前を登録してから記録してね！");
+        openLoginModal();
+        return;
+      }
+      
+      const isRead = readingProgressData.some(item => item.subject === subject && item.tab_index === tabIndex);
+      
+      try {
+        if (isRead) {
+          const { error } = await supabaseClient
+            .from('reading_history_gem')
+            .delete()
+            .eq('student_name', currentStudent)
+            .eq('subject', subject)
+            .eq('tab_index', tabIndex);
+            
+          if (error) throw error;
+          readingProgressData = readingProgressData.filter(item => !(item.subject === subject && item.tab_index === tabIndex));
+        } else {
+          const { error } = await supabaseClient
+            .from('reading_history_gem')
+            .insert({
+              student_name: currentStudent,
+              subject: subject,
+              tab_index: tabIndex
+            });
+            
+          if (error) throw error;
+          readingProgressData.push({ subject, tab_index: tabIndex });
+        }
+        updateDashboardUI();
+        updateReadButtonsUI();
+      } catch (e) {
+        console.error("Error toggling page read status:", e);
+      }
+    }
+
+    async function saveQuizScore(subject, score, total) {
+      if (!currentStudent) return;
+      
+      try {
+        const { error } = await supabaseClient
+          .from('quiz_history_gem')
+          .insert({
+            student_name: currentStudent,
+            subject: subject,
+            score: score,
+            total: total
+          });
+          
+        if (error) throw error;
+        
+        if (quizHighScores[subject] === null || score > quizHighScores[subject]) {
+          quizHighScores[subject] = score;
+        }
+        updateDashboardUI();
+      } catch (e) {
+        console.error("Error saving quiz score:", e);
+      }
+    }
+
     // ふりがな切り替えスクリプト
     function toggleRuby() {
       const body = document.body;
@@ -1605,6 +2122,9 @@
     }
 
     function showResult() {
+      const selectSubject = document.getElementById('subject-select').value;
+      saveQuizScore(selectSubject, score, currentQuizSet.length);
+
       const quizBox = document.getElementById('quiz-box');
       let message = '';
       if (score === currentQuizSet.length) {
@@ -1650,6 +2170,8 @@
     // 初期化
     window.onload = function() {
       loadQuestion();
+      initReadButtons();
+      checkStudentLogin();
     }
   </script>
 </body>
