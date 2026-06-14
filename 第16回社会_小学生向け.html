@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="小学校5年生向けの社会科「関東地方」のわかりやすいまとめページです。イラスト風デザインとふりがな切り替え機能、クイズ付き。">
+  <title>たのしく学ぶ！「関東地方」のかんたんまとめ</title>
+  
+  <!-- Google Fonts から丸文字のフォントをインポート -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+  </style>
+
+  <style>
+    /* デザインシステム定義 */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      --header-gradient: linear-gradient(135deg, #4fa4f3 0%, #1e70e5 100%);
+      --card-bg: #ffffff;
+      --text-main: #2c3e50;
+      --text-sub: #5a738e;
+      --color-primary: #1e70e5;
+      --color-primary-light: #e6f0fa;
+      --color-accent: #ff9f43;
+      --color-accent-light: #fff2e6;
+      --color-success: #2ecc71;
+      --color-success-light: #e6f9ed;
+      --font-family: 'M PLUS Rounded 1c', sans-serif;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      --border-radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.8;
+      padding-bottom: 60px;
+    }
+
+    /* ふりがな（ルビ）の調整 */
+    ruby {
+      ruby-position: over;
+    }
+    rt {
+      font-size: 0.55em;
+      color: #1e70e5;
+      letter-spacing: 0.05em;
+      padding-bottom: 0.1em;
+    }
+    /* ふりがな非表示用クラス */
+    body.hide-ruby rt {
+      display: none;
+    }
+
+    /* ヘッダーデザイン */
+    header {
+      background: var(--header-gradient);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 10px 30px rgba(30, 112, 229, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    /* メインコンテナ */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* コントロールパネル (ふりがな切替など) */
+    .control-panel {
+      background: var(--card-bg);
+      padding: 15px 25px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      border: 2px solid var(--color-primary-light);
+    }
+
+    .control-title {
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-btn {
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(30, 112, 229, 0.3);
+      transition: all 0.3s;
+    }
+
+    .toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 112, 229, 0.4);
+    }
+
+    .toggle-btn.off {
+      background: var(--text-sub);
+      box-shadow: none;
+    }
+
+    /* セクションナビゲーション */
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 2px solid transparent;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--text-sub);
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* カード・学習コンテンツ */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: none; /* 初期状態では非表示（JSで制御） */
+    }
+
+    .section-card.active {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      border-bottom: 4px solid var(--color-primary-light);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      font-size: 2.2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    /* コンテンツパーツ */
+    h3 {
+      font-size: 1.25rem;
+      margin: 25px 0 15px;
+      color: var(--text-main);
+      border-left: 5px solid var(--color-accent);
+      padding-left: 12px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    /* 重要ポイント表示用ボックス */
+    .point-box {
+      background: var(--color-accent-light);
+      border-left: 6px solid var(--color-accent);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .point-box-title {
+      font-weight: bold;
+      color: #cc6600;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 用語解説吹き出し */
+    .explain-bubble {
+      background: var(--color-primary-light);
+      padding: 15px 20px;
+      border-radius: 15px;
+      margin: 15px 0;
+      position: relative;
+      font-size: 0.95rem;
+      color: #1e5bb5;
+    }
+
+    /* クイズセクション */
+    .quiz-container {
+      background: #ffffff;
+      border-radius: var(--border-radius);
+      padding: 35px;
+      box-shadow: var(--shadow);
+      border: 3px solid var(--color-accent);
+      margin-top: 40px;
+    }
+
+    .quiz-question {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: var(--color-accent-light);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border-left: 6px solid var(--color-accent);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option-btn {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      font-family: var(--font-family);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-option-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: scale(1.01);
+    }
+
+    .quiz-option-btn.correct {
+      background: var(--color-success-light);
+      border-color: var(--color-success);
+      color: #155724;
+    }
+
+    .quiz-option-btn.incorrect {
+      background: #fde8e8;
+      border-color: #f8b4b4;
+      color: #721c24;
+    }
+
+    .quiz-feedback {
+      display: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .quiz-feedback.show-correct {
+      display: block;
+      background: var(--color-success-light);
+      color: var(--color-success);
+      border: 2px solid var(--color-success);
+    }
+
+    .quiz-feedback.show-incorrect {
+      display: block;
+      background: #fde8e8;
+      color: #e53e3e;
+      border: 2px solid #f8b4b4;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quiz-score {
+      font-weight: bold;
+      color: var(--text-sub);
+    }
+
+    .next-quiz-btn {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 159, 67, 0.3);
+      transition: all 0.3s;
+    }
+
+    .next-quiz-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 159, 67, 0.4);
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+    }
+
+    /* レスポンシブ設計 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      .control-panel {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-badge">小学5年生 しゃかい科</div>
+    <h1><ruby>関東地方<rt>かんとうちほう</rt></ruby>のかんたんまとめ</h1>
+    <p class="subtitle"><ruby>関東地方<rt>かんとうちほう</rt></ruby>のしぜん・のうぎょう・こうぎょうをマスターしよう！</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- コントロールパネル (ふりがな機能) -->
+    <div class="control-panel">
+      <div class="control-title">
+        <span>💡 おたすけ機能：漢字のうえに読みがなをつけるよ</span>
+      </div>
+      <button id="ruby-toggle" class="toggle-btn" onclick="toggleRuby()">ふりがな：ON</button>
+    </div>
+
+    <!-- タブメニュー (切り替えボタン) -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">🧭 1. しぜん</button>
+      <button class="tab-btn" onclick="switchTab(1)">🌾 2. のうぎょう・水産業</button>
+      <button class="tab-btn" onclick="switchTab(2)">🏭 3. こうぎょう</button>
+      <button class="tab-btn" onclick="switchTab(3)">✈️ 4. のりもの・かんこう</button>
+      <button class="tab-btn" onclick="switchTab(4)">🏙️ 5. 東京とまちの問題</button>
+      <button class="tab-btn" onclick="switchTab(5)">❄️ 6. 【おまけ】東北・北海道</button>
+    </div>
+
+    <!-- コンテンツカード 1. しぜん -->
+    <div id="tab-0" class="section-card active">
+      <div class="section-header">
+        <span class="section-icon">🧭</span>
+        <h2 class="section-title">しぜん（自然環境）</h2>
+      </div>
+      
+      <h3>1. <ruby>関東平野<rt>かんとうへいや</rt></ruby>と<ruby>関東<rt>かんとう</rt></ruby>ローム<ruby>層<rt>そう</rt></ruby></h3>
+      <p>
+        <ruby>関東地方<rt>かんとうちほう</rt></ruby>には、日本でいちばん広い平野である<strong><ruby>関東平野<rt>かんとうへいや</rt></ruby></strong>が広がっています。
+        ここには、大昔に富士山や箱根山から飛んできた火山灰がつもってできた<strong><ruby>関東ローム層<rt>かんとうろーむそう</rt></ruby></strong>という赤くて水はけの良い土の地層があります。
+      </p>
+      <div class="explain-bubble">
+        📖 <strong>解説：</strong>水はけが良いというのは「水がたまりにくい」ということ。だから、お米を作る「田んぼ」より、水はけの良い土が大好きな野菜を作る「畑」がたくさんあるんだよ！
+      </div>
+
+      <h3>2. 日本一の川、<ruby>利根川<rt>とねがわ</rt></ruby></h3>
+      <p>
+        <ruby>利根川<rt>とねがわ</rt></ruby>は、雨や雪の水をあつめる広さ（<strong><ruby>流域面積<rt>りゅういきめんせき</rt></ruby></strong>）が<strong>日本一</strong>の川です！
+        むかしから「<ruby>坂東太郎<rt>ばんどうたろう</rt></ruby>（ばんどう地方の長男）」というニックネームで親しまれています。
+      </p>
+
+      <h3>3. <ruby>関東地方<rt>かんとうちほう</rt></ruby>の気候</h3>
+      <p>
+        海がわ（太平洋がわ）と内陸（山に近いほう）で天気がちがいます。
+      </p>
+      <ul>
+        <li><strong>太平洋がわ（東京など）：</strong>夏は南東の季節風や台風で雨が多くてジメジメします。冬は、つめたい乾いた風（<strong>からっ風</strong>）がふくため、晴れの日が多くて空気が乾燥します。</li>
+        <li><strong>内陸（群馬県の前橋など）：</strong>夏はとてもあつく、冬はとてもさむいという、気温の差が大きくなります。</li>
+        <li><strong>小笠原諸島（父島など）：</strong>東京の南に約1000kmはなれた島で、一年中あたたかい気候です。</li>
+      </ul>
+    </div>
+
+    <!-- コンテンツカード 2. のうぎょう・水産業 -->
+    <div id="tab-1" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🌾</span>
+        <h2 class="section-title">のうぎょう・水産業</h2>
+      </div>
+
+      <h3>1. 大都市のちかくで行う「<ruby>近郊農業<rt>きんこうのうぎょう</rt></ruby>」</h3>
+      <p>
+        東京などの大都市のまわり（茨城県、千葉県、埼玉県など）では、つくった野菜をすぐにトラックで東京へ届けられるようにする<strong><ruby>近郊農業<rt>きんこうのうぎょう</rt></ruby></strong>がとてもさかんです。
+      </p>
+
+      <h3>2. すずしい気候をいかす「<ruby>高冷地農業<rt>こうれいちのうぎょう</rt></ruby>」</h3>
+      <p>
+        群馬県の**<ruby>嬬恋村<rt>つまごいむら</rt></ruby>**など、標高が高くて夏でもすずしい場所では、その気候をいかして夏のあいだに<strong>キャベツ</strong>をたくさん作っています。
+      </p>
+
+      <div class="point-box">
+        <div class="point-box-title">⭐ 覚えておこう！関東の有名な特産物</div>
+        <ul>
+          <li><strong>千葉県：</strong><strong><ruby>落花生<rt>らっかせい</rt></ruby></strong>（ピーナッツ）の生産が日本一！</li>
+          <li><strong>埼玉県（狭山市）：</strong>お茶（狭山茶）が有名。</li>
+          <li><strong>群馬県（下仁田町）：</strong>こんにゃくのもとになる「こんにゃくいも」の生産が有名。</li>
+          <li><strong>栃木県：</strong>いちご（とちおとめ）や、かんぴょうが有名。</li>
+        </ul>
+      </div>
+
+      <h3>3. さかなをとる拠点（漁港）</h3>
+      <ul>
+        <li><strong><ruby>銚子港<rt>ちょうしこう</rt></ruby>（千葉県）：</strong>つめたい波（親潮）とあたたかい波（黒潮）がぶつかる「潮目（しおめ）」に近いため、イワシやサバなどが日本でトップクラスにたくさんとれます。</li>
+        <li><strong><ruby>三崎港<rt>みさきこう</rt></ruby>（神奈川県）：</strong>遠くの海まで行く船（遠洋漁業）が集まり、<strong>マグロ</strong>がたくさん水揚げされます。</li>
+      </ul>
+    </div>
+
+    <!-- コンテンツカード 3. こうぎょう -->
+    <div id="tab-2" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🏭</span>
+        <h2 class="section-title">工業の地域的特色</h2>
+      </div>
+
+      <p>関東地方には、日本を代表する工業エリアが3つあります。</p>
+
+      <h3>1. <ruby>京浜工業地帯<rt>けいひんこうぎょうちたい</rt></ruby></h3>
+      <p>
+        東京・川崎・横浜の東京湾の西がわにあります。
+        川崎市では石油からプラスチックなどを作る「石油化学」、横須賀市では「自動車・造船」、東京都では新聞や本をつくる<strong>「印刷業」</strong>がさかんです。
+      </p>
+
+      <h3>2. <ruby>京葉工業地域<rt>けいようこうぎょうちいき</rt></ruby></h3>
+      <p>
+        千葉市、市原市など東京湾の東がわにあります。
+        鉄をつくる「鉄鋼（てっこう）」や石油化学の巨大な工場が集まっており、<strong>重化学工業</strong>の割合がとても高いのが特徴です。
+      </p>
+
+      <h3>3. <ruby>関東内陸工業地域<rt>かんとうないりくこうぎょうちいき</rt></ruby></h3>
+      <p>
+        栃木県、群馬県、埼玉県の高速道路の近くに広がっています。
+        港からはなれているため、輸入する原料をあまり使わない、<strong>自動車</strong>（群馬県太田市など）や<strong>電気製品</strong>などを組み立てる工場がたくさんあります。
+      </p>
+
+      <div class="point-box">
+        <div class="point-box-title">🎨 伝統工芸品（昔から伝わるものづくり）</div>
+        <ul>
+          <li><strong><ruby>益子焼<rt>ましこやき</rt></ruby>（栃木県）：</strong>ぽってりとしたあたたかみのあるお皿やコップ。</li>
+          <li><strong><ruby>箱根寄木細工<rt>はこねよせぎざいく</rt></ruby>（神奈川県）：</strong>いろんな色の木を組み合わせてきれいな模様をつくる箱など。</li>
+          <li><strong><ruby>黄八丈<rt>きはちじょう</rt></ruby>（東京都の八丈島）：</strong>きいろい絹（きぬ）の糸で織る美しい着物の布。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- コンテンツカード 4. のりもの・かんこう -->
+    <div id="tab-3" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">✈️</span>
+        <h2 class="section-title">のりもの・かんこう</h2>
+      </div>
+
+      <h3>1. 東京を中心にしたのりもののネットワーク</h3>
+      <p>
+        東京駅を中心に、全国へむけて新幹線や高速道路がのびています。
+      </p>
+
+      <h3>2. 2つの大きな空港</h3>
+      <ul>
+        <li><strong>羽田空港：</strong>主に日本の国内を移動する飛行機がたくさん飛んでいます。</li>
+        <li><strong>成田国際空港：</strong>世界中とつながる日本の「空の玄関」です。半導体などを輸出し、くすりなどを輸入しており、<strong>貿易額（ぼうえきがく）が日本一</strong>の場所です。</li>
+      </ul>
+
+      <h3>3. <ruby>東京湾<rt>とうきょうわん</rt></ruby>アクアライン</h3>
+      <p>
+        神奈川県川崎市と千葉県木更津市をむすぶ道路です。
+        川崎がわの約10kmは<strong>海底トンネル</strong>、木更津がわの約5kmは<strong>橋</strong>になっています。
+      </p>
+      <div class="explain-bubble">
+        ❓ <strong>どうして半分だけ海底トンネルなの？</strong><br>
+        東京湾の奥には大きな船がたくさん通るし、近くの羽田空港に飛行機が降りてくるため、高い桥をつくると邪魔になってしまうからです。でも、全部トンネルにするとお金がかかりすぎるので、半分は普通の橋にしました。
+      </div>
+
+      <h3>4. 世界遺産（世界に認められた宝物）</h3>
+      <ul>
+        <li><strong>小笠原諸島（自然遺産）：</strong>大昔から大陸とつながったことがないため、ここにしかいない珍しい生き物がたくさんくらしています。</li>
+        <li><strong>日光東照宮（文化遺産・栃木県）：</strong>徳川家康をまつる、きらびやかな建物です。</li>
+        <li><strong>富岡製糸場（文化遺産・群馬県）：</strong>明治時代につくられた、日本初の近代的な生糸（シルクの糸）の工場です。</li>
+      </ul>
+    </div>
+
+    <!-- コンテンツカード 5. 東京とまちの問題 -->
+    <div id="tab-4" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🏙️</span>
+        <h2 class="section-title">首都・東京とまちの問題</h2>
+      </div>
+
+      <h3>1. 昼間と夜間の人口のちがい</h3>
+      <p>
+        東京にはたくさんの会社や学校があるため、昼間はまわりの県から多くの人が集まります。
+        そのため、東京は<strong>「昼間の人口」が「夜間の人口」よりとても多く</strong>なります。
+        まわりの埼玉県、千葉県、神奈川県は、夜に帰ってねむる場所である<strong>ベッドタウン</strong>と呼ばれています。
+      </p>
+
+      <h3>2. 都市型水害（大雨による洪水）へのそなえ</h3>
+      <p>
+        東京の地面はアスファルトやコンクリートでおおわれているため、雨水が地面に吸い込まれず、一気に川や下水道に流れてあふれてしまう「都市型洪水」がおきやすいです。
+      </p>
+      <p>
+        特に、海より土地が低い<strong>「ゼロメートル地帯」</strong>は水害に弱いため、様々な対策をしています。
+      </p>
+      
+      <div class="point-box">
+        <div class="point-box-title">🛡️ 水害を防ぐ秘密基地：首都圏外郭放水路</div>
+        <p>
+          埼玉県の春日部市には、大雨がふったときに川からあふれた水を一時的に地下にためて、安全に大きな川（江戸川）へ流すための巨大な地下施設<strong>「<ruby>首都圏外郭放水路<rt>しゅとけんがいかくほうすいろ</rt></ruby>」</strong>がつくられました。柱が何本もならび、まるで「地下の神殿」のように見えます。
+        </p>
+      </div>
+    </div>
+
+    <!-- コンテンツカード 6. 東北・北海道 -->
+    <div id="tab-5" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">❄️</span>
+        <h2 class="section-title">【おまけ】東北・北海道地方</h2>
+      </div>
+
+      <p>学校のテストの後半に出てきた、東北地方と北海道地方 of ポイントもまとめておくよ！</p>
+
+      <h3>1. 東北地方と北海道地方の工業</h3>
+      <ul>
+        <li><strong>東北地方：</strong>東北自動車道という高速道路の近くに、スマートフォンなどに使う電子部品や、自動車を組み立てる工場が進出しました。</li>
+        <li><strong>北海道：</strong>広大な大地でとれた牛乳やじゃがいも、魚などを使った<strong>食料品工業</strong>や、苫小牧（とまこまい）での<strong>製紙・パルプ（紙づくり）</strong>、室蘭（むろらん）での<strong>鉄鋼（鉄づくり）</strong>がさかんです。</li>
+      </ul>
+
+      <h3>2. 地熱（ちねつ）発電と世界遺産</h3>
+      <ul>
+        <li><strong>地熱発電：</strong>火山の地下にあるマグマの熱を利用して電気をつくる方法です。岩手県の松川に日本初の施設があります。</li>
+        <li><strong>世界自然遺産：</strong>北海道の「知床（しれとこ）」や、青森・秋田にまたがる「白神山地（しらかみさんち - 世界最大級のブナの森）」が有名です。</li>
+      </ul>
+    </div>
+
+    <!-- 楽しく復習！クイズセクション -->
+    <div class="quiz-container">
+      <div class="section-header">
+        <span class="section-icon">✏️</span>
+        <h2 class="section-title">チャレンジクイズ！</h2>
+      </div>
+      <div id="quiz-box">
+        <div class="quiz-question" id="q-text"></div>
+        <div class="quiz-options" id="q-options"></div>
+        <div class="quiz-feedback" id="q-feedback"></div>
+        <div class="quiz-nav">
+          <div class="quiz-score" id="q-score"></div>
+          <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" style="display:none;"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+      <p>© 2026 たのしく学ぶ！社会科まとめプロジェクト</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // ふりがな切り替えスクリプト
+    function toggleRuby() {
+      const body = document.body;
+      const btn = document.getElementById('ruby-toggle');
+      if (body.classList.contains('hide-ruby')) {
+        body.classList.remove('hide-ruby');
+        btn.textContent = 'ふりがな：ON';
+        btn.classList.remove('off');
+      } else {
+        body.classList.add('hide-ruby');
+        btn.textContent = 'ふりがな：OFF';
+        btn.classList.add('off');
+      }
+    }
+
+    // タブ切り替えスクリプト
+    function switchTab(tabIndex) {
+      // 全てのタブボタンのactiveクラスを消す
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      // 全てのセクションカードのactiveクラスを消す
+      const cards = document.querySelectorAll('.section-card');
+      cards.forEach(card => card.classList.remove('active'));
+
+      // クリックされたタブとカードにactiveクラスをつける
+      tabs[tabIndex].classList.add('active');
+      const targetCard = document.getElementById(`tab-${tabIndex}`);
+      if (targetCard) {
+        targetCard.classList.add('active');
+      }
+    }
+
+    // クイズのデータ
+    const quizData = [
+      {
+        question: "富士山などの火山灰がつもってできた、水はけが良くて赤みがかかった土の層をなんというか？",
+        options: ["関東ローム層", "シラス台地", "黒土（くろつち）", "粘土層"],
+        answer: 0,
+        hint: "水はけが良いから、田んぼより野菜畑に向いているよ。"
+      },
+      {
+        question: "雨や雪の水をあつめる広さ（流域面積）が日本一で、「坂東太郎」とも呼ばれる川はどれ？",
+        options: ["信濃川（しなのがわ）", "利根川（とねがわ）", "荒川（あらかわ）", "多摩川（たまがわ）"],
+        answer: 1,
+        hint: "流域面積は日本一だけど、長さの日本一は信濃川だよ。"
+      },
+      {
+        question: "夏でも涼しい高原の気候をいかして、キャベツなどをたくさん作る群馬県の村はどこ？",
+        options: ["下仁田町（しもにたまち）", "嬬恋村（つまごいむら）", "狭山市（さやまし）", "九十九里町"],
+        answer: 1,
+        hint: "「つまごいむら」と読むよ。夏のキャベツで超有名！"
+      },
+      {
+        question: "東京などの大きな都市のまわりで、すぐ届くように野菜などをたくさんつくる农业をなんというか？",
+        options: ["促成栽培（そくせいさいばい）", "高冷地農業（こうれいちのうぎょう）", "近郊農業（きんこうのうぎょう）", "有機農業"],
+        answer: 2,
+        hint: "大都市の「近郊（ちかく）」で行うからこの名前だよ。"
+      },
+      {
+        question: "東京湾の東がわ（千葉・君津・市原など）にあり、鉄鋼や石油化学の巨大工場が集まるエリアはどれ？",
+        options: ["京浜工業地帯", "京葉工業地域", "関東内陸工業地域", "鹿島臨海工業地域"],
+        answer: 1,
+        hint: "千葉の「葉」の文字が入る名前だよ。"
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+      answered = false;
+      const currentQuiz = quizData[currentQuizIndex];
+      
+      // 質問文のセット
+      document.getElementById('q-text').textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
+      
+      // 選択肢ボタンの生成
+      const optionsContainer = document.getElementById('q-options');
+      optionsContainer.innerHTML = '';
+      
+      currentQuiz.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.textContent = option;
+        btn.onclick = () => selectOption(index);
+        optionsContainer.appendChild(btn);
+      });
+
+      // フィードバックと進むボタンの初期化
+      const feedback = document.getElementById('q-feedback');
+      feedback.style.display = 'none';
+      feedback.className = 'quiz-feedback';
+      document.getElementById('next-btn').style.display = 'none';
+      
+      // スコアの更新
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${quizData.length}`;
+    }
+
+    function selectOption(selectedIndex) {
+      if (answered) return; // すでに解答済みの場合はなにもしない
+      answered = true;
+
+      const currentQuiz = quizData[currentQuizIndex];
+      const buttons = document.querySelectorAll('.quiz-option-btn');
+      const feedback = document.getElementById('q-feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (selectedIndex === currentQuiz.answer) {
+        // 正解の場合
+        buttons[selectedIndex].classList.add('correct');
+        feedback.textContent = '🎉 せいかい！ すごいね！';
+        feedback.className = 'quiz-feedback show-correct';
+        score++;
+      } else {
+        // 不正解の場合
+        buttons[selectedIndex].classList.add('incorrect');
+        buttons[currentQuiz.answer].classList.add('correct');
+        feedback.innerHTML = `😢 ざんねん！正解は 「<strong>${currentQuiz.options[currentQuiz.answer]}</strong>」 でした。<br><small>ヒント: ${currentQuiz.hint}</small>`;
+        feedback.className = 'quiz-feedback show-incorrect';
+      }
+
+      // クイズが最後かどうかでボタンテキストを変更
+      if (currentQuizIndex === quizData.length - 1) {
+        nextBtn.textContent = '結果を見る';
+      } else {
+        nextBtn.textContent = 'つぎの問題へ';
+      }
+
+      nextBtn.style.display = 'block';
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${quizData.length}`;
+    }
+
+    function nextQuestion() {
+      if (currentQuizIndex < quizData.length - 1) {
+        currentQuizIndex++;
+        loadQuestion();
+      } else {
+        // すべて終了した場合の結果発表
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const quizBox = document.getElementById('quiz-box');
+      let message = '';
+      if (score === quizData.length) {
+        message = '🏆 パーフェクト！きみは関東地方マスターだ！';
+      } else if (score >= 3) {
+        message = '✨ おめでとう！よくがんばったね！';
+      } else {
+        message = '💪 もういちど読んでチャレンジしてみよう！';
+      }
+
+      quizBox.innerHTML = `
+        <div style="text-align: center; padding: 20px 0;">
+          <h3 style="border: none; font-size: 1.8rem; color: var(--color-accent); margin-bottom: 20px;">結果発表</h3>
+          <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">あなたのスコア: <span style="font-size: 2.2rem; color: var(--color-primary);">${score}</span> / ${quizData.length}点</p>
+          <div class="quiz-feedback show-correct" style="margin-bottom: 30px;">${message}</div>
+          <button class="next-quiz-btn" onclick="resetQuiz()">もう一回やってみる</button>
+        </div>
+      `;
+    }
+
+    function resetQuiz() {
+      currentQuizIndex = 0;
+      score = 0;
+      // 元のHTML構造に戻す
+      const quizContainer = document.querySelector('.quiz-container');
+      quizContainer.innerHTML = `
+        <div class="section-header">
+          <span class="section-icon">✏️</span>
+          <h2 class="section-title">チャレンジクイズ！</h2>
+        </div>
+        <div id="quiz-box">
+          <div class="quiz-question" id="q-text"></div>
+          <div class="quiz-options" id="q-options"></div>
+          <div class="quiz-feedback" id="q-feedback"></div>
+          <div class="quiz-nav">
+            <div class="quiz-score" id="q-score"></div>
+            <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" style="display:none;"></button>
+          </div>
+        </div>
+      `;
+      loadQuestion();
+    }
+
+    // 初期起動時に最初のクイズを表示
+    window.onload = function() {
+      loadQuestion();
+    }
+  </script>
+</body>
+</html>

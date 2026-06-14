@@ -1,0 +1,17 @@
+# Large PDF files
+*.pdf
+
+# Directory extractions / helper images
+extracted_social/
+images/
+tmp/
+
+# Python scripts
+*.py
+*.txt
+
+# OS metadata
+.DS_Store
+
+# Vercel deployment metadata
+.vercel

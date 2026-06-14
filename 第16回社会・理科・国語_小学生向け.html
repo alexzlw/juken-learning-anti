@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="小学校5年生向けの社会科「関東地方」、理科「気体」、国語「随筆文・因果関係」のわかりやすいまとめポータルです。図文並茂（完全オリジナルイラスト）、ふりがな切り替え、クイズ付き。">
+  <title>たのしく学ぶ！5年生の社会・理科・国語まとめポータル</title>
+  
+  <!-- Google Fonts から丸文字のフォントをインポート -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+  </style>
+
+  <style>
+    /* デザインシステム定義 */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      --header-gradient: linear-gradient(135deg, #4fa4f3 0%, #1e70e5 100%);
+      --card-bg: #ffffff;
+      --text-main: #2c3e50;
+      --text-sub: #5a738e;
+      --color-primary: #1e70e5;
+      --color-primary-light: #e6f0fa;
+      --color-accent: #ff9f43;
+      --color-accent-light: #fff2e6;
+      --color-success: #2ecc71;
+      --color-success-light: #e6f9ed;
+      --font-family: 'M PLUS Rounded 1c', sans-serif;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      --border-radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.8;
+      padding-bottom: 60px;
+      transition: background 0.3s;
+    }
+
+    /* ふりがな（ルビ）の調整 */
+    ruby {
+      ruby-position: over;
+    }
+    rt {
+      font-size: 0.55em;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+      padding-bottom: 0.1em;
+    }
+    /* ふりがな非表示用クラス */
+    body.hide-ruby rt {
+      display: none;
+    }
+
+    /* ヘッダーデザイン */
+    header {
+      background: var(--header-gradient);
+      color: white;
+      text-align: center;
+      padding: 45px 20px;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    /* メインコンテナ */
+    .container {
+      max-width: 950px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* コントロールパネル */
+    .control-panel {
+      background: var(--card-bg);
+      padding: 15px 25px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      border: 2px solid var(--color-primary-light);
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .subject-select-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #subject-select {
+      font-family: var(--font-family);
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid var(--color-primary);
+      background: white;
+      color: var(--text-main);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    #subject-select:hover {
+      background: var(--color-primary-light);
+    }
+
+    .toggle-btn {
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s;
+    }
+
+    .toggle-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .toggle-btn.off {
+      background: var(--text-sub);
+      box-shadow: none;
+    }
+
+    /* セクションナビゲーション */
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 2px solid transparent;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--text-sub);
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* カード・学習コンテンツ */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: none; /* JSで制御 */
+    }
+
+    .section-card.active {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      border-bottom: 4px solid var(--color-primary-light);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      font-size: 2.2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    /* コンテンツパーツ */
+    h3 {
+      font-size: 1.25rem;
+      margin: 25px 0 15px;
+      color: var(--text-main);
+      border-left: 5px solid var(--color-accent);
+      padding-left: 12px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    /* オリジナル図解ボックス（著作権フリー・完全コード製図） */
+    .illustration-box {
+      text-align: center;
+      margin: 25px 0;
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      border: 2px dashed var(--color-primary-light);
+    }
+
+    .illustration-caption {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: var(--text-sub);
+    }
+
+    /* 重要ポイント表示用ボックス */
+    .point-box {
+      background: var(--color-accent-light);
+      border-left: 6px solid var(--color-accent);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .point-box-title {
+      font-weight: bold;
+      color: #b7791f;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 用語解説吹き出し */
+    .explain-bubble {
+      background: var(--color-primary-light);
+      padding: 15px 20px;
+      border-radius: 15px;
+      margin: 15px 0;
+      position: relative;
+      font-size: 0.95rem;
+      color: var(--color-primary);
+    }
+
+    /* ガスボンベリスト */
+    .gas-bomb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .gas-bomb-card {
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+    }
+
+    /* クイズセクション */
+    .quiz-container {
+      background: #ffffff;
+      border-radius: var(--border-radius);
+      padding: 35px;
+      box-shadow: var(--shadow);
+      border: 3px solid var(--color-accent);
+      margin-top: 40px;
+    }
+
+    .quiz-question {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: var(--color-accent-light);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border-left: 6px solid var(--color-accent);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option-btn {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      font-family: var(--font-family);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-option-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: scale(1.01);
+    }
+
+    .quiz-option-btn.correct {
+      background: var(--color-success-light);
+      border-color: var(--color-success);
+      color: #155724;
+    }
+
+    .quiz-option-btn.incorrect {
+      background: #fde8e8;
+      border-color: #f8b4b4;
+      color: #721c24;
+    }
+
+    .quiz-feedback {
+      display: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .quiz-feedback.show-correct {
+      display: block;
+      background: var(--color-success-light);
+      color: var(--color-success);
+      border: 2px solid var(--color-success);
+    }
+
+    .quiz-feedback.show-incorrect {
+      display: block;
+      background: #fde8e8;
+      color: #e53e3e;
+      border: 2px solid #f8b4b4;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quiz-score {
+      font-weight: bold;
+      color: var(--text-sub);
+    }
+
+    .next-quiz-btn {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+      transition: all 0.3s;
+    }
+
+    .next-quiz-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+    }
+
+    /* レスポンシブ設計 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      .control-panel {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header id="main-header">
+    <div class="header-badge">小学5年生 学習まとめ</div>
+    <h1 id="header-title">たのしく学ぶ！社会科「関東地方」</h1>
+    <p class="subtitle" id="header-desc">関東地方のしぜん・のうぎょう・こうぎょうをマスターしよう！</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- コントロールパネル -->
+    <div class="control-panel">
+      <div class="subject-select-wrapper">
+        <label for="subject-select" style="font-weight: bold; margin-right: 5px;">📚 きょうか：</label>
+        <select id="subject-select" onchange="changeSubject()">
+          <option value="social">🗺️ 社会（関東地方）</option>
+          <option value="science">🧪 理科（気体の性質）</option>
+          <option value="japanese">📖 国語（随筆文・因果関係）</option>
+        </select>
+      </div>
+      <button id="ruby-toggle" class="toggle-btn" onclick="toggleRuby()">ふりがな：ON</button>
+    </div>
+
+    <!-- =============== 【社会】タブメニュー =============== -->
+    <div id="social-tabs" class="nav-tabs">
+      <button class="tab-btn active" onclick="switchSocialTab(0)">🧭 1. しぜん</button>
+      <button class="tab-btn" onclick="switchSocialTab(1)">🌾 2. のうぎょう・水産業</button>
+      <button class="tab-btn" onclick="switchSocialTab(2)">🏭 3. こうぎょう</button>
+      <button class="tab-btn" onclick="switchSocialTab(3)">✈️ 4. のりもの・かんこう</button>
+      <button class="tab-btn" onclick="switchSocialTab(4)">🏙️ 5. 東京とまちの問題</button>
+    </div>
+
+    <!-- =============== 【理科】タブメニュー =============== -->
+    <div id="science-tabs" class="nav-tabs" style="display: none;">
+      <button class="tab-btn active" onclick="switchScienceTab(0)">🧭 1. 気体のあつめ方</button>
+      <button class="tab-btn" onclick="switchScienceTab(1)">🧪 2. 三大気体</button>
+      <button class="tab-btn" onclick="switchScienceTab(2)">⚠️ 3. においのある気体</button>
+      <button class="tab-btn" onclick="switchScienceTab(3)">🌬️ 4. 空気のなかみ</button>
+      <button class="tab-btn" onclick="switchScienceTab(4)">🔬 5. 実験のちゅうい点</button>
+    </div>
+
+    <!-- =============== 【国語】タブメニュー =============== -->
+    <div id="japanese-tabs" class="nav-tabs" style="display: none;">
+      <button class="tab-btn active" onclick="switchJapaneseTab(0)">📖 1. 読解のきほん</button>
+      <button class="tab-btn" onclick="switchJapaneseTab(1)">🏔️ 2. 随筆①「山登り」</button>
+      <button class="tab-btn" onclick="switchJapaneseTab(2)">🤝 3. 随筆②「客は偉くない」</button>
+      <button class="tab-btn" onclick="switchJapaneseTab(3)">🍼 4. 随筆③「誰だって昔は」</button>
+      <button class="tab-btn" onclick="switchJapaneseTab(4)">🔗 5. 因果関係</button>
+    </div>
+
+    <!-- ==============================================
+         =============== 社会科コンテンツ ================
+         ============================================== -->
+    <div id="social-content">
+      <!-- 1. しぜん -->
+      <div id="social-tab-0" class="section-card active">
+        <div class="section-header">
+          <span class="section-icon">🧭</span>
+          <h2 class="section-title">しぜん（自然環境）</h2>
+        </div>
+        
+        <h3>1. <ruby>関東平野<rt>かんとうへいや</rt></ruby>と<ruby>関東<rt>かんとう</rt></ruby>ローム<ruby>層<rt>そう</rt></ruby></h3>
+        <p>
+          <ruby>関東地方<rt>かんとうちほう</rt></ruby>には、日本でいちばん広い平野である<strong><ruby>関東平野<rt>かんとうへいや</rt></ruby></strong>が広がっています。
+          ここには、大昔に富士山や箱根山から飛んできた火山灰がつもってできた<strong><ruby>関東ローム層<rt>かんとうろーむそう</rt></ruby></strong>という赤くて水はけの良い土の地層があります。
+        </p>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 380" width="100%" height="300" style="background:#eef5fc; border-radius:15px;">
+            <!-- Gunma -->
+            <rect x="40" y="40" width="120" height="90" rx="15" fill="#a8e6cf" stroke="#fff" stroke-width="3"/>
+            <text x="100" y="90" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">群馬県</text>
+            <!-- Tochigi -->
+            <rect x="170" y="30" width="120" height="100" rx="15" fill="#dcedc1" stroke="#fff" stroke-width="3"/>
+            <text x="230" y="85" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">栃木県</text>
+            <!-- Ibaraki -->
+            <rect x="300" y="60" width="130" height="130" rx="15" fill="#ffd3b6" stroke="#fff" stroke-width="3"/>
+            <text x="365" y="130" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">茨城県</text>
+            <!-- Saitama -->
+            <rect x="80" y="140" width="210" height="80" rx="15" fill="#ffaaa6" stroke="#fff" stroke-width="3"/>
+            <text x="185" y="185" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">埼玉県</text>
+            <!-- Tokyo -->
+            <rect x="100" y="230" width="180" height="60" rx="15" fill="#ff8b94" stroke="#fff" stroke-width="3"/>
+            <text x="190" y="265" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">東京都</text>
+            <!-- Chiba -->
+            <rect x="290" y="200" width="120" height="150" rx="15" fill="#ffb3ba" stroke="#fff" stroke-width="3"/>
+            <text x="350" y="280" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">千葉県</text>
+            <!-- Kanagawa -->
+            <rect x="90" y="300" width="150" height="70" rx="15" fill="#baffc9" stroke="#fff" stroke-width="3"/>
+            <text x="165" y="340" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="15" text-anchor="middle">神奈川県</text>
+          </svg>
+          <div class="illustration-caption">【図1】関東地方の1都6県のつながりマップ</div>
+        </div>
+
+        <div class="explain-bubble">
+          📖 <strong>解説：</strong>水はけが良いというのは「水がたまりにくい」ということ。だから、お米を作る「田んぼ」より、水はけの良い土が大好きな野菜を作る「畑」がたくさんあるんだよ！
+        </div>
+
+        <h3>2. 日本一の川、<ruby>利根川<rt>とねがわ</rt></ruby></h3>
+        <p>
+          <ruby>利根川<rt>とねがわ</rt></ruby>は、雨や雪の水をあつめる広さ（<strong><ruby>流域面積<rt>りゅういきめんせき</rt></ruby></strong>）が<strong>日本一</strong>の川です！
+          むかしから「<ruby>坂東太郎<rt>ばんどうたろう</rt></ruby>（ばんどう地方の長男）」というニックネームで親しまれています。
+        </p>
+
+        <h3>3. <ruby>関東地方<rt>かんとうちほう</rt></ruby>の気候</h3>
+        <p>
+          海がわ（太平洋がわ）と内陸（山に近いほう）で天気がちがいます。
+        </p>
+        
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 240" width="100%" height="200" style="background:#fff; border-radius:15px; padding:10px;">
+            <!-- Axis -->
+            <line x1="50" y1="180" x2="450" y2="180" stroke="#ccc" stroke-width="2"/>
+            <line x1="50" y1="20" x2="50" y2="180" stroke="#ccc" stroke-width="2"/>
+            <line x1="450" y1="20" x2="450" y2="180" stroke="#ccc" stroke-width="2"/>
+            
+            <!-- Left Temp axis label -->
+            <text x="25" y="15" font-size="9" fill="#ff7675" font-weight="bold" font-family="'M PLUS Rounded 1c'">気温(℃)</text>
+            <circle cx="77" cy="140" r="4" fill="#ff7675"/><circle cx="197" cy="70" r="4" fill="#ff7675"/>
+            <circle cx="257" cy="45" r="4" fill="#ff7675"/><circle cx="407" cy="135" r="4" fill="#ff7675"/>
+            <path d="M 77,140 L 137,110 L 197,70 L 257,45 L 317,55 L 377,115 L 407,135" fill="none" stroke="#ff7675" stroke-width="3"/>
+            
+            <!-- Precipitation bars -->
+            <rect x="70" y="150" width="15" height="30" fill="#74b9ff" rx="2"/>
+            <rect x="130" y="130" width="15" height="50" fill="#74b9ff" rx="2"/>
+            <rect x="197" y="90" width="15" height="90" fill="#74b9ff" rx="2"/>
+            <rect x="257" y="100" width="15" height="80" fill="#74b9ff" rx="2"/>
+            <rect x="317" y="50" width="15" height="130" fill="#74b9ff" rx="2"/>
+            <rect x="377" y="120" width="15" height="60" fill="#74b9ff" rx="2"/>
+            <rect x="407" y="155" width="15" height="25" fill="#74b9ff" rx="2"/>
+            
+            <text x="455" y="15" font-size="9" fill="#74b9ff" font-weight="bold" font-family="'M PLUS Rounded 1c'">降水量</text>
+            <text x="77" y="198" font-size="9" text-anchor="middle" fill="#666">1月</text>
+            <text x="197" y="198" font-size="9" text-anchor="middle" fill="#666">5月</text>
+            <text x="257" y="198" font-size="9" text-anchor="middle" fill="#666">7月</text>
+            <text x="317" y="198" font-size="9" text-anchor="middle" fill="#666">9月</text>
+            <text x="407" y="198" font-size="9" text-anchor="middle" fill="#666">12月</text>
+          </svg>
+          <div class="illustration-caption">【図2】東京の平均気温（赤線）と降水量（青棒）の特徴</div>
+        </div>
+
+        <ul>
+          <li><strong>太平洋がわ（東京など）：</strong>夏は南東の季節風や台風で雨が多くてジメジメします。冬は、つめたい乾いた風（<strong>からっ風</strong>）がふくため、晴れの日が多くて空気が乾燥します。</li>
+          <li><strong>内陸（群馬県の前橋など）：</strong>夏はとてもあつく、冬はとてもさむいという、気温の差が大きくなります。</li>
+        </ul>
+      </div>
+
+      <!-- 2. のうぎょう・水産業 -->
+      <div id="social-tab-1" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🌾</span>
+          <h2 class="section-title">のうぎょう・水産業</h2>
+        </div>
+
+        <h3>1. 大都市のちかくで行う「<ruby>近郊農業<rt>きんこうのうぎょう</rt></ruby>」</h3>
+        <p>
+          東京などの大都市のまわり（茨城県、千葉県、埼玉県など）では、つくった野菜をすぐにトラックで東京へ届けられるようにする<strong><ruby>近郊農業<rt>きんこうのうぎょう</rt></ruby></strong>がとてもさかんです。
+        </p>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 400 160" width="100%" height="150" style="background:#fff2e6; border-radius:15px;">
+            <circle cx="90" cy="80" r="35" fill="#2ecc71" opacity="0.9"/>
+            <circle cx="80" cy="80" r="28" fill="#27ae60" opacity="0.8"/>
+            <path d="M 60,80 Q 90,40 120,80 Q 90,120 60,80" fill="none" stroke="#fff" stroke-width="2"/>
+            <text x="90" y="140" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#b7791f" font-size="12" text-anchor="middle">嬬恋村キャベツ</text>
+            <g transform="translate(110,0)">
+              <path d="M 60,80 C 60,50 80,50 100,65 C 120,50 140,50 140,80 C 140,110 120,110 100,95 C 80,110 60,110 60,80 Z" fill="#e67e22"/>
+              <text x="100" y="140" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#b7791f" font-size="12" text-anchor="middle">千葉県落花生</text>
+            </g>
+            <g transform="translate(220,0)">
+              <path d="M 50,110 Q 50,50 90,40" fill="none" stroke="#f1c40f" stroke-width="3"/>
+              <circle cx="80" cy="45" r="4" fill="#f1c40f"/><circle cx="70" cy="55" r="4" fill="#f1c40f"/>
+              <circle cx="60" cy="65" r="4" fill="#f1c40f"/><circle cx="53" cy="80" r="4" fill="#f1c40f"/>
+              <text x="70" y="140" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#b7791f" font-size="12" text-anchor="middle">水郷地帯早場米</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図3】関東地方の気候や地形をいかした特徴的な農産物</div>
+        </div>
+
+        <h3>2. すずしい気候をいかす「<ruby>高冷地農業<rt>こうれいちのうぎょう</rt></ruby>」</h3>
+        <p>
+          群馬県の<strong><ruby>嬬恋村<rt>つまごいむら</rt></ruby></strong>など、標高が高くて夏でもすずしい場所では、その気候をいかして夏のあいだに<strong>キャベツ</strong>をたくさん作っています。
+        </p>
+
+        <div class="point-box">
+          <div class="point-box-title">⭐ 覚えておこう！関東の有名な特産物</div>
+          <ul>
+            <li><strong>千葉県：</strong><strong><ruby>落花生<rt>らっかせい</rt></ruby></strong>（ピーナッツ）の生産が日本一！</li>
+            <li><strong>埼玉県（狭山市）：</strong>お茶（狭山茶）が有名。</li>
+            <li><strong>群馬県（下仁田町）：</strong>こんにゃくのもとになる「こんにゃくいも」の生産が有名。</li>
+            <li><strong>栃木県：</strong>いちご（とちおとめ）や、かんぴょうが有名。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. こうぎょう -->
+      <div id="social-tab-2" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🏭</span>
+          <h2 class="section-title">工業の地域的特色</h2>
+        </div>
+
+        <p>関東地方には、日本を代表する工業エリアが3つあります。</p>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 400 200" width="100%" height="150" style="background:#fcf8e3; border-radius:15px;">
+            <rect x="40" y="80" width="80" height="50" fill="#7f8c8d" />
+            <polygon points="40,80 60,60 80,80 100,60 120,80" fill="#95a5a6" />
+            <rect x="60" y="30" width="15" height="30" fill="#34495e" />
+            <text x="80" y="155" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#7f8c8d" font-size="12" text-anchor="middle">重化学工業（鉄鋼・石油）</text>
+            <g transform="translate(180, 20)">
+              <rect x="20" y="70" width="100" height="30" fill="#e74c3c" rx="5"/>
+              <rect x="35" y="45" width="55" height="30" fill="#e74c3c" rx="5"/>
+              <circle cx="45" cy="100" r="12" fill="#34495e" stroke="#fff" stroke-width="2"/>
+              <circle cx="95" cy="100" r="12" fill="#34495e" stroke="#fff" stroke-width="2"/>
+              <text x="70" y="135" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#e74c3c" font-size="12" text-anchor="middle">内陸組み立て工業（自動車）</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図4】湾岸の巨大工場と、内陸の高速道路沿い自動車工場</div>
+        </div>
+
+        <h3>1. <ruby>京浜工業地帯<rt>けいひんこうぎょうちたい</rt></ruby></h3>
+        <p>
+          東京・川崎・横浜の東京湾の西がわにあります。
+          川崎市では石油からプラスチックなどを作る「石油化学」、横須賀市では「自動車・造船」、東京都では新聞や本をつくる<strong>「印刷業」</strong>がさかんです。
+        </p>
+
+        <h3>2. <ruby>京葉工業地域<rt>けいようこうぎょうちいき</rt></ruby></h3>
+        <p>
+          千葉市、市原市など東京湾の東がわにあります。
+          鉄をつくる「鉄鋼（てっこう）」や石油化学の巨大な工場が集まっており、<strong>重化学工業</strong>の割合がとても高いのが特徴です。
+        </p>
+      </div>
+
+      <!-- 4. のりもの・かんこう -->
+      <div id="social-tab-3" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">✈️</span>
+          <h2 class="section-title">のりもの・かんこう</h2>
+        </div>
+
+        <h3>1. 東京を中心にしたのりもののネットワーク</h3>
+        <p>
+          東京駅を中心に、全国へむけて新幹線や高速道路がのびています。
+        </p>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 400 150" width="100%" height="130" style="background:#e8f4f8; border-radius:15px;">
+            <path d="M 50,90 L 250,90 C 280,90 310,80 330,60 L 350,60 L 350,95 L 50,95 Z" fill="#fff" stroke="#111" stroke-width="2"/>
+            <path d="M 50,90 Q 200,90 330,60" fill="none" stroke="#2980b9" stroke-width="3"/>
+            <rect x="100" y="70" width="30" height="12" fill="#333" rx="2"/>
+            <rect x="150" y="70" width="30" height="12" fill="#333" rx="2"/>
+            <rect x="200" y="70" width="30" height="12" fill="#333" rx="2"/>
+            <text x="200" y="125" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2980b9" font-size="14" text-anchor="middle">新幹線・高速道路の起点「東京」</text>
+          </svg>
+          <div class="illustration-caption">【図5】全国へ高速で移動できる新幹線のネットワーク</div>
+        </div>
+
+        <h3>2. 2つの大きな空港</h3>
+        <ul>
+          <li><strong>羽田空港：</strong>主に日本の国内を移動する飛行機が飛んでいます。</li>
+          <li><strong>成田国際空港：</strong>世界中とつながる日本の「空の玄関」です。半導体などを輸出し、くすりなどを輸入しており、<strong>貿易額（ぼうえきがく）が日本一</strong>の場所です。</li>
+        </ul>
+      </div>
+
+      <!-- 5. 東京とまちの問題 -->
+      <div id="social-tab-4" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🏙️</span>
+          <h2 class="section-title">首都・東京とまちの問題</h2>
+        </div>
+
+        <h3>1. 昼間と夜間の人口のちがい</h3>
+        <p>
+          東京にはたくさんの会社や学校があるため、昼間はまわりの県から多くの人が集まります。
+          そのため、東京は<strong>「昼間の人口」が「夜間の人口」よりとても多く</strong>なります。
+          まわりの埼玉県、千葉県、神奈川県は、夜に帰ってねむる場所である<strong>ベッドタウン</strong>と呼ばれています。
+        </p>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 400 180" width="100%" height="150" style="background:#eef7f2; border-radius:15px;">
+            <circle cx="100" cy="70" r="25" fill="#f1c40f"/>
+            <text x="100" y="130" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#d35400" font-size="14" text-anchor="middle">昼間：働く人が流入する東京</text>
+            <path d="M 270,70 A 25,25 0 1,0 310,70 A 20,20 0 1,1 270,70 Z" fill="#f39c12"/>
+            <text x="290" y="130" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="14" text-anchor="middle">夜間：まわりのベッドタウンへ帰る</text>
+          </svg>
+          <div class="illustration-caption">【図6】昼と夜で大移動する人口の波</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==============================================
+         =============== 理科コンテンツ ==================
+         ============================================== -->
+    <div id="science-content" style="display: none;">
+      <!-- 1. 気体のあつめ方 -->
+      <div id="science-tab-0" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🧭</span>
+          <h2 class="section-title">気体のあつめ方（捕集法）</h2>
+        </div>
+        <p>
+          気体をあつめるときは、その気体が「<strong>水に溶けやすいか</strong>」「<strong>空気より重いか軽いか</strong>」で3つの方法を使い分けるよ！
+        </p>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 600 190" width="100%" height="160" style="background:#e6f7ed; border-radius:15px; padding:10px;">
+            <!-- Water displacement -->
+            <g transform="translate(0, 0)">
+              <rect x="20" y="110" width="140" height="50" fill="#a0e0ff" stroke="#333" stroke-width="2" opacity="0.7"/>
+              <rect x="65" y="50" width="50" height="90" rx="5" fill="none" stroke="#333" stroke-width="2"/>
+              <circle cx="80" cy="70" r="5" fill="#fff" stroke="#333"/><circle cx="90" cy="85" r="4" fill="#fff" stroke="#333"/>
+              <path d="M 10,90 L 90,90 L 90,120" fill="none" stroke="#777" stroke-width="3"/>
+              <text x="90" y="180" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="12" text-anchor="middle">水上置換法</text>
+            </g>
+            <!-- Downward -->
+            <g transform="translate(200, 0)">
+              <rect x="65" y="60" width="50" height="90" rx="5" fill="none" stroke="#333" stroke-width="2"/>
+              <path d="M 65,60 L 115,60" stroke="#333" stroke-width="2"/>
+              <path d="M 40,40 L 90,40 L 90,130" fill="none" stroke="#777" stroke-width="3"/>
+              <path d="M 90,130 L 90,145 M 90,145 L 85,140 M 90,145 L 95,140" fill="none" stroke="#e74c3c" stroke-width="2"/>
+              <text x="90" y="180" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="12" text-anchor="middle">下方置換法 (重い気体)</text>
+            </g>
+            <!-- Upward -->
+            <g transform="translate(400, 0)">
+              <rect x="65" y="40" width="50" height="90" rx="5" fill="none" stroke="#333" stroke-width="2"/>
+              <path d="M 40,140 L 90,140 L 90,60" fill="none" stroke="#777" stroke-width="3"/>
+              <path d="M 90,60 L 90,45 M 90,45 L 85,50 M 90,45 L 95,50" fill="none" stroke="#2ecc71" stroke-width="2"/>
+              <text x="90" y="180" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="12" text-anchor="middle">上方置換法 (軽い気体)</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図1】気体の性質にあわせた3つの集め方</div>
+        </div>
+
+        <h3>1. 水上置換法（すいじょうちかんほう）</h3>
+        <p>
+          水を入れた水そうのなかに、集気びんをさかさまに立てて、泡となって出てくる気体をあつめる方法だよ。
+        </p>
+        <ul>
+          <li><strong>向いている気体：</strong>水に<strong>溶けにくい</strong>気体（酸素や水素など）。</li>
+          <li><strong>とくちょう：</strong>集気びんのなかの空気が追い出されて気体だけになるので、いちばんきれい（純粋）に気体をあつめることができるよ。</li>
+        </ul>
+      </div>
+
+      <!-- 2. 三大気体 -->
+      <div id="science-tab-1" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🧪</span>
+          <h2 class="section-title">三大気体（酸素・二酸化炭素・水素）</h2>
+        </div>
+
+        <h3>1. <ruby>酸素<rt>さんそ</rt></ruby></h3>
+        <p>
+          生きものが呼吸（こきゅう）するのに必要な気体だよ。
+        </p>
+        
+        <div class="illustration-box">
+          <svg viewBox="0 0 300 180" width="100%" height="150" style="background:#fff; border-radius:15px; padding:10px;">
+            <path d="M 130,50 L 170,50 L 170,80 L 220,150 C 230,165 210,170 150,170 C 90,170 70,165 80,150 L 130,80 Z" fill="none" stroke="#333" stroke-width="2.5"/>
+            <rect x="128" y="45" width="44" height="10" fill="#95a5a6"/>
+            <path d="M 140,20 L 145,20 L 145,140 L 140,140" fill="none" stroke="#333" stroke-width="1.5"/>
+            <path d="M 130,10 L 155,10 L 148,20 L 137,20 Z" fill="none" stroke="#333" stroke-width="1.5"/>
+            <path d="M 132,12 L 152,12 L 145,20 Z" fill="#3498db" opacity="0.5"/>
+            <circle cx="120" cy="160" r="5" fill="#2c3e50"/><circle cx="150" cy="160" r="6" fill="#2c3e50"/><circle cx="180" cy="160" r="5" fill="#2c3e50"/>
+            <rect x="90" y="145" width="120" height="23" fill="#3498db" opacity="0.3"/>
+            <path d="M 158,50 L 158,70 L 240,70 L 240,130" fill="none" stroke="#777" stroke-width="2.5"/>
+          </svg>
+          <div class="illustration-caption">【図2】二酸化マンガンと過酸化水素水から酸素を作る装置</div>
+        </div>
+
+        <ul>
+          <li><strong>とくちょう：</strong>自分自身は燃えないけれど、ほかのものが燃えるのを強くたすける性質（<strong>助燃性：じょねんせい</strong>）があるよ。酸素のなかに火のついた線香を入れると、炎をあげて激しく燃え上がるんだ！</li>
+        </ul>
+      </div>
+
+      <!-- 3. においのある気体 -->
+      <div id="science-tab-2" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">⚠️</span>
+          <h2 class="section-title">においのある気体（アンモニア・塩化水素）</h2>
+        </div>
+        <p>
+          鼻をつくようなツンとしたにおい（<strong>刺激臭：しげきしゅう</strong>）があり、すいこむと危ない気体のなかまだよ。
+        </p>
+
+        <h3>1. アンモニア</h3>
+        
+        <div class="illustration-box">
+          <svg viewBox="0 0 200 210" width="100%" height="180" style="background:#e6f7ed; border-radius:15px; padding:10px;">
+            <circle cx="100" cy="65" r="40" fill="none" stroke="#333" stroke-width="2.5"/>
+            <rect x="92" y="105" width="16" height="30" fill="none" stroke="#333" stroke-width="2.5"/>
+            <!-- Spray -->
+            <path d="M 100,105 L 100,60 Q 90,45 80,55 M 100,60 Q 110,45 120,55 M 100,70 Q 90,65 95,80 M 100,70 Q 110,65 105,80" fill="none" stroke="#e74c3c" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="100" y1="90" x2="100" y2="180" stroke="#777" stroke-width="2.5"/>
+            <rect x="60" y="165" width="80" height="40" fill="none" stroke="#333" stroke-width="2.5"/>
+            <rect x="62" y="167" width="76" height="36" fill="#3498db" opacity="0.4"/>
+            <ellipse cx="80" cy="130" rx="4" ry="8" fill="#e74c3c" opacity="0.8"/>
+          </svg>
+          <div class="illustration-caption">【図3】アンモニアが水に非常によく溶けて赤くなる噴水実験</div>
+        </div>
+      </div>
+
+      <!-- 4. 空気のなかみ -->
+      <div id="science-tab-3" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🌬️</span>
+          <h2 class="section-title">空気のなかみはどうなっている？</h2>
+        </div>
+        
+        <p>
+          私たちがふだん吸っている空気は、いろいろな気体とまざりあってできているよ。
+        </p>
+        
+        <div class="point-box">
+          <div class="point-box-title">🎈 空気のなかの気体の割合（かわいた空気）</div>
+          <ul>
+            <li><strong>ちっ素（窒素）：約78%</strong>（いちばん多い！）<br>体のタンパク質をつくったり、植物の肥料のもとになるよ。</li>
+            <li><strong>酸素：約21%</strong>（2番目に多い！）</li>
+            <li><strong>アルゴン：約0.93%</strong></li>
+            <li><strong>二酸化炭素：約0.04%</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 5. 実験のちゅうい点 -->
+      <div id="science-tab-4" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🔬</span>
+          <h2 class="section-title">理科の実験でたいせつなちゅうい点</h2>
+        </div>
+
+        <h3>1. 試験管をあたためるとき（重ソウの分解など）</h3>
+        
+        <div class="illustration-box">
+          <svg viewBox="0 0 320 160" width="100%" height="130" style="background:#fff; border-radius:15px; padding:10px;">
+            <g transform="rotate(15, 120, 50)">
+              <rect x="40" y="35" width="140" height="25" rx="5" fill="none" stroke="#333" stroke-width="2"/>
+              <path d="M 60,35 Q 120,30 180,35" fill="none" stroke="#fff" stroke-width="1.5"/>
+              <rect x="42" y="37" width="20" height="21" fill="#bbb" />
+            </g>
+            <path d="M 60,110 L 70,80 L 80,110 Z" fill="#e74c3c"/>
+            <path d="M 65,110 L 70,90 L 75,110 Z" fill="#f1c40f"/>
+            <rect x="50" y="110" width="40" height="30" fill="#7f8c8d" />
+            <text x="180" y="130" font-family="'M PLUS Rounded 1c'" font-size="11" fill="#e74c3c" font-weight="bold">※口を少し下に下げる！</text>
+          </svg>
+          <div class="illustration-caption">【図4】試験管が割れるのを防ぐための正しい傾け方</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==============================================
+         =============== 国語コンテンツ ==================
+         ============================================== -->
+<div id="japanese-content" style="display: none;">
+      <!-- 1. 読解のきほん -->
+      <div id="japanese-tab-0" class="section-card active">
+        <div class="section-header">
+          <span class="section-icon">📖</span>
+          <h2 class="section-title"><ruby>随筆文<rt>ずいひつぶん</rt></ruby>の<ruby>読解<rt>どっかい</rt></ruby>ポイント</h2>
+        </div>
+        <p>
+          <strong><ruby>随筆文<rt>ずいひつぶん</rt></ruby>（エッセイ）</strong>とは、<ruby>筆者<rt>ひっしゃ</rt></ruby>がじぶんの<strong><ruby>経験<rt>けいけん</rt></ruby>や<ruby>事実<rt>じじつ</rt></ruby></strong>をもとに、そのとき心にかんじたことや考えたことを自由に書いた文章のことだよ。
+        </p>
+
+        <div class="point-box">
+          <div class="point-box-title">🔍 随筆文を読み解く4つのチェックポイント</div>
+          <ol>
+            <li><strong>だれが書いた文章なのか？</strong><br>筆者の年齢、仕事、性格などを知ると、筆者のものの見方がよくわかるよ。</li>
+            <li><strong>文章が書かれたきっかけは？</strong><br>何を見て、何をしてこの文章を書こうと思ったのかを見つけよう。</li>
+            <li><strong>どのような具体的な「経験（事実）」が書かれているか？</strong><br>筆者の考えの裏付け（理由・証拠）になるエピソードを探そう。</li>
+            <li><strong>筆者がいちばん伝えたかったこと（意見・結論）は何か？</strong><br>筆者からのメッセージ（要旨）をつかもう。</li>
+          </ol>
+        </div>
+
+        <h3>ミニコラム：<ruby>養老孟司<rt>ようろうたけし</rt></ruby>先生の「有用性を捨てるべき理由」</h3>
+        <p>
+          現代社会（げんだいしゃかい）は「役に立つこと（有用性）」ばかりを求めがちです。でも、養老先生はこう指摘（してき）しています。
+        </p>
+        <div class="explain-bubble">
+          「ハエ一匹ゴキブリ一匹出てこない環境（かんきょう）は、異常で不健康な世界なんだって気がつかないといけません。有用性のあるものが偉いなんて考えは捨てるべきですよ。」
+        </div>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 240" width="100%" height="200" style="background:#fdfaf6; border-radius:15px; padding:10px;">
+            <!-- Left Side: Unpaved Yard -->
+            <rect x="20" y="20" width="210" height="200" rx="10" fill="#e8d8c8" stroke="#d5b59c" stroke-width="2"/>
+            <text x="125" y="45" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#7d5a3e" font-size="14" text-anchor="middle">土の校庭（ミミズがいるよ）</text>
+            <path d="M 40,180 Q 45,160 50,180" fill="none" stroke="#2ecc71" stroke-width="3"/>
+            <path d="M 60,190 Q 65,175 70,190" fill="none" stroke="#2ecc71" stroke-width="3"/>
+            <path d="M 180,170 Q 185,150 190,170" fill="none" stroke="#2ecc71" stroke-width="3"/>
+            <path d="M 100,160 Q 110,150 120,160 T 140,160" fill="none" stroke="#e09090" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="102" cy="158" r="1.5" fill="#111"/>
+            <text x="125" y="145" font-family="'M PLUS Rounded 1c'" font-size="10" fill="#a06060" text-anchor="middle">ミミズくん</text>
+            <ellipse cx="160" cy="120" rx="18" ry="12" fill="#f39c12"/>
+            <circle cx="172" cy="105" r="10" fill="#f39c12"/>
+            <polygon points="165,98 168,90 173,98" fill="#f39c12"/>
+            <polygon points="173,98 177,90 180,98" fill="#f39c12"/>
+            <path d="M 144,124 Q 130,130 135,115" fill="none" stroke="#f39c12" stroke-width="4" stroke-linecap="round"/>
+            <text x="120" y="195" font-family="'M PLUS Rounded 1c'" font-size="10" fill="#d35400" font-weight="bold" text-anchor="middle">「土のほうが楽しいにゃ！」</text>
+            <!-- Right Side: Paved Yard -->
+            <rect x="270" y="20" width="210" height="200" rx="10" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2"/>
+            <text x="375" y="45" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#7f8c8d" font-size="14" text-anchor="middle">舗装された校庭（無機質）</text>
+            <line x1="280" y1="80" x2="470" y2="80" stroke="#d5dbdb" stroke-width="2"/>
+            <line x1="280" y1="140" x2="470" y2="140" stroke="#d5dbdb" stroke-width="2"/>
+            <line x1="340" y1="50" x2="340" y2="210" stroke="#d5dbdb" stroke-width="2"/>
+            <line x1="410" y1="50" x2="410" y2="210" stroke="#d5dbdb" stroke-width="2"/>
+            <ellipse cx="375" cy="120" rx="15" ry="5" fill="#bdc3c7"/>
+            <rect x="360" y="120" width="30" height="30" fill="#95a5a6"/>
+            <text x="375" y="195" font-family="'M PLUS Rounded 1c'" font-size="10" fill="#7f8c8d" text-anchor="middle">生き物がすめない環境</text>
+          </svg>
+          <div class="illustration-caption">【図1】舗装された校庭と、生き物がいる土の校庭</div>
+        </div>
+      </div>
+
+      <!-- 2. 随筆①「山登り」 -->
+      <div id="japanese-tab-1" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🏔️</span>
+          <h2 class="section-title">随筆①『勉強とは「山道を登る」みたいなこと』</h2>
+        </div>
+        
+        <div style="background:#f9f9f9; padding:20px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:25px; line-height:2.0; font-size:1.05rem;">
+          <p>
+            <ruby>勉強<rt>べんきょう</rt></ruby>をするとね、目には見えないけれど自分が<ruby>成長<rt>せいちょう</rt></ruby>するんだ。勉強をする前のキミとあとのキミとでは、あとのキミのほうがちょっとだけ多く<ruby>世界<rt>せかい</rt></ruby>のことを<ruby>理解<rt>りかい</rt></ruby>したことになる。キミにとっての世界が広がるってことだね。
+          </p>
+          <p>
+            <ruby>山登<rt>やまのぼ</rt></ruby>りにたとえてみよう。山道を登っていくのはつらい。でも高く登れば登るほど遠くの<ruby>景色<rt>けしき</rt></ruby>まで見わたせるようになるでしょ。それがキミにとっての世界。つらいけれどももうちょっと登ってみると、その分だけ世界が広がる。遠くのほうに川が見えたり海が見えたり山が見えたりする。全部は見えない。そうすると「その先はどうなっているのかな」と気になってしょうがない。しょうがないから、つらいけど、もう少し山を登ってみる。
+          </p>
+          <p>
+            そうやって見える世界を広げていくことは、まさしく自分自身が成長するということなんですよ。
+          </p>
+          <p>
+            遠くの世界をただながめるだけじゃなくて、身近な生活の中でもたくさんの<ruby>発見<rt>はっけん</rt></ruby>ができるようになります。
+            <ruby>化学<rt>かがく</rt></ruby>という学問を勉強するとおふろのお湯も、空から降ってくる雪も、自分の体を流れる<ruby>血液<rt>けつえき</rt></ruby>にふくまれる水分も、全部同じH₂O（エイチツーオー）という<ruby>物質<rt>ぶっしつ</rt></ruby>であることがわかる。キミが人の体に<ruby>興味<rt>きょうみ</rt></ruby>を持って、勉強して、子どもは夜ねている間に成長するということがわかれば、お父さんやお母さんが、いつも「早くねなさい」と言う意味もわかるでしょう。
+          </p>
+          <p>
+            毎日が発見の連続になるんです。やってみないとわからないことなんだけれど、それってとっても気持ちいいことなんですよ。この面白さを知れば勉強がつらいことではなくなります。ぜひみんなにも勉強という名の山登りをやってみてほしい。
+          </p>
+          <p>
+            （中略）学校の勉強だけしていると、どんな問題にも「答え」があるはずって考えてしまうよね。でもそれはかんちがい。本当は、世の中いつも「答え」があるとは限らない。簡単に出てくる「答え」ほど、あやしいと思わなきゃいけない。今はインターネットに質問（しつもん）を書きこむとすぐにだれかが答えてくれる。変動があるかもしれないが、それでもそれが「答え」かどうかは十分<ruby>疑<rt>うたが</rt></ruby>ってほしい。
+          </p>
+          <p>
+            「なぜ勉強しなくちゃいけないの？」とか「なぜ自分は生きているの？」とかいう<ruby>疑問<rt>ぎもん</rt></ruby>ははっきり言って「答え」のない疑問でしょ。「答え」がないからといって考えるのをあきらめてしまっていいわけでもない。「答え」のない疑問こそ、いつまでも自分自身で持っていなきゃいけない疑問なんだ。「答え」を知ることよりも考えることが大切ということです。つまり、「答え」を考え続けることが大切だ。その疑問にはわかりやすい「答え」はない。だから、自分で山を登っているという<ruby>感覚<rt>かんかく</rt></ruby>が大切なんだ。それがないと、いつまでたっても勉強が面白いと思えない。
+          </p>
+          <p style="text-align:right; font-size:0.9rem; color:var(--text-sub);">
+            ― <ruby>養老孟司<rt>ようろうたけし</rt></ruby>『勉強とは「山道を登る」みたいなこと』より
+          </p>
+        </div>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 240" width="100%" height="200" style="background:#e8f4f8; border-radius:15px; padding:10px;">
+            <polygon points="50,220 250,50 450,220" fill="#2ecc71" stroke="#27ae60" stroke-width="3"/>
+            <path d="M 50,220 Q 150,200 200,150 T 250,50" fill="none" stroke="#e67e22" stroke-width="4" stroke-dasharray="8 6"/>
+            <circle cx="420" cy="50" r="20" fill="#f1c40f"/>
+            <line x1="420" y1="20" x2="420" y2="10" stroke="#f1c40f" stroke-width="3"/>
+            <line x1="390" y1="50" x2="380" y2="50" stroke="#f1c40f" stroke-width="3"/>
+            <g transform="translate(180, 120)">
+              <circle cx="0" cy="-20" r="10" fill="#ffd3b6"/>
+              <rect x="-6" y="-10" width="12" height="20" fill="#e74c3c" rx="3"/>
+              <line x1="-6" y1="-5" x2="-15" y2="0" stroke="#111" stroke-width="2"/>
+              <line x1="6" y1="-5" x2="15" y2="-10" stroke="#111" stroke-width="2"/>
+              <line x1="15" y1="-25" x2="15" y2="10" stroke="#7f8c8d" stroke-width="3"/>
+              <polygon points="15,-25 45,-18 15,-10" fill="#f1c40f"/>
+              <text x="26" y="-14" font-family="'M PLUS Rounded 1c'" font-size="8" font-weight="bold" fill="#111">勉強</text>
+              <rect x="-70" y="-55" width="80" height="25" rx="5" fill="#fff" stroke="#111" stroke-width="1.5"/>
+              <text x="-30" y="-38" font-family="'M PLUS Rounded 1c'" font-size="9" font-weight="bold" fill="#111" text-anchor="middle">もっと登るぞ！</text>
+            </g>
+            <text x="330" y="100" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2980b9" font-size="12">川や海が見えてくる！</text>
+            <path d="M 330,115 Q 360,110 390,120" fill="none" stroke="#3498db" stroke-width="4" stroke-linecap="round"/>
+            <text x="330" y="150" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#8e44ad" font-size="12">見える世界が広がる！</text>
+          </svg>
+          <div class="illustration-caption">【図2】山登りのように世界を広げていく勉強のイメージ</div>
+        </div>
+      </div>
+
+      <!-- 3. 随筆②「客は偉くない」 -->
+      <div id="japanese-tab-2" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🤝</span>
+          <h2 class="section-title">随筆②『お客は偉くない』</h2>
+        </div>
+
+        <div style="background:#f9f9f9; padding:20px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:25px; line-height:2.0; font-size:1.05rem;">
+          <p>
+            かつて<ruby>書店<rt>しょてん</rt></ruby>に勤めていた。売場に立てば、朝から晩まで「いらっしゃいませ」「ありがとうございます」だ。ある時、昼休みを終えたバイトの女の子が、くすくす笑いながらもどってきた。どうしたのかと聞くと、弁当箱のふたを開け、手を合わせて「いただきます」と言うつもりが、手を合わせて「いらっしゃいませ」と頭を下げたのだそうだ。
+          </p>
+          <p>
+            「ありがとうございます」もくせになる。サンキュー、メルシーにくらべて、アリガトウゴザイマスは音節が多く、音の組み立てが複雑で発語しにくい。私は滑舌がよくないので、スムーズに言えるようになったのは、社会人になってしばらくしてからだ。
+          </p>
+          <p>
+            買い物をした際、あるいはタクシーを下りる際、釣り銭を受け取りながら、自然に「ありがとうございます」と言ってしまう。受けたサービスへの謝礼だ。悪いことではないし、相手にきょとんとされるようなふるまいでもないけれど、無表情のまま釣銭を差し出す店員や運転手にあたると、「なんてお客だけが礼を言うんや」と苦笑してしまう。
+          </p>
+          <p>
+            商売というのはすばらしいシステムだ。納得した上でのフェアな取引ならば、双方ともが喜べるのだから。自由主義社会には競争があるゆえ、「うちで買っていただいてありがたい」と売り手は感謝しなくてはならないにしても、別にどちらかが偉いわけではない。電車や飛行機の中で、乗務員に対して理由もなく横柄な人がいる。こっけいだ。乗せてもらわなくては困るくせに、何をいばっているのだろう。
+          </p>
+          <p>
+            「買う時は、だれもが王様になる」という考え方に対して、賛同しかねる。無用のストレスが社会に広がりそうだ。
+          </p>
+          <p>
+            そんな私が現在のように〈<ruby>転向<rt>てんこう</rt></ruby>〉したのは、自分が社会に出て接客の現場にいたせいだろうが、それに先立つ経験もある。中学生になるかならずかという夏休み。源平合戦で有名な屋島に遊びに行った。歩道を散策した私は、ある光景に出くわす。
+          </p>
+          <p>
+            休憩所の店先に帽子をかぶったおじさんが立ち、中をのぞいていた。うどんでも食べて店を出ようとしていたらしい。おじさんは財布を片手に、店の奥に向かって言った。
+          </p>
+          <p style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; padding-left:15px; border-left:4px solid var(--color-primary);">
+            「ごちそうさまぁ」
+          </p>
+          <p>
+            意外な言葉だった。代金を払おうとしているのに店員の姿が見当たらない場合、「すみませーん」と呼びかけるものだと思っていた。いや、それしか思いつかなかった。なのに、このおじさんは無料でもてなされたかのように「ごちそうさま」と言う。一瞬だけ違和感を覚えた後、私の内に変化が起きた。
+          </p>
+          <p>
+            お客として代価を支払うとしても、自分のために料理を作ってくれたのだから、感謝を込めて「ごちそうさま」と言うのが礼儀にかなっている。それはそうだと納得し、お客は偉いわけではない、と知ったのだ。後日、食堂で食事をして店を出る時に、小声でぎこちなく「ごちそうさま」と言ってみた。すると、照れくさい気もしたが、それだけのことで一歩大人に近づいたように感じた。
+          </p>
+          <p style="text-align:right; font-size:0.9rem; color:var(--text-sub);">
+            ― <ruby>有栖川有栖<rt>ありすがわありす</rt></ruby>『お客は偉くない』より
+          </p>
+        </div>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 240" width="100%" height="200" style="background:#fdf2e9; border-radius:15px; padding:10px;">
+            <rect x="280" y="30" width="190" height="180" fill="#d2b48c" rx="5" stroke="#8b5a2b" stroke-width="2"/>
+            <rect x="310" y="15" width="130" height="35" fill="#c0392b" rx="3"/>
+            <text x="375" y="38" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="16" text-anchor="middle">讃岐うどん</text>
+            <rect x="290" y="70" width="170" height="40" fill="#fff" opacity="0.9"/>
+            <line x1="290" y1="70" x2="460" y2="70" stroke="#8b5a2b" stroke-width="2"/>
+            <text x="375" y="95" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#c0392b" font-size="12" text-anchor="middle">のれん</text>
+            <g transform="translate(180, 120)">
+              <circle cx="0" cy="-25" r="12" fill="#ffd3b6"/>
+              <path d="M -15,-35 L 15,-35 L 10,-42 L -10,-42 Z" fill="#7f8c8d"/>
+              <ellipse cx="0" cy="-35" rx="15" ry="3" fill="#7f8c8d"/>
+              <rect x="-8" y="-13" width="16" height="30" fill="#3498db" rx="3"/>
+              <line x1="-8" y1="-5" x2="-20" y2="5" stroke="#111" stroke-width="2"/>
+              <rect x="-24" y="2" width="8" height="12" fill="#7e5109" rx="1"/>
+              <rect x="-90" y="-75" width="110" height="30" rx="10" fill="#fff" stroke="#d35400" stroke-width="2"/>
+              <text x="-35" y="-55" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#d35400" font-size="12" text-anchor="middle">ごちそうさまぁ！</text>
+            </g>
+            <g transform="translate(60, 130)">
+              <circle cx="0" cy="-20" r="10" fill="#ffd3b6"/>
+              <path d="M -10,-22 Q 0,-30 10,-22 Q 0,-25 -10,-22" fill="#111"/>
+              <rect x="-6" y="-10" width="12" height="25" fill="#2ecc71" rx="2"/>
+              <line x1="6" y1="-5" x2="15" y2="5" stroke="#111" stroke-width="2"/>
+              <circle cx="20" cy="-25" r="8" fill="#f1c40f"/>
+              <line x1="20" y1="-17" x2="20" y2="-13" stroke="#f1c40f" stroke-width="2"/>
+              <path d="M 16,-25 L 24,-25" stroke="#111" stroke-width="1"/>
+              <text x="-20" y="-35" font-family="'M PLUS Rounded 1c'" font-size="9" fill="#1e70e5" font-weight="bold">（ハッとする！）</text>
+            </g>
+            <text x="250" y="220" font-family="'M PLUS Rounded 1c'" font-size="11" fill="#7f8c8d" font-weight="bold" text-anchor="middle">おじさんの言葉で、ボクの心が変わった！</text>
+          </svg>
+          <div class="illustration-caption">【図3】うどん屋で感謝を伝えるおじさんに出会う場面</div>
+        </div>
+      </div>
+
+      <!-- 4. 随筆③「誰だって昔は」 -->
+      <div id="japanese-tab-3" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🍼</span>
+          <h2 class="section-title">随筆③『誰だって昔は』</h2>
+        </div>
+
+        <div style="background:#f9f9f9; padding:20px; border-radius:15px; border:1px solid #e2e8f0; margin-bottom:25px; line-height:2.0; font-size:1.05rem;">
+          <p>
+            昔は子供が嫌いだった。小さな子がそばにいると、どう接したらいいのか分からず、妙な具合に<ruby>緊張<rt>きんちょう</rt></ruby>してしまった。気に入らないとすぐピーピー泣き、よだれで口元をぬるぬるさせ、興奮してすぐ熱を出す生き物。私にとっては、それが子供だった。
+          </p>
+          <p>
+            ところがいつの頃からか、少しずつ感じ方が変化してきた。別に緊張する必要などない、子供だって、自分と同じ人間じゃないか。と思えるようになった。二十七の時子供を産んだことがきっかけではあるのだろうが、「自分の子供は可愛い、だから他の子も皆可愛い」というほど単純な話ではない気がする。根本的には、<ruby>想像力<rt>そうぞうりょく</rt></ruby>の問題なのだ。
+          </p>
+          <p>
+            小説の中の言葉に、次のようなものがある。「人についてどんな悪い噂を聞こうとだ、誰にだってハートはあるってこと。誰だって昔はちっこい赤ん坊で、母親の乳を吸ってたんだってこと」
+          </p>
+          <p>
+            仕事で、遠慮会釈もない失礼な男に出会ったとする。昔の私なら腹を立て、嫌味の一つも言ったかもしれない。しかし出産を経験した後では、こんな男でも赤ん坊の頃には、小さなお口でお母さんのおっぱいをチューチュー吸っていたんだ、と思えるようになった。そういう想像力が働けば、腹も立たなくなる。相手を許す気持にさえなれる。
+          </p>
+          <p>
+            数年前、フランスの出版社に招待され、パリへ行った時だった。そこで私の小説の翻訳を担当してくれている編集者エヴァと出会った。言葉は通じないが、お互いに同じ小説の世界を共有してきたからだろうか、言葉の届かない深い場所で通じ合っているのを感じた。
+          </p>
+          <p>
+            夕方になった時、エヴァが申し訳なさそうに口を開いた。「実はこれから息子を保育所へ迎えに行かなければならないの。ディナーをご一緒できなくて本当にごめんなさい」
+          </p>
+          <p>
+            エヴァはつい最近出産をして、職場復帰したばかりなのだ。仕事より子供の事情を優先させなければいけない事態が、必ず起こってくる。すると母親はまるで自分が何か悪いことをしでかしたかのように、罪悪感にさいなまれ、大勢の人に頭を下げて回る。
+          </p>
+          <p>
+            もちろん何の問題もない。すぐに息子さんを迎えに行ってあげて、と私は言った。エヴァは鞄をつかみ、大急ぎで走っていった。その時の後ろ姿には、申し訳ないという気持ちがあふれていた。
+          </p>
+          <p>
+            でも一体、母親が何をしたというのだろう。そんなに謝る必要など、どこにもないのよ。ただ一生懸命、わが子を育てているだけではないか。そしてどんな人でも、そうやって誰かの手で育てられてきたのではないか。私は、エヴァの後ろ姿に向かってつぶやいた。
+          </p>
+          <p style="font-weight:bold; color:var(--color-primary); font-size:1.1rem; padding-left:15px; border-left:4px solid var(--color-primary);">
+            「大丈夫。何の心配もいらない。いつか将来、小さな赤ん坊の前で途方に暮れている人に出会ったら、この同じ言葉を掛けてあげれば、それで合算（お相子：おあいこ）だから」
+          </p>
+          <p style="text-align:right; font-size:0.9rem; color:var(--text-sub);">
+            ― <ruby>小川洋子<rt>おがわようこ</rt></ruby>『誰だって昔は』より
+          </p>
+        </div>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 240" width="100%" height="200" style="background:#fdf0fd; border-radius:15px; padding:10px;">
+            <g transform="translate(100, 130)">
+              <circle cx="0" cy="-30" r="14" fill="#ffd3b6"/>
+              <line x1="-6" y1="-34" x2="-2" y2="-31" stroke="#111" stroke-width="2"/>
+              <line x1="6" y1="-34" x2="2" y2="-31" stroke="#111" stroke-width="2"/>
+              <path d="M -5,-25 Q 0,-20 5,-25" fill="none" stroke="#111" stroke-width="2"/>
+              <rect x="-12" y="-16" width="24" height="40" fill="#34495e" rx="3"/>
+              <polygon points="-6,-16 0,-6 6,-16" fill="#fff"/>
+              <polygon points="-3,-16 0,-10 3,-16" fill="#c0392b"/>
+              <path d="M -25,-40 Q -20,-50 -15,-40" fill="none" stroke="#e74c3c" stroke-width="2"/>
+              <path d="M 15,-40 Q 20,-50 25,-40" fill="none" stroke="#e74c3c" stroke-width="2"/>
+              <text x="0" y="40" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#c0392b" font-size="11" text-anchor="middle">おこっている大人</text>
+            </g>
+            <g transform="translate(200, 110)">
+              <path d="M 0,0 L 80,0 M 70,-8 L 80,0 L 70,8" fill="none" stroke="#8e44ad" stroke-width="3"/>
+              <text x="40" y="-15" font-family="'M PLUS Rounded 1c'" font-size="10" fill="#8e44ad" font-weight="bold" text-anchor="middle">想像力の魔法</text>
+              <circle cx="15" cy="-15" r="1.5" fill="#f1c40f"/><circle cx="65" cy="15" r="2" fill="#f1c40f"/>
+              <circle cx="35" cy="10" r="1.5" fill="#f1c40f"/>
+            </g>
+            <g transform="translate(380, 120)">
+              <ellipse cx="0" cy="-20" rx="65" ry="55" fill="#fff" stroke="#8e44ad" stroke-width="2" stroke-dasharray="5 3"/>
+              <circle cx="-10" cy="-20" r="18" fill="#ffd3b6"/>
+              <path d="M -10,-38 Q -6,-45 -4,-38" fill="none" stroke="#d35400" stroke-width="2"/>
+              <circle cx="-16" cy="-22" r="1.5" fill="#111"/><circle cx="-8" cy="-22" r="1.5" fill="#111"/>
+              <path d="M -15,-14 Q -12,-10 -9,-14" fill="none" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/>
+              <rect x="10" y="-20" width="14" height="24" rx="2" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1.5"/>
+              <rect x="12" y="-25" width="10" height="5" fill="#f39c12"/>
+              <line x1="10" y1="-12" x2="24" y2="-12" stroke="#bdc3c7" stroke-width="1"/>
+              <text x="0" y="25" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#8e44ad" font-size="11" text-anchor="middle">誰だって昔は赤ちゃん</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図4】どんな大人もかつては誰かに育てられた赤ちゃんだったという想像</div>
+        </div>
+      </div>
+
+      <!-- 5. 因果関係 -->
+      <div id="japanese-tab-4" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🔗</span>
+          <h2 class="section-title">国語のきほん「因果関係（原因と結果）」</h2>
+        </div>
+        <p>
+          文章の中で、あるできごとが<strong>原因（理由）</strong>になり、その次に起こることが<strong>結果（結論）</strong>になる関係を<strong>「因果関係（いんがかんけい）」</strong>とよぶよ。
+        </p>
+
+        <h3>1. 原因から結果につなぐ「順接（じゅんせつ）」の言葉</h3>
+        <p>
+          「<strong>[原因] ➔ だから・そこで・したがって ➔ [結果]</strong>」の順でつなぐ言葉だよ。
+        </p>
+        <div class="explain-bubble">
+          💬 <strong>例文：</strong>風邪をひいた（原因）。<strong>だから</strong>、学校を休んだ（結果）。
+        </div>
+
+        <h3>2. 結果から原因につなぐ「理由（りゆう）」の言葉</h3>
+        <p>
+          「<strong>[結果] ➔ なぜなら・というのは ➔ [原因]</strong>」の順で説明する言葉だよ。
+        </p>
+        <div class="explain-bubble">
+          💬 <strong>例文：</strong>学校を休んだ（結果）。<strong>なぜなら</strong>、風邪をひいたからだ（理由・原因）。
+        </div>
+
+        <div class="point-box">
+          <div class="point-box-title">⚡ 出来事（原因）と気持ちの変化（結果）</div>
+          <p>
+            物語や随筆の文章問題では、<strong>「起こった出来事（原因）」</strong>によって登場人物の<strong>「行動や気持ち（結果）」</strong>がどう変わったかを聞かれるよ。<br>
+            （例）『杜子春』で杜子春が「伏せていた目をあげた」のはなぜ？ ➔ 老人が黄金の場所を教えてくれた（出来事・原因）から！
+          </p>
+        </div>
+
+        <div class="illustration-box">
+          <svg viewBox="0 0 500 240" width="100%" height="200" style="background:#f3f4f6; border-radius:15px; padding:10px;">
+            <g transform="translate(30, 20)">
+              <rect x="10" y="20" width="110" height="60" rx="10" fill="#ff9f43" stroke="#e67e22" stroke-width="2"/>
+              <text x="65" y="45" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="13" text-anchor="middle">原因 (げんいん)</text>
+              <text x="65" y="68" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="10" text-anchor="middle">例:熱がでた</text>
+              <path d="M 125,50 L 185,50 M 175,45 L 185,50 L 175,55" fill="none" stroke="#8e44ad" stroke-width="3"/>
+              <text x="155" y="38" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#8e44ad" font-size="10" text-anchor="middle">だから</text>
+              <rect x="190" y="20" width="110" height="60" rx="10" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+              <text x="245" y="45" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="13" text-anchor="middle">結果 (けっか)</text>
+              <text x="245" y="68" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="10" text-anchor="middle">例:学校を休んだ</text>
+            </g>
+            <g transform="translate(30, 110)">
+              <rect x="10" y="20" width="110" height="60" rx="10" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+              <text x="65" y="45" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="13" text-anchor="middle">結果 (けっか)</text>
+              <text x="65" y="68" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="10" text-anchor="middle">例:学校を休んだ</text>
+              <path d="M 125,50 L 185,50 M 175,45 L 185,50 L 175,55" fill="none" stroke="#8e44ad" stroke-width="3"/>
+              <text x="155" y="38" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#8e44ad" font-size="9" text-anchor="middle">なぜなら</text>
+              <rect x="190" y="20" width="110" height="60" rx="10" fill="#ff9f43" stroke="#e67e22" stroke-width="2"/>
+              <text x="245" y="45" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="13" text-anchor="middle">原因 (げんいん)</text>
+              <text x="245" y="68" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#fff" font-size="10" text-anchor="middle">例:熱がでたからだ</text>
+            </g>
+            <rect x="350" y="30" width="120" height="150" rx="10" fill="#fff" stroke="#bdc3c7" stroke-width="2"/>
+            <text x="410" y="60" font-family="'M PLUS Rounded 1c'" font-weight="bold" fill="#2c3e50" font-size="12" text-anchor="middle">因果関係の極意</text>
+            <text x="410" y="90" font-family="'M PLUS Rounded 1c'" fill="#5a738e" font-size="10" text-anchor="middle">出来事 ➔ 原因</text>
+            <text x="410" y="110" font-family="'M PLUS Rounded 1c'" fill="#5a738e" font-size="10" text-anchor="middle">気持ち ➔ 結果</text>
+            <text x="410" y="140" font-family="'M PLUS Rounded 1c'" fill="#e67e22" font-size="10" font-weight="bold" text-anchor="middle">文と文を論理でつなぐ</text>
+          </svg>
+          <div class="illustration-caption">【図5】原因と結果を論理的につなぐ接続語のルール</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==============================================
+         =============== 共通クイズコーナー ================
+         ============================================== -->
+    <div class="quiz-container">
+      <div class="section-header">
+        <span class="section-icon">✏️</span>
+        <h2 class="section-title" id="quiz-title">チャレンジクイズ！</h2>
+      </div>
+      <div id="quiz-box">
+        <div class="quiz-question" id="q-text"></div>
+        <div class="quiz-options" id="q-options"></div>
+        <div class="quiz-feedback" id="q-feedback"></div>
+        <div class="quiz-nav">
+          <div class="quiz-score" id="q-score"></div>
+          <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" style="display:none;"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+      <p>© 2026 たのしく学ぶ！社会・理科・国語まとめプロジェクト</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // ふりがな切り替えスクリプト
+    function toggleRuby() {
+      const body = document.body;
+      const btn = document.getElementById('ruby-toggle');
+      if (body.classList.contains('hide-ruby')) {
+        body.classList.remove('hide-ruby');
+        btn.textContent = 'ふりがな：ON';
+        btn.classList.remove('off');
+      } else {
+        body.classList.add('hide-ruby');
+        btn.textContent = 'ふりがな：OFF';
+        btn.classList.add('off');
+      }
+    }
+
+    // 教科切り替えスクリプト
+    function changeSubject() {
+      const select = document.getElementById('subject-select');
+      const val = select.value;
+      const root = document.documentElement;
+      
+      const socialContent = document.getElementById('social-content');
+      const scienceContent = document.getElementById('science-content');
+      const japaneseContent = document.getElementById('japanese-content');
+      
+      const socialTabs = document.getElementById('social-tabs');
+      const scienceTabs = document.getElementById('science-tabs');
+      const japaneseTabs = document.getElementById('japanese-tabs');
+      
+      const headerTitle = document.getElementById('header-title');
+      const headerDesc = document.getElementById('header-desc');
+
+      if (val === 'social') {
+        // 社会科テーマ
+        root.style.setProperty('--color-primary', '#1e70e5');
+        root.style.setProperty('--color-primary-light', '#e6f0fa');
+        root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #4fa4f3 0%, #1e70e5 100%)');
+        
+        socialContent.style.display = 'block';
+        scienceContent.style.display = 'none';
+        japaneseContent.style.display = 'none';
+        
+        socialTabs.style.display = 'flex';
+        scienceTabs.style.display = 'none';
+        japaneseTabs.style.display = 'none';
+        
+        headerTitle.innerHTML = 'たのしく学ぶ！社会科「<ruby>関東地方<rt>かんとうちほう</rt></ruby>」';
+        headerDesc.textContent = '関東地方のしぜん・のうぎょう・こうぎょうをマスターしよう！';
+        
+        switchSocialTab(0);
+      } else if (val === 'science') {
+        // 理科テーマ
+        root.style.setProperty('--color-primary', '#1e824c');
+        root.style.setProperty('--color-primary-light', '#e6f7ed');
+        root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #42b983 0%, #1e824c 100%)');
+        
+        socialContent.style.display = 'none';
+        scienceContent.style.display = 'block';
+        japaneseContent.style.display = 'none';
+        
+        socialTabs.style.display = 'none';
+        scienceTabs.style.display = 'flex';
+        japaneseTabs.style.display = 'none';
+        
+        headerTitle.innerHTML = 'たのしく学ぶ！理科「<ruby>気体<rt>きたい</rt></ruby>の性質」';
+        headerDesc.textContent = '酸素、二酸化炭素、水素などのいろいろな気体を大けんきゅう！';
+        
+        switchScienceTab(0);
+      } else {
+        // 国語テーマ
+        root.style.setProperty('--color-primary', '#8e44ad');
+        root.style.setProperty('--color-primary-light', '#f5eef8');
+        root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #a55eea 0%, #8e44ad 100%)');
+        
+        socialContent.style.display = 'none';
+        scienceContent.style.display = 'none';
+        japaneseContent.style.display = 'block';
+        
+        socialTabs.style.display = 'none';
+        scienceTabs.style.display = 'none';
+        japaneseTabs.style.display = 'flex';
+        
+        headerTitle.innerHTML = 'たのしく学ぶ！国語「<ruby>随筆文<rt>ずいひつぶん</rt></ruby>の読解」';
+        headerDesc.textContent = '随筆文（エッセイ）の基本と、文章の「因果関係」を大特訓！';
+        
+        switchJapaneseTab(0);
+      }
+      resetQuiz();
+    }
+
+    // 社会科タブ切り替え
+    function switchSocialTab(index) {
+      const tabButtons = document.querySelectorAll('#social-tabs .tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      
+      const cards = document.querySelectorAll('#social-content .section-card');
+      cards.forEach(card => card.classList.remove('active'));
+      
+      tabButtons[index].classList.add('active');
+      document.getElementById(`social-tab-${index}`).classList.add('active');
+    }
+
+    // 理科タブ切り替え
+    function switchScienceTab(index) {
+      const tabButtons = document.querySelectorAll('#science-tabs .tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      
+      const cards = document.querySelectorAll('#science-content .section-card');
+      cards.forEach(card => card.classList.remove('active'));
+      
+      tabButtons[index].classList.add('active');
+      
+      // 理科は4枚目のID調整（空気のなかみ）
+      let targetId = `science-tab-${index}`;
+      if (index === 3) targetId = `tab-3`;
+      
+      document.getElementById(targetId).classList.add('active');
+    }
+
+    // 国語タブ切り替え
+    function switchJapaneseTab(index) {
+      const tabButtons = document.querySelectorAll('#japanese-tabs .tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      
+      const cards = document.querySelectorAll('#japanese-content .section-card');
+      cards.forEach(card => card.classList.remove('active'));
+      
+      tabButtons[index].classList.add('active');
+      document.getElementById(`japanese-tab-${index}`).classList.add('active');
+    }
+
+    // ================ クイズ用のデータとロジック ================
+    const socialQuizzes = [
+      {
+        question: "富士山などの火山灰がつもってできた、水はけが良くて赤みがかかった土の層をなんというか？",
+        options: ["関東ローム層", "シラス台地", "黒土（くろつち）", "粘土層"],
+        answer: 0,
+        hint: "水はけが良いから、田んぼより野菜畑に向いているよ。"
+      },
+      {
+        question: "雨や雪の水をあつめる広さ（流域面積）が日本一で、「坂東太郎」とも呼ばれる川はどれ？",
+        options: ["信濃川（しなのがわ）", "利根川（とねがわ）", "荒川（アリカワ）", "多摩川（たまがわ）"],
+        answer: 1,
+        hint: "流域面積は日本一だけど、長さの日本一は信濃川だよ。"
+      },
+      {
+        question: "夏でも涼しい高原の気候をいかして、キャベツなどをたくさん作る群馬県の村はどこ？",
+        options: ["下仁田町（しもにたまち）", "嬬恋村（つまごいむら）", "狭山市（さやまし）", "九十九里町"],
+        answer: 1,
+        hint: "「つまごいむら」と読むよ。夏のキャベツで超有名！"
+      },
+      {
+        question: "東京などの大きな都市のまわりで、すぐ届くように野菜などをたくさんつくる農業をなんというか？",
+        options: ["促成栽培（そくせいさいばい）", "高冷地農業（こうれいちのうぎょう）", "近郊農業（きんこうのうぎょう）", "有機農業"],
+        answer: 2,
+        hint: "大都市の「近郊（ちかく）」で行うからこの名前だよ。"
+      },
+      {
+        question: "東京湾の東がわ（千葉・君津・市原など）にあり、鉄鋼や石油化学の巨大工場が集まるエリアはどれ？",
+        options: ["京浜工業地帯", "京葉工業地域", "関東内陸工業地域", "鹿島臨海工業地域"],
+        answer: 1,
+        hint: "千葉の「葉」の文字が入る名前だよ。"
+      }
+    ];
+
+    const scienceQuizzes = [
+      {
+        question: "水に溶けにくい気体を集めるときに使う、一番きれいに気体が集まる方法はどれ？",
+        options: ["水上置換法（すいじょうちかんほう）", "下方置換法（かほうちかんほう）", "上方置換法（じょうほうちかんほう）"],
+        answer: 0,
+        hint: "水の中で泡として気体を集めるから、空気が混ざらないんだよ。"
+      },
+      {
+        question: "過酸化水素水に二酸化マンガンを加えたときに発生する、ものが燃えるのを助ける気体はなに？",
+        options: ["水素", "二酸化炭素", "酸素", "ちっ素"],
+        answer: 2,
+        hint: "生きものが呼吸するのにも使われるよ。二酸化マンガンは触媒だよ。"
+      },
+      {
+        question: "石灰水に通すと白く濁り、空気の約1.5倍の重さがある気体はなに？",
+        options: ["酸素", "水素", "二酸化炭素", "アンモニア"],
+        answer: 2,
+        hint: "炭酸飲料のなかにたくさん溶け込んでいる気体だよ。"
+      },
+      {
+        question: "地球上で最も軽く、燃やすと「ポッ」と音を立てて水ができる気体はなに？",
+        options: ["ちっ素", "水素", "酸素", "塩化水素"],
+        answer: 1,
+        hint: "燃えたあとに水しか残らない、とてもクリーンな気体だよ。"
+      },
+      {
+        question: "水に極めてよく溶けて、フェノールフタレイン液に入るときれいな赤い噴水を作る、強い刺激臭の気体はなに？",
+        options: ["アンモニア", "塩化水素", "二酸化硫黄", "アルゴン"],
+        answer: 0,
+        hint: "空気より軽いので、上方置換法で集めるよ。虫よけ液にも少し含まれているよ。"
+      }
+    ];
+
+    const japaneseQuizzes = [
+      {
+        question: "養老先生の『勉強とは山登りのようなもの』というお話で、山を高く登れば登るほどどうなると言っているかな？",
+        options: ["つらくて途中で山を下りたくなる", "遠くの景色（川や海など）が見えて、自分の世界が広がる", "山のてっぺんで美味しいお弁当が食べられる"],
+        answer: 1,
+        hint: "高く登ると遠くまで見えるように、勉強すると自分に見える世界が広がるんだよ。"
+      },
+      {
+        question: "有栖川先生の『お客は偉くない』というお話で、おじさんがうどん屋さんを出るときに言った、意外な言葉はどれかな？",
+        options: ["「すみませーん！」", "「ごちそうさまぁ」", "「ありがとうございました」"],
+        answer: 1,
+        hint: "代金を払うのにお店に人がいないとき、おじさんは感謝を込めてこの言葉を言ったよ。"
+      },
+      {
+        question: "小川先生の『誰だって昔は』というお話で、怒っている失礼な大人がいても許せるようになる「想像（そうぞう）」はどれかな？",
+        options: ["「この人は、きっと大金持ちなんだ」と想像する", "「この人だって昔は小さな赤ちゃんで、おっぱいを吸っていたんだ」と想像する", "「この人は、今日たまたま機嫌が悪いだけだ」と想像する"],
+        answer: 1,
+        hint: "どんな人でも昔は誰かに一生懸命育てられた赤ちゃんだったんだ、と想像する魔法だよ。"
+      },
+      {
+        question: "「熱が出てしまった。＿＿＿、今日はお布団でゆっくり寝ています。」の空欄に入る、原因から結果につなぐ正しい言葉は？",
+        options: ["なぜなら", "だから（そこで・そのため）", "しかし"],
+        answer: 1,
+        hint: "熱が出た（原因）➔ だから ➔ 寝ている（結果）という順番の関係だね。"
+      },
+      {
+        question: "「お相子（おあいこ）」という言葉はどういう意味かな？",
+        options: ["お互いに勝ち負けや貸し借りがなく、同じ状態になること", "相手よりも自分が優しくなること", "じゃんけんであいこが何回も続くこと"],
+        answer: 0,
+        hint: "小川先生のエッセイに出てきたね。お互い様だから心配いらないよという意味だよ。"
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let score = 0;
+    let answered = false;
+    let currentQuizSet = socialQuizzes;
+
+    function loadQuestion() {
+      answered = false;
+      const select = document.getElementById('subject-select').value;
+      if (select === 'social') {
+        currentQuizSet = socialQuizzes;
+      } else if (select === 'science') {
+        currentQuizSet = scienceQuizzes;
+      } else {
+        currentQuizSet = japaneseQuizzes;
+      }
+      const currentQuiz = currentQuizSet[currentQuizIndex];
+      
+      document.getElementById('quiz-title').textContent = (select === 'social') ? "関東地方クイズ！" : ((select === 'science') ? "気体マスタークイズ！" : "国語・読解チェッククイズ！");
+      document.getElementById('q-text').textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
+      
+      const optionsContainer = document.getElementById('q-options');
+      optionsContainer.innerHTML = '';
+      
+      currentQuiz.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.textContent = option;
+        btn.onclick = () => selectOption(index);
+        optionsContainer.appendChild(btn);
+      });
+
+      const feedback = document.getElementById('q-feedback');
+      feedback.style.display = 'none';
+      feedback.className = 'quiz-feedback';
+      document.getElementById('next-btn').style.display = 'none';
+      
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${currentQuizSet.length}`;
+    }
+
+    function selectOption(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const currentQuiz = currentQuizSet[currentQuizIndex];
+      const buttons = document.querySelectorAll('.quiz-option-btn');
+      const feedback = document.getElementById('q-feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (selectedIndex === currentQuiz.answer) {
+        buttons[selectedIndex].classList.add('correct');
+        feedback.textContent = '🎉 せいかい！ すごいね！';
+        feedback.className = 'quiz-feedback show-correct';
+        score++;
+      } else {
+        buttons[selectedIndex].classList.add('incorrect');
+        buttons[currentQuiz.answer].classList.add('correct');
+        feedback.innerHTML = `😢 ざんねん！正解は 「<strong>${currentQuiz.options[currentQuiz.answer]}</strong>」 でした。<br><small>ヒント: ${currentQuiz.hint}</small>`;
+        feedback.className = 'quiz-feedback show-incorrect';
+      }
+
+      if (currentQuizIndex === currentQuizSet.length - 1) {
+        nextBtn.textContent = '結果を見る';
+      } else {
+        nextBtn.textContent = 'つぎの問題へ';
+      }
+
+      nextBtn.style.display = 'block';
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${currentQuizSet.length}`;
+    }
+
+    function nextQuestion() {
+      if (currentQuizIndex < currentQuizSet.length - 1) {
+        currentQuizIndex++;
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const quizBox = document.getElementById('quiz-box');
+      let message = '';
+      if (score === currentQuizSet.length) {
+        message = '🏆 パーフェクト！きみはマスターだ！';
+      } else if (score >= 3) {
+        message = '✨ おめでとう！よくがんばったね！';
+      } else {
+        message = '💪 もういちど読んでチャレンジしてみよう！';
+      }
+
+      quizBox.innerHTML = `
+        <div style="text-align: center; padding: 20px 0;">
+          <h3 style="border: none; font-size: 1.8rem; color: var(--color-accent); margin-bottom: 20px;">結果発表</h3>
+          <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">あなたのスコア: <span style="font-size: 2.2rem; color: var(--color-primary);">${score}</span> / ${currentQuizSet.length}点</p>
+          <div class="quiz-feedback show-correct" style="margin-bottom: 30px;">${message}</div>
+          <button class="next-quiz-btn" onclick="resetQuiz()">もう一回やってみる</button>
+        </div>
+      `;
+    }
+
+    function resetQuiz() {
+      currentQuizIndex = 0;
+      score = 0;
+      const quizContainer = document.querySelector('.quiz-container');
+      quizContainer.innerHTML = `
+        <div class="section-header">
+          <span class="section-icon">✏️</span>
+          <h2 class="section-title" id="quiz-title">チャレンジクイズ！</h2>
+        </div>
+        <div id="quiz-box">
+          <div class="quiz-question" id="q-text"></div>
+          <div class="quiz-options" id="q-options"></div>
+          <div class="quiz-feedback" id="q-feedback"></div>
+          <div class="quiz-nav">
+            <div class="quiz-score" id="q-score"></div>
+            <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" style="display:none;"></button>
+          </div>
+        </div>
+      `;
+      loadQuestion();
+    }
+
+    // 初期化
+    window.onload = function() {
+      loadQuestion();
+    }
+  </script>
+</body>
+</html>

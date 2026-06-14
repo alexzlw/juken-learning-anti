@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="小学校5年生向けの理科「気体」のわかりやすいまとめページです。イラスト風デザインとふりがな切り替え機能、クイズ付き。">
+  <title>たのしく学ぶ！「気体のなかま」のかんたんまとめ</title>
+  
+  <!-- Google Fonts から丸文字のフォントをインポート -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+  </style>
+
+  <style>
+    /* デザインシステム定義 */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f0f7f4 0%, #e1ebe6 100%);
+      --header-gradient: linear-gradient(135deg, #42b983 0%, #1e824c 100%);
+      --card-bg: #ffffff;
+      --text-main: #2c3e50;
+      --text-sub: #5a738e;
+      --color-primary: #1e824c;
+      --color-primary-light: #e6f7ed;
+      --color-accent: #f39c12;
+      --color-accent-light: #fef5e7;
+      --color-success: #2ecc71;
+      --color-success-light: #e6f9ed;
+      --font-family: 'M PLUS Rounded 1c', sans-serif;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      --border-radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.8;
+      padding-bottom: 60px;
+    }
+
+    /* ふりがな（ルビ）の調整 */
+    ruby {
+      ruby-position: over;
+    }
+    rt {
+      font-size: 0.55em;
+      color: var(--color-primary);
+      letter-spacing: 0.05em;
+      padding-bottom: 0.1em;
+    }
+    /* ふりがな非表示用クラス */
+    body.hide-ruby rt {
+      display: none;
+    }
+
+    /* ヘッダーデザイン */
+    header {
+      background: var(--header-gradient);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 10px 30px rgba(30, 130, 76, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    /* メインコンテナ */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* コントロールパネル (ふりがな切替など) */
+    .control-panel {
+      background: var(--card-bg);
+      padding: 15px 25px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      border: 2px solid var(--color-primary-light);
+    }
+
+    .control-title {
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-btn {
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(30, 130, 76, 0.3);
+      transition: all 0.3s;
+    }
+
+    .toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 130, 76, 0.4);
+    }
+
+    .toggle-btn.off {
+      background: var(--text-sub);
+      box-shadow: none;
+    }
+
+    /* セクションナビゲーション */
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 2px solid transparent;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--text-sub);
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* カード・学習コンテンツ */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: none;
+    }
+
+    .section-card.active {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      border-bottom: 4px solid var(--color-primary-light);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      font-size: 2.2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    /* コンテンツパーツ */
+    h3 {
+      font-size: 1.25rem;
+      margin: 25px 0 15px;
+      color: var(--text-main);
+      border-left: 5px solid var(--color-accent);
+      padding-left: 12px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    /* 重要ポイント表示用ボックス */
+    .point-box {
+      background: var(--color-accent-light);
+      border-left: 6px solid var(--color-accent);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .point-box-title {
+      font-weight: bold;
+      color: #b7791f;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 用語解説吹き出し */
+    .explain-bubble {
+      background: var(--color-primary-light);
+      padding: 15px 20px;
+      border-radius: 15px;
+      margin: 15px 0;
+      position: relative;
+      font-size: 0.95rem;
+      color: #1e6b3e;
+    }
+
+    /* ガスボンベリスト */
+    .gas-bomb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .gas-bomb-card {
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+    }
+
+    /* クイズセクション */
+    .quiz-container {
+      background: #ffffff;
+      border-radius: var(--border-radius);
+      padding: 35px;
+      box-shadow: var(--shadow);
+      border: 3px solid var(--color-accent);
+      margin-top: 40px;
+    }
+
+    .quiz-question {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: var(--color-accent-light);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border-left: 6px solid var(--color-accent);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option-btn {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      font-family: var(--font-family);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-option-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: scale(1.01);
+    }
+
+    .quiz-option-btn.correct {
+      background: var(--color-success-light);
+      border-color: var(--color-success);
+      color: #155724;
+    }
+
+    .quiz-option-btn.incorrect {
+      background: #fde8e8;
+      border-color: #f8b4b4;
+      color: #721c24;
+    }
+
+    .quiz-feedback {
+      display: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .quiz-feedback.show-correct {
+      display: block;
+      background: var(--color-success-light);
+      color: var(--color-success);
+      border: 2px solid var(--color-success);
+    }
+
+    .quiz-feedback.show-incorrect {
+      display: block;
+      background: #fde8e8;
+      color: #e53e3e;
+      border: 2px solid #f8b4b4;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quiz-score {
+      font-weight: bold;
+      color: var(--text-sub);
+    }
+
+    .next-quiz-btn {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-family: var(--font-family);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+      transition: all 0.3s;
+    }
+
+    .next-quiz-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+    }
+
+    /* レスポンシブ設計 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      .control-panel {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-badge">小学5年生 理科</div>
+    <h1>たのしく学ぶ！「気体のなかま」のかんたんまとめ</h1>
+    <p class="subtitle">酸素、二酸化炭素、水素などのいろいろな気体を大けんきゅう！</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- コントロールパネル (ふりがな機能) -->
+    <div class="control-panel">
+      <div class="control-title">
+        <span>💡 おたすけ機能：漢字のうえに読みがなをつけるよ</span>
+      </div>
+      <button id="ruby-toggle" class="toggle-btn" onclick="toggleRuby()">ふりがな：ON</button>
+    </div>
+
+    <!-- タブメニュー -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">🧭 1. 気体のあつめ方</button>
+      <button class="tab-btn" onclick="switchTab(1)">🧪 2. 三大気体（酸素・二酸化炭素・水素）</button>
+      <button class="tab-btn" onclick="switchTab(2)">⚠️ 3. においのある気体</button>
+      <button class="tab-btn" onclick="switchTab(3)">🌬️ 4. 空気のなかみ</button>
+      <button class="tab-btn" onclick="switchTab(4)">🔬 5. 実験のちゅうい点</button>
+    </div>
+
+    <!-- 1. 気体のあつめ方 -->
+    <div id="tab-0" class="section-card active">
+      <div class="section-header">
+        <span class="section-icon">🧭</span>
+        <h2 class="section-title">気体のあつめ方（捕集法）</h2>
+      </div>
+      <p>
+        気体をあつめるときは、その気体が「<strong>水に溶けやすいか</strong>」「<strong>空気より重いか軽いか</strong>」で3つの方法を使い分けるよ！
+      </p>
+
+      <h3>1. 水上置換法（すいじょうちかんほう）</h3>
+      <p>
+        水を入れた水そうのなかに、集気びんをさかさまに立てて、泡となって出てくる気体をあつめる方法だよ。
+      </p>
+      <ul>
+        <li><strong>向いている気体：</strong>水に**溶けにくい**気体（酸素や水素など）。</li>
+        <li><strong>とくちょう：</strong>集気びんのなかの空気が追い出されて気体だけになるので、いちばんきれい（純粋）に気体をあつめることができるよ。</li>
+      </ul>
+
+      <h3>2. 下方置換法（かほうちかんほう）</h3>
+      <p>
+        集気びんの口をうえに向けて、ガラス管を底まで入れて、空気をおしだすようにあつめる方法だよ。
+      </p>
+      <ul>
+        <li><strong>向いている気体：</strong>水に**溶けやすく**、空気より**重い**気体（二酸化炭素や塩化水素など）。</li>
+      </ul>
+
+      <h3>3. 上方置換法（じょうほうちかんほう）</h3>
+      <p>
+        集気びんの口をしたに向けて、うえにのぼっていく気体をあつめる方法だよ。
+      </p>
+      <ul>
+        <li><strong>向いている気体：</strong>水に**溶けやすく**、空気より**軽い**気体（アンモニア）。</li>
+      </ul>
+    </div>
+
+    <!-- 2. 三大気体 -->
+    <div id="tab-1" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🧪</span>
+        <h2 class="section-title">三大気体（酸素・二酸化炭素・水素）</h2>
+      </div>
+
+      <h3>1. <ruby>酸素<rt>さんそ</rt></ruby>（空気よりすこし重い・水に溶けにくい）</h3>
+      <p>
+        生きものが呼吸（こきゅう）するのに必要な気体だよ。
+      </p>
+      <ul>
+        <li><strong>とくちょう：</strong>自分自身は燃えないけれど、ほかのものが燃えるのを強くたすける性質（**助燃性：じょねんせい**）があるよ。酸素のなかに火のついた線香を入れると、炎をあげて激しく燃え上がるんだ！</li>
+        <li><strong>つくり方：</strong>**<ruby>二酸化<rt>にさんか</rt></ruby>マンガン**に**<ruby>過酸化水素水<rt>かさんかすいそすい</rt></ruby>**（オキシドール）を加えるよ。</li>
+      </ul>
+      <div class="explain-bubble">
+        🔬 <strong>ミニちしき：触媒（しょくばい）</strong><br>
+        二酸化マンガンは、自分自身は変化しないけれど、過酸化水素水が酸素と水に分かれるのを手伝う「おたすけキャラ」なんだ。こういうのを「触媒」っていうよ。
+      </div>
+
+      <h3>2. <ruby>二酸化炭素<rt>にさんかたんそ</rt></ruby>（空気より重い・水にすこし溶ける）</h3>
+      <p>
+        炭酸飲料のシュワシュワの正体だよ。
+      </p>
+      <ul>
+        <li><strong>とくちょう：</strong>火を消す性質があるよ（二酸化炭素の消火器もあるね）。水に溶けると「炭酸水（弱酸性）」になり、**石灰水（せっかいすい）を通すと白くにごる**のが一番のとくちょうだよ！</li>
+        <li><strong>つくり方：</strong>**石灰石（貝殻でもOK）**に**うすい塩酸**を加えるか、**重ソウ（炭酸水素ナトリウム）**を加熱するよ。</li>
+      </ul>
+
+      <h3>3. <ruby>水素<rt>すいそ</rt></ruby>（世界一軽い・水に溶けない）</h3>
+      <p>
+        地球上でいちばん軽い気体だよ！
+      </p>
+      <ul>
+        <li><strong>とくちょう：</strong>自分自身がすごく燃えやすいよ。空気とまぜて火をつけると「ポッ」と音をたてて爆発するように燃え、**水**ができるんだ。</li>
+        <li><strong>つくり方：</strong>アルミニウムなどの金属にうすい塩酸を加えるよ。</li>
+      </ul>
+    </div>
+
+    <!-- 3. においのある気体 -->
+    <div id="tab-2" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">⚠️</span>
+        <h2 class="section-title">においのある気体（アンモニア・塩化水素・二酸化硫黄）</h2>
+      </div>
+      <p>
+        鼻をつくようなツンとしたにおい（**刺激臭：しげきしゅう**）があり、すいこむと危ない気体のなかまだよ。
+      </p>
+
+      <h3>1. アンモニア（空気より軽い・水にめちゃくちゃ溶ける）</h3>
+      <ul>
+        <li><strong>とくちょう：</strong>水に溶けると「アルカリ性」になります。フェノールフタレインという薬を入れた水にアンモニアを溶かすと、フラスコの中で**きれいな赤い噴水**ができる実験が有名だよ！</li>
+        <li><strong>つくり方：</strong>アンモニア水をあたためるか、塩化アンモニウムと消石灰をまぜて加熱するよ。</li>
+        <li><strong>集め方：</strong>空気より軽くて水に溶けやすいから、**上方置換法**を使うよ。</li>
+      </ul>
+
+      <h3>2. 塩化水素（空気より重い・水にめちゃくちゃ溶ける）</h3>
+      <ul>
+        <li><strong>とくちょう：</strong>水に溶けるとみんながよく知る強い酸性の液体**「塩酸（えんさん）」**になるよ。</li>
+        <li><strong>集め方：</strong>空気より重くて水に溶けやすいから、**下方置換法**を使うよ。</li>
+      </ul>
+
+      <h3>3. 二酸化硫黄（空気より重い・水に溶ける・有毒）</h3>
+      <ul>
+        <li><strong>とくちょう：</strong>火山ガスにふくまれており、色をぬく力（**漂白作用：ひょうはくさよう**）があるよ。赤い花びらをこの気体に近づけると、だんだん色が消えて白っぽくなるんだ。</li>
+        <li><strong>環境問題：</strong>工場の煙などからでて、大気汚染や**酸性雨**の原因になってしまうよ。</li>
+      </ul>
+    </div>
+
+    <!-- 4. 空気のなかみ -->
+    <div id="tab-3" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🌬️</span>
+        <h2 class="section-title">空気のなかみはどうなっている？</h2>
+      </div>
+      <p>
+        私たちがふだん吸っている空気は、いろいろな気体がまざりあってできているよ。その体積の割合を見てみよう！
+      </p>
+      
+      <div class="point-box">
+        <div class="point-box-title">🎈 空気のなかの気体の割合（かわいた空気）</div>
+        <ul>
+          <li><strong>ちっ素（窒素）：約78%</strong>（いちばん多い！）<br>体のタンパク質をつくったり、植物の肥料（ひりょう）のもとになるよ。</li>
+          <li><strong>酸素：約21%</strong>（2番目に多い！）<br>呼吸やものが燃えるのに使われるよ。</li>
+          <li><strong>アルゴン：約0.93%</strong>（3番目に多い！）<br>電球のなかに詰められているよ。</li>
+          <li><strong>二酸化炭素：約0.04%</strong><br>割合は少ないけれど、地球をあたたかく保つ「温室効果ガス」だよ。</li>
+        </ul>
+      </div>
+
+      <h3>⚠️ 気をつけよう！一酸化炭素（いっさんかたんそ）</h3>
+      <p>
+        炭素をふくむものが、酸素のたりない状態で燃えたとき（不完全燃焼）にできる気体だよ。
+        においも色もないけれど**とても強い毒**があり、吸い込むと一酸化炭素中毒になって命にかかわるから、換気（かんき）がとても大切なんだ！
+      </p>
+    </div>
+
+    <!-- 5. 実験のちゅうい点 -->
+    <div id="tab-4" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🔬</span>
+        <h2 class="section-title">理科の実験でたいせつなちゅうい点</h2>
+      </div>
+      <p>
+        気体をつくる実験では、安全のために絶対に守らなければならないルールがあるよ！テストにもよくでるから覚えよう。
+      </p>
+
+      <h3>1. 試験管をあたためるとき（重ソウの分解など）</h3>
+      <ul>
+        <li><strong>試験管の口を下げる：</strong>加熱してでてきた水分が、熱い試験管の底のほうに流れていくと、温度の差でガラスがパリン！と割れてしまうんだ。これを防ぐために**試験管の口を少し下に傾けて**実験するよ。</li>
+        <li><strong>火を消すまえにガラス管を抜く：</strong>実験が終わってガスバーナーの火を消すときは、必ず**先にガラス管を水そうの水から抜いてから**火を消すよ。先に火を消すと、試験管が冷えて水を吸い上げてしまい、割れてしまうんだ。</li>
+      </ul>
+
+      <h3>2. 突沸（とっぷつ）をふせぐ「沸とう石」</h3>
+      <p>
+        アンモニア水などをあたためるとき、液体が突然「ボカン！」と激しく飛び散るのを防ぐために、あらかじめ細かい穴がたくさんあいた**「沸とう石（ふっとうせき）」**を入れておくよ。
+      </p>
+
+      <h3>3. ボンベの色で見分けよう！</h3>
+      <p>
+        間違えてちがう気体を使わないように、ガスボンベの色は世界で決まっているよ。
+      </p>
+      <div class="gas-bomb-grid">
+        <div class="gas-bomb-card" style="background: #000000; border: 2px solid #555;">酸素（黒色）</div>
+        <div class="gas-bomb-card" style="background: #27ae60;">二酸化炭素（緑色）</div>
+        <div class="gas-bomb-card" style="background: #e74c3c;">水素（赤色）</div>
+        <div class="gas-bomb-card" style="background: #bdc3c7; color: #333;">アンモニア（白色）</div>
+      </div>
+    </div>
+
+    <!-- クイズセクション -->
+    <div class="quiz-container">
+      <div class="section-header">
+        <span class="section-icon">✏️</span>
+        <h2 class="section-title">気体マスタークイズ！</h2>
+      </div>
+      <div id="quiz-box">
+        <div class="quiz-question" id="q-text">問題を読み込み中...</div>
+        <div class="quiz-options" id="q-options">
+          <!-- ボタンがJSで入る -->
+        </div>
+        <div class="quiz-feedback" id="q-feedback">フィードバック</div>
+        <div class="quiz-nav">
+          <div class="quiz-score" id="q-score">正解数: 0 / 0</div>
+          <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" style="display:none;">つぎの問題へ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+      <p>© 2026 たのしく学ぶ！理科まとめプロジェクト</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // ふりがな切り替えスクリプト
+    function toggleRuby() {
+      const body = document.body;
+      const btn = document.getElementById('ruby-toggle');
+      if (body.classList.contains('hide-ruby')) {
+        body.classList.remove('hide-ruby');
+        btn.textContent = 'ふりがな：ON';
+        btn.classList.remove('off');
+      } else {
+        body.classList.add('hide-ruby');
+        btn.textContent = 'ふりがな：OFF';
+        btn.classList.add('off');
+      }
+    }
+
+    // タブ切り替えスクリプト
+    function switchTab(tabIndex) {
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      const cards = document.querySelectorAll('.section-card');
+      cards.forEach(card => card.classList.remove('active'));
+
+      tabs[tabIndex].classList.add('active');
+      const targetCard = document.getElementById(`tab-${tabIndex}`);
+      if (targetCard) {
+        targetCard.classList.add('active');
+      }
+    }
+
+    // クイズのデータ
+    const quizData = [
+      {
+        question: "水に溶けにくい気体を集めるときに使う、一番きれいに気体が集まる方法はどれ？",
+        options: ["水上置換法（すいじょうちかんほう）", "下方置換法（かほうちかんほう）", "上方置換法（じょうほうちかんほう）"],
+        answer: 0,
+        hint: "水の中で泡として気体を集めるから、空気が混ざらないんだよ。"
+      },
+      {
+        question: "過酸化水素水に二酸化マンガンを加えたときに発生する、ものが燃えるのを助ける気体はなに？",
+        options: ["水素", "二酸化炭素", "酸素", "ちっ素"],
+        answer: 2,
+        hint: "生きものが呼吸するのにも使われるよ。二酸化マンガンは触媒だよ。"
+      },
+      {
+        question: "石灰水に通すと白く濁り、空気の約1.5倍の重さがある気体はなに？",
+        options: ["酸素", "水素", "二酸化炭素", "アンモニア"],
+        answer: 2,
+        hint: "炭酸飲料のなかにたくさん溶け込んでいる気体だよ。"
+      },
+      {
+        question: "地球上で最も軽く、燃やすと「ポッ」と音を立てて水ができる気体はなに？",
+        options: ["ちっ素", "水素", "酸素", "塩化水素"],
+        answer: 1,
+        hint: "燃えたあとに水しか残らない、とてもクリーンな気体だよ。"
+      },
+      {
+        question: "水に極めてよく溶けて、フェノールフタレイン液に入るときれいな赤い噴水を作る、強い刺激臭の気体はなに？",
+        options: ["アンモニア", "塩化水素", "二酸化硫黄", "アルゴン"],
+        answer: 0,
+        hint: "空気より軽いので、上方置換法で集めるよ。虫よけ液にも少し含まれているよ。"
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+      answered = false;
+      const currentQuiz = quizData[currentQuizIndex];
+      
+      document.getElementById('q-text').textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
+      
+      const optionsContainer = document.getElementById('q-options');
+      optionsContainer.innerHTML = '';
+      
+      currentQuiz.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.textContent = option;
+        btn.onclick = () => selectOption(index);
+        optionsContainer.appendChild(btn);
+      });
+
+      const feedback = document.getElementById('q-feedback');
+      feedback.style.display = 'none';
+      feedback.className = 'quiz-feedback';
+      document.getElementById('next-btn').style.display = 'none';
+      
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${quizData.length}`;
+    }
+
+    function selectOption(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const currentQuiz = quizData[currentQuizIndex];
+      const buttons = document.querySelectorAll('.quiz-option-btn');
+      const feedback = document.getElementById('q-feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (selectedIndex === currentQuiz.answer) {
+        buttons[selectedIndex].classList.add('correct');
+        feedback.textContent = '🎉 せいかい！ すごいね！';
+        feedback.className = 'quiz-feedback show-correct';
+        score++;
+      } else {
+        buttons[selectedIndex].classList.add('incorrect');
+        buttons[currentQuiz.answer].classList.add('correct');
+        feedback.innerHTML = `😢 ざんねん！正解は 「<strong>${currentQuiz.options[currentQuiz.answer]}</strong>」 でした。<br><small>ヒント: ${currentQuiz.hint}</small>`;
+        feedback.className = 'quiz-feedback show-incorrect';
+      }
+
+      if (currentQuizIndex === quizData.length - 1) {
+        nextBtn.textContent = '結果を見る';
+      } else {
+        nextBtn.textContent = 'つぎの問題へ';
+      }
+
+      nextBtn.style.display = 'block';
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${quizData.length}`;
+    }
+
+    function nextQuestion() {
+      if (currentQuizIndex < quizData.length - 1) {
+        currentQuizIndex++;
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const quizBox = document.getElementById('quiz-box');
+      let message = '';
+      if (score === quizData.length) {
+        message = '🏆 パーフェクト！きみは気体マスターだ！';
+      } else if (score >= 3) {
+        message = '✨ おめでとう！よくがんばったね！';
+      } else {
+        message = '💪 もういちど読んでチャレンジしてみよう！';
+      }
+
+      quizBox.innerHTML = `
+        <div style="text-align: center; padding: 20px 0;">
+          <h3 style="border: none; font-size: 1.8rem; color: var(--color-accent); margin-bottom: 20px;">結果発表</h3>
+          <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">あなたのスコア: <span style="font-size: 2.2rem; color: var(--color-primary);">${score}</span> / ${quizData.length}点</p>
+          <div class="quiz-feedback show-correct" style="margin-bottom: 30px;">${message}</div>
+          <button class="next-quiz-btn" onclick="resetQuiz()">もう一回やってみる</button>
+        </div>
+      `;
+    }
+
+    function resetQuiz() {
+      currentQuizIndex = 0;
+      score = 0;
+      const quizContainer = document.querySelector('.quiz-container');
+      quizContainer.innerHTML = `
+        <div class="section-header">
+          <span class="section-icon">✏️</span>
+          <h2 class="section-title">気体マスタークイズ！</h2>
+        </div>
+        <div id="quiz-box">
+          <div class="quiz-question" id="q-text"></div>
+          <div class="quiz-options" id="q-options"></div>
+          <div class="quiz-feedback" id="q-feedback"></div>
+          <div class="quiz-nav">
+            <div class="quiz-score" id="q-score"></div>
+            <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" style="display:none;"></button>
+          </div>
+        </div>
+      `;
+      loadQuestion();
+    }
+
+    window.onload = function() {
+      loadQuestion();
+    }
+  </script>
+</body>
+</html>

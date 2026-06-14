@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>関東地方わくわく探検クエスト</title>
+  <style>
+    :root{
+      --sky:#dff6ff; --blue:#2f80ed; --green:#40b86a; --yellow:#ffd75e;
+      --orange:#ff9f43; --pink:#ff6b9a; --purple:#7c5cff; --ink:#243042;
+      --card:#ffffff; --soft:#f5f8ff; --bad:#ff5d5d; --good:#19a974;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;color:var(--ink);background:linear-gradient(#dff6ff,#fff7df 50%,#eef9ee)}
+    header{padding:22px 16px 12px;text-align:center;background:linear-gradient(135deg,#66d9ff,#8ee6a8);border-bottom:6px solid #fff}
+    h1{margin:0;font-size:clamp(28px,5vw,48px);letter-spacing:.04em;text-shadow:2px 2px 0 #fff}
+    .subtitle{font-weight:700;margin:8px 0 0;font-size:18px}
+    main{max-width:1100px;margin:0 auto;padding:18px}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center}
+    .panel{background:rgba(255,255,255,.92);border:4px solid #fff;border-radius:24px;padding:18px;box-shadow:0 10px 24px rgba(33,61,96,.12)}
+    .mapWrap{position:relative;min-height:360px;overflow:hidden;background:linear-gradient(#e8fbff,#fff);}
+    .map{width:100%;height:auto;display:block}
+    .bubble{display:inline-block;background:#fff4b8;border:3px solid #ffbf2f;border-radius:18px;padding:8px 12px;font-weight:800;margin:4px;box-shadow:0 4px 0 #f2a900}
+    .startBtn,.choice,.nextBtn,.resetBtn{border:0;border-radius:18px;padding:14px 18px;font-weight:900;font-size:18px;cursor:pointer;transition:.15s;box-shadow:0 5px 0 rgba(0,0,0,.18)}
+    .startBtn{background:var(--orange);color:white;font-size:22px;width:100%;margin-top:12px}
+    button:hover{transform:translateY(-2px)} button:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+    .status{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:18px 0}
+    .bar{height:22px;background:#dce7ff;border-radius:999px;overflow:hidden;border:3px solid #fff}
+    .bar>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#69db7c,#ffd43b,#ff922b);transition:.4s}
+    .score{font-size:20px;font-weight:900;background:white;border-radius:18px;padding:8px 12px;border:3px solid #fff}
+    .lessonGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+    .mini{background:var(--card);border-radius:20px;padding:14px;border:3px solid #eef3ff;box-shadow:0 6px 14px rgba(0,0,0,.07)}
+    .mini .emoji{font-size:36px}.mini h3{margin:6px 0}.mini p{margin:0;line-height:1.55}
+    #game{display:none}
+    .stageTitle{font-size:26px;margin:0 0 8px}.mission{font-size:20px;line-height:1.7;background:#f7fbff;border-left:8px solid var(--blue);padding:12px;border-radius:12px}
+    .choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.choice{background:white;color:var(--ink);border:3px solid #dce7ff;text-align:left}.choice.correct{background:#d7ffe6;border-color:var(--good)}.choice.wrong{background:#ffe0e0;border-color:var(--bad)}
+    .feedback{display:none;margin-top:14px;padding:14px;border-radius:18px;font-weight:800;line-height:1.6}.feedback.good{display:block;background:#d7ffe6;border:3px solid #52c878}.feedback.bad{display:block;background:#ffe7e7;border:3px solid #ff7777}
+    .nextBtn{display:none;background:var(--purple);color:#fff;margin-top:12px}.resetBtn{background:#00a8cc;color:#fff;margin-top:10px}
+    .badgeRow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.badge{background:#eee;border-radius:999px;padding:8px 12px;font-weight:900;filter:grayscale(1);opacity:.45}.badge.on{filter:none;opacity:1;background:#fff1a8;border:2px solid #ffc928}
+    .note{font-size:14px;color:#526070}.final{display:none;text-align:center}.final h2{font-size:36px}.stamp{font-size:70px;animation:bounce 1s infinite alternate}@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+    .flash{animation:flash .5s}@keyframes flash{50%{transform:scale(1.03);background:#fff7cc}}
+    footer{text-align:center;padding:30px;color:#596275}
+    @media(max-width:760px){.hero{grid-template-columns:1fr}.lessonGrid{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.mapWrap{min-height:auto}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🗺️ 関東地方 わくわく探検クエスト</h1>
+  <p class="subtitle">5年生向け：遊びながら、地形・産業・東京の特色をマスターしよう！</p>
+</header>
+<main>
+  <section id="intro" class="hero">
+    <div class="panel">
+      <h2>きみは「関東たんけん隊」！</h2>
+      <p>地図の中を旅して、50このミッションをクリアしよう。やさしい→ふつう→むずかしいの3段階！連続正解でボーナス宝石ももらえるよ。</p>
+      <div>
+        <span class="bubble">🌾 農業</span><span class="bubble">🏭 工業</span><span class="bubble">🚄 交通</span>
+        <span class="bubble">🗼 東京</span><span class="bubble">🌊 水害対策</span><span class="bubble">🏆 まとめ</span>
+      </div>
+      <button class="startBtn" onclick="startGame()">探検スタート！</button>
+      <p class="note">ヒントカードを読んでからクイズに答えよう。まちがえても、もう一度チャレンジできるよ。</p>
+    </div>
+    <div class="panel mapWrap">
+      <svg class="map" viewBox="0 0 520 390" aria-label="関東地方のイラスト地図">
+        <rect width="520" height="390" fill="#e9fbff"/>
+        <path d="M40 260 C90 190,130 130,210 110 C310 80,390 120,445 190 C490 248,440 330,335 350 C230 370,110 330,40 260Z" fill="#b9e8a5" stroke="#4aa96c" stroke-width="5"/>
+        <path d="M110 120 C150 80,205 65,250 90" fill="none" stroke="#8b7355" stroke-width="13" stroke-linecap="round"/>
+        <path d="M80 245 C140 238,205 250,290 232 C350 220,390 245,440 235" fill="none" stroke="#63b3ed" stroke-width="9" stroke-linecap="round"/>
+        <ellipse cx="360" cy="255" rx="80" ry="55" fill="#8ed6ff" stroke="#2f80ed" stroke-width="4"/>
+        <text x="326" y="260" font-size="20" font-weight="bold">東京湾</text>
+        <circle cx="330" cy="215" r="14" fill="#ff6b6b"/><text x="345" y="220" font-size="18">東京</text>
+        <circle cx="385" cy="278" r="11" fill="#ff922b"/><text x="400" y="283" font-size="16">千葉</text>
+        <circle cx="295" cy="278" r="11" fill="#845ef7"/><text x="246" y="284" font-size="16">神奈川</text>
+        <circle cx="270" cy="170" r="11" fill="#51cf66"/><text x="285" y="176" font-size="16">埼玉</text>
+        <circle cx="350" cy="145" r="11" fill="#ffd43b"/><text x="365" y="151" font-size="16">茨城</text>
+        <circle cx="205" cy="125" r="11" fill="#20c997"/><text x="145" y="130" font-size="16">群馬</text>
+        <circle cx="285" cy="100" r="11" fill="#fab005"/><text x="300" y="105" font-size="16">栃木</text>
+        <text x="35" y="355" font-size="24">🚄 🏭 🌾 🗼 🐟</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <h2>まずはヒントカードをチェック！</h2>
+    <div class="lessonGrid">
+      <div class="mini"><div class="emoji">🌋</div><h3>自然</h3><p>関東平野は日本最大。利根川は流域面積日本一。霞ヶ浦は日本第2の湖。</p></div>
+      <div class="mini"><div class="emoji">🥬</div><h3>農業</h3><p>大都市の近くでは近郊農業。嬬恋村ではすずしい高原でキャベツを育てるよ。</p></div>
+      <div class="mini"><div class="emoji">🐟</div><h3>水産業</h3><p>銚子港は日本有数の漁港。三崎港は遠洋漁業、まぐろで有名。</p></div>
+      <div class="mini"><div class="emoji">🏭</div><h3>工業</h3><p>京浜は東京湾の西岸、京葉は東岸。市原は石油化学、君津は鉄鋼がさかん。</p></div>
+      <div class="mini"><div class="emoji">✈️</div><h3>交通</h3><p>東京は交通の中心。羽田空港と成田空港は空の玄関口。</p></div>
+      <div class="mini"><div class="emoji">🗼</div><h3>東京</h3><p>政治・経済・文化・情報が集まる首都。昼間人口が夜間人口より多いよ。</p></div>
+    </div>
+  </section>
+
+  <section id="game" class="panel" style="margin-top:18px">
+    <div class="status">
+      <div class="bar"><span id="progress"></span></div>
+      <div class="score">⭐ <span id="score">0</span>点</div>
+    </div>
+    <div class="badgeRow" id="badges"></div>
+    <div id="quizBox">
+      <h2 class="stageTitle" id="stageTitle"></h2>
+      <div class="mission" id="mission"></div>
+      <div class="choices" id="choices"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="nextBtn" id="nextBtn" onclick="nextStage()">つぎのステージへ ➜</button>
+    </div>
+    <div class="final" id="final">
+      <div class="stamp">🏆</div>
+      <h2>関東マスター認定！</h2>
+      <p id="finalMsg"></p>
+      <button class="resetBtn" onclick="resetGame()">もう一度あそぶ</button>
+    </div>
+  </section>
+</main>
+<footer>作成資料：第16回社会PDF「関東地方」の内容にもとづく学習用HTML</footer>
+<script>
+const stages = [
+  {diff:'やさしい', badge:'🌋 や1', title:'ステージ1：関東の入口', q:'関東地方と中部地方の境にある山地はどれ？', choices:['関東山地', '中国山地', '四国山地', '筑紫山地'], ans:0, exp:'関東山地は関東地方の西側にあります。'},
+  {diff:'やさしい', badge:'🗾 や2', title:'ステージ2：日本一の平野', q:'関東地方に広がる、日本でいちばん大きな平野は？', choices:['濃尾平野', '関東平野', '石狩平野', '大阪平野'], ans:1, exp:'関東平野は日本最大の平野です。'},
+  {diff:'やさしい', badge:'🌊 や3', title:'ステージ3：川の王さま', q:'流域面積が日本一で、関東平野を流れる川は？', choices:['多摩川', '利根川', '信濃川', '荒川'], ans:1, exp:'利根川は「坂東太郎」とも呼ばれます。'},
+  {diff:'やさしい', badge:'💧 や4', title:'ステージ4：湖を見つけろ', q:'日本で2番目に大きい湖で、茨城県にある湖は？', choices:['琵琶湖', '霞ヶ浦', '十和田湖', 'サロマ湖'], ans:1, exp:'霞ヶ浦は日本第2の湖です。'},
+  {diff:'やさしい', badge:'🏖️ や5', title:'ステージ5：長い砂浜', q:'千葉県東部に広がる、長い砂浜の海岸は？', choices:['湘南海岸', '九十九里浜', '三保の松原', '鳥取砂丘'], ans:1, exp:'九十九里浜は千葉県の有名な砂浜海岸です。'},
+  {diff:'やさしい', badge:'🟫 や6', title:'ステージ6：赤土のひみつ', q:'火山灰が長い年月で変化してできた赤土の層は？', choices:['関東ローム', 'シラス台地', '扇状地', '三角州'], ans:0, exp:'関東ロームは水はけがよく、畑作に向いています。'},
+  {diff:'やさしい', badge:'🥬 や7', title:'ステージ7：都会の近くの農業', q:'大都市の近くで、野菜や花を育てて出荷する農業は？', choices:['近郊農業', '遠洋農業', '焼畑農業', '遊牧'], ans:0, exp:'近郊農業は大消費地に近いことを生かします。'},
+  {diff:'やさしい', badge:'🥬 や8', title:'ステージ8：キャベツ畑へGO', q:'群馬県の嬬恋村でさかんな、夏のすずしい気候を生かした農業は？', choices:['近郊農業', '促成栽培', '高冷地農業', '水田単作'], ans:2, exp:'高冷地農業では、低地とちがう時期に野菜を出荷できます。'},
+  {diff:'やさしい', badge:'🥜 や9', title:'ステージ9：千葉の名物', q:'千葉県で生産が有名な農作物は？', choices:['りんご', 'みかん', 'らっかせい', 'さとうきび'], ans:2, exp:'千葉県といえば、らっかせいが有名です。'},
+  {diff:'やさしい', badge:'🍢 や10', title:'ステージ10：下仁田町の特産', q:'群馬県下仁田町で多く栽培される工芸作物は？', choices:['こんにゃくいも', '茶', 'い草', 'てんさい'], ans:0, exp:'こんにゃくいもは、こんにゃくの原料です。'},
+  {diff:'やさしい', badge:'🍓 や11', title:'ステージ11：栃木の農産物', q:'栃木県で「とちおとめ」などの品種が知られる農産物は？', choices:['いちご', 'ぶどう', 'なし', 'もも'], ans:0, exp:'栃木県はいちごの生産で有名です。'},
+  {diff:'やさしい', badge:'🐟 や12', title:'ステージ12：大漁の港', q:'千葉県にあり、日本有数の水あげ量をほこる漁港は？', choices:['三崎港', '横浜港', '銚子港', '東京港'], ans:2, exp:'銚子港は利根川の河口近くにあります。'},
+  {diff:'やさしい', badge:'🐟 や13', title:'ステージ13：まぐろの港', q:'神奈川県にあり、遠洋漁業の基地として知られる港は？', choices:['三崎港', '銚子港', '鹿島港', '茨城港'], ans:0, exp:'三崎港はまぐろの水あげで知られます。'},
+  {diff:'やさしい', badge:'🏭 や14', title:'ステージ14：西岸の工業地帯', q:'東京湾の西岸に沿って広がる工業地帯は？', choices:['京浜工業地帯', '京葉工業地域', '阪神工業地帯', '瀬戸内工業地域'], ans:0, exp:'京浜は東京・川崎・横浜などの工業地帯です。'},
+  {diff:'やさしい', badge:'🏭 や15', title:'ステージ15：東岸の工業地域', q:'東京湾の東岸に広がる工業地域は？', choices:['京浜工業地帯', '京葉工業地域', '北九州工業地域', '中京工業地帯'], ans:1, exp:'京葉工業地域は千葉県側に広がります。'},
+  {diff:'やさしい', badge:'✈️ や16', title:'ステージ16：空の玄関口', q:'国内線の中心として旅客数が多く、東京にある空港は？', choices:['成田国際空港', '羽田空港', '関西国際空港', '新千歳空港'], ans:1, exp:'羽田空港は国内線の中心です。'},
+  {diff:'やさしい', badge:'🗼 や17', title:'ステージ17：東京の役わり', q:'東京に集まっているものとして正しいものは？', choices:['国会や企業・銀行', '牧場だけ', '火山だけ', '漁船だけ'], ans:0, exp:'東京は政治・経済・文化・情報の中心です。'},
+  {diff:'ふつう', badge:'🛢️ ふ18', title:'ステージ18：石油化学の町', q:'京葉工業地域で、石油化学工業がさかんな都市は？', choices:['市原市', '前橋市', '宇都宮市', 'さいたま市'], ans:0, exp:'市原市では石油化学工業がさかんです。'},
+  {diff:'ふつう', badge:'⚙️ ふ19', title:'ステージ19：鉄の町', q:'千葉県にあり、鉄鋼業がさかんな都市は？', choices:['君津市', '秩父市', '箱根町', '水戸市'], ans:0, exp:'君津市は大きな製鉄所で知られます。'},
+  {diff:'ふつう', badge:'⛰️ ふ20', title:'ステージ20：セメントの町', q:'埼玉県にあり、セメント工業で有名な都市は？', choices:['秩父市', '横須賀市', '日光市', '千葉市'], ans:0, exp:'秩父市はセメント工業で有名です。'},
+  {diff:'ふつう', badge:'🚢 ふ21', title:'ステージ21：車を輸出する港', q:'自動車の輸出が多い神奈川県の貿易港は？', choices:['横浜港', '銚子港', '三崎港', '鹿島港'], ans:0, exp:'横浜港からは自動車や部品などが輸出されます。'},
+  {diff:'ふつう', badge:'🚄 ふ22', title:'ステージ22：新幹線クイズ', q:'東京駅を出た東北新幹線と上越新幹線が分かれる駅は？', choices:['大宮駅', '横浜駅', '千葉駅', '水戸駅'], ans:0, exp:'東北新幹線と上越新幹線は大宮駅で分かれます。'},
+  {diff:'ふつう', badge:'🚄 ふ23', title:'ステージ23：海沿いの新幹線', q:'東京都から神奈川県を通る新幹線は？', choices:['東海道新幹線', '東北新幹線', '上越新幹線', '北陸新幹線'], ans:0, exp:'東海道新幹線は東京から神奈川方面へ進みます。'},
+  {diff:'ふつう', badge:'🚄 ふ24', title:'ステージ24：北へ向かう新幹線', q:'東京都・埼玉県・栃木県を通る新幹線は？', choices:['東海道新幹線', '東北新幹線', '山陽新幹線', '九州新幹線'], ans:1, exp:'東北新幹線は東京から北へ向かいます。'},
+  {diff:'ふつう', badge:'🌉 ふ25', title:'ステージ25：アクアライン', q:'東京湾アクアラインが結ぶ千葉県の市は？', choices:['木更津市', '宇都宮市', '前橋市', '水戸市'], ans:0, exp:'東京湾アクアラインは木更津市と川崎市を結びます。'},
+  {diff:'ふつう', badge:'🌉 ふ26', title:'ステージ26：トンネルの理由', q:'東京湾アクアラインの神奈川県側が海底トンネルなのはなぜ？', choices:['船や飛行機の通行を妨げにくくするため', '雪をふせぐため', '山をこえるため', '魚を育てるため'], ans:0, exp:'高い橋だと船や羽田空港の飛行機に影響が出るためです。'},
+  {diff:'ふつう', badge:'🗼 ふ27', title:'ステージ27：昼の人口', q:'東京は通勤・通学で人が集まるため、何が夜間人口を上回る？', choices:['昼間人口', '森林面積', '湖の数', '火山の数'], ans:0, exp:'東京では昼間人口が夜間人口を上回ります。'},
+  {diff:'ふつう', badge:'💧 ふ28', title:'ステージ28：東京の水', q:'東京都の水道水の多くは、利根川と何川の水？', choices:['荒川', '木曽川', '淀川', '吉野川'], ans:0, exp:'東京都の水道水の約80%は利根川と荒川の水です。'},
+  {diff:'ふつう', badge:'🌊 ふ29', title:'ステージ29：低い土地', q:'海面より土地が低く、高潮や洪水に注意が必要な地域は？', choices:['ゼロメートル地帯', '高冷地', '扇状地', 'リアス海岸'], ans:0, exp:'ゼロメートル地帯では水害への備えが大切です。'},
+  {diff:'ふつう', badge:'🚇 ふ30', title:'ステージ30：地下鉄の工夫', q:'水害を防ぐため、地下鉄の出入り口はどう工夫されることがある？', choices:['周囲の道路より高くする', '海の中に作る', '木で作る', '必ず山頂に作る'], ans:0, exp:'出入り口を高くして、水が地下へ流れこむのを防ぎます。'},
+  {diff:'ふつう', badge:'🌐 ふ31', title:'ステージ31：世界自然遺産', q:'東京都にあり、都心から南に約1000km離れた世界自然遺産は？', choices:['小笠原諸島', '佐渡島', '淡路島', '対馬'], ans:0, exp:'小笠原諸島は独自の生き物が多い島々です。'},
+  {diff:'ふつう', badge:'🏯 ふ32', title:'ステージ32：世界文化遺産', q:'栃木県にある世界文化遺産は？', choices:['日光の社寺', '姫路城', '厳島神社', '白川郷'], ans:0, exp:'日光東照宮をふくむ日光の社寺が登録されています。'},
+  {diff:'ふつう', badge:'🧵 ふ33', title:'ステージ33：生糸の歴史', q:'群馬県にある世界文化遺産で、生糸の生産に関係する施設は？', choices:['富岡製糸場', '東京駅', '横浜港', '鹿島港'], ans:0, exp:'富岡製糸場は明治時代に作られました。'},
+  {diff:'ふつう', badge:'🏙️ ふ34', title:'ステージ34：副都心', q:'東京の副都心として正しい組み合わせは？', choices:['新宿・渋谷', '銚子・三崎', '嬬恋・下仁田', '日光・富岡'], ans:0, exp:'新宿や渋谷などは副都心と呼ばれます。'},
+  {diff:'ふつう', badge:'🏙️ ふ35', title:'ステージ35：新都心', q:'埼玉県にある、東京の機能を分散する目的で開発された地域は？', choices:['さいたま新都心', 'みなとみらい21', '幕張新都心', '筑波研究学園都市'], ans:0, exp:'さいたま新都心は埼玉県にあります。'},
+  {diff:'むずかしい', badge:'🧠 む36', title:'ステージ36：組み合わせ問題1', q:'「市原市 - 君津市 - 秩父市」の説明として正しい順番は？', choices:['石油化学・鉄鋼・セメント', '鉄鋼・セメント・石油化学', 'セメント・石油化学・鉄鋼', '漁業・農業・観光'], ans:0, exp:'市原=石油化学、君津=鉄鋼、秩父=セメントです。'},
+  {diff:'むずかしい', badge:'🧠 む37', title:'ステージ37：組み合わせ問題2', q:'「銚子港 - 三崎港」の説明として正しい組み合わせは？', choices:['沖合漁業で水あげ多い・遠洋漁業の基地', '遠洋漁業の基地・空港', '自動車輸出・石油化学', '米作り・キャベツ'], ans:0, exp:'銚子港は水あげ量、三崎港は遠洋漁業とまぐろがポイントです。'},
+  {diff:'むずかしい', badge:'🧠 む38', title:'ステージ38：農業の理由', q:'関東ロームが広がる地域で畑作がさかんな理由は？', choices:['水はけがよいから', '一年中雪があるから', '海が深いから', '石油が出るから'], ans:0, exp:'関東ロームは水はけがよく、畑作に向いています。'},
+  {diff:'むずかしい', badge:'🧠 む39', title:'ステージ39：高冷地農業のねらい', q:'嬬恋村のキャベツは、すずしい高原の気候を利用して何をずらす？', choices:['出荷の時期', '県庁所在地', '川の流れ', '空港の場所'], ans:0, exp:'低地でとれにくい夏に出荷できるのが強みです。'},
+  {diff:'むずかしい', badge:'🧠 む40', title:'ステージ40：早く収穫する米', q:'台風の被害を避けるなどの目的で、普通より早く収穫する米を何という？', choices:['早場米', '古代米', 'もち米', '輸入米'], ans:0, exp:'早場米は早い時期に収穫する米です。'},
+  {diff:'むずかしい', badge:'🧠 む41', title:'ステージ41：貿易品目', q:'横浜港の主な輸出品としてPDFに出ていたものは？', choices:['自動車', 'まぐろ', 'キャベツ', 'こんにゃくいも'], ans:0, exp:'横浜港は自動車や自動車部品の輸出が多いです。'},
+  {diff:'むずかしい', badge:'🧠 む42', title:'ステージ42：工業地域の特徴', q:'関東内陸工業地域で中心となる工業として近いものは？', choices:['自動車・電気機器の組み立て', '遠洋漁業', '米の単作', '生糸だけ'], ans:0, exp:'内陸部では加工組立型の工業が発達しました。'},
+  {diff:'むずかしい', badge:'🧠 む43', title:'ステージ43：鹿島臨海工業地域', q:'茨城県の鹿島港の周辺で発達した工業は？', choices:['鉄鋼・石油化学', '製糸・絹織物', '水産加工だけ', '出版・印刷だけ'], ans:0, exp:'鹿島港の周辺には鉄鋼・石油化学の大工場があります。'},
+  {diff:'むずかしい', badge:'🧠 む44', title:'ステージ44：都市の広がり', q:'地価が高くなり、都心部の人口が郊外へ移る現象は？', choices:['ドーナツ化現象', 'ヒートアイランド現象', '液状化現象', 'フェーン現象'], ans:0, exp:'中心部が少なく周辺に広がるため、ドーナツのように例えます。'},
+  {diff:'むずかしい', badge:'🧠 む45', title:'ステージ45：暑い都市', q:'都市部の気温が周辺の郊外より高くなる現象は？', choices:['ヒートアイランド現象', 'ドーナツ化現象', '高潮', '地盤沈下'], ans:0, exp:'建物や道路が熱をためやすいことなどが関係します。'},
+  {diff:'むずかしい', badge:'🧠 む46', title:'ステージ46：洪水対策', q:'埼玉県春日部市の地下に作られた大きな洪水対策施設は？', choices:['首都圏外郭放水路', '青函トンネル', '関門トンネル', '黒部ダム'], ans:0, exp:'首都圏外郭放水路は大雨の水を地下で調節します。'},
+  {diff:'むずかしい', badge:'🧠 む47', title:'ステージ47：東京の情報産業', q:'東京に集中している情報をあつかう産業として正しいものは？', choices:['テレビ局・出版社・新聞社', '牧場・養殖場・炭鉱', 'みかん畑・茶畑・棚田', '造船所だけ'], ans:0, exp:'東京にはメディアやICT、ゲーム・アニメ関連産業も集まります。'},
+  {diff:'むずかしい', badge:'🧠 む48', title:'ステージ48：東京スカイツリー', q:'東京スカイツリーの高さとしてPDFに出ていた数字は？', choices:['634m', '333m', '1000m', '3776m'], ans:0, exp:'東京スカイツリーは高さ634mです。'},
+  {diff:'むずかしい', badge:'🧠 む49', title:'ステージ49：面積が増えた理由', q:'東京・千葉・神奈川・愛知・大阪などで面積が増えた大きな理由は？', choices:['海沿いで埋め立てが行われたから', '山が急に高くなったから', '国境が変わったから', '川が全部なくなったから'], ans:0, exp:'沿海部の埋め立て地が、工業用地・商業用地・住宅地・空港などに利用されました。'},
+  {diff:'むずかしい', badge:'🧠 む50', title:'ステージ50：まとめのボス', q:'関東地方の説明として、もっとも正しいものは？', choices:['東京を中心に交通・情報・産業が発達し、農業や工業も地域ごとに特色がある', '山だけで都市はない', '農業はまったく行われない', '港も空港もない'], ans:0, exp:'大正解！関東地方は首都東京を中心に、多様な特色をもつ地方です。'}
+];
+let current=0, score=0, locked=false, streak=0, gems=0;
+const pointMap={'やさしい':50,'ふつう':100,'むずかしい':150};
+const levelIcon={'やさしい':'🌱','ふつう':'🔥','むずかしい':'👑'};
+function startGame(){document.getElementById('game').style.display='block';document.getElementById('game').scrollIntoView({behavior:'smooth'});renderBadges();renderStage();}
+function renderBadges(){document.getElementById('badges').innerHTML=stages.map((s,i)=>`<span class="badge ${i<current?'on':''}" title="${s.title}">${s.badge}</span>`).join('');}
+function rewardLine(){return `💎 宝石 ${gems}こ　⚡ れんぞく正解 ${streak}　🎁 3れんぞくごとに+20点！`;}
+function renderStage(){locked=false;const s=stages[current];document.getElementById('stageTitle').textContent=s.title;document.getElementById('mission').innerHTML=`${levelIcon[s.diff]} 難しさ：<b>${s.diff}</b>　正解で<b>${pointMap[s.diff]}点</b><br>🎯 ミッション：${s.q}<br><span class="note">${rewardLine()}</span>`;document.getElementById('choices').innerHTML=s.choices.map((c,i)=>`<button class="choice" onclick="answer(${i})">${['A','B','C','D'][i]}. ${c}</button>`).join('');document.getElementById('feedback').className='feedback';document.getElementById('feedback').textContent='';document.getElementById('nextBtn').style.display='none';document.getElementById('progress').style.width=(current/stages.length*100)+'%';document.getElementById('score').textContent=score;renderBadges();}
+function answer(i){if(locked)return;locked=true;const s=stages[current];const btns=[...document.querySelectorAll('.choice')];const fb=document.getElementById('feedback');let bonus=0;if(i===s.ans){streak++;gems++;bonus=(streak%3===0)?20:0;score+=pointMap[s.diff]+bonus;btns[i].classList.add('correct');fb.className='feedback good';fb.innerHTML=`ピンポーン！ ${s.exp}<br>バッジをゲット！ ${s.badge}　💎+1<br>${bonus?`🎉 ${streak}れんぞく正解ボーナス！ +${bonus}点`:'あと'+(3-streak%3)+'回れんぞく正解でボーナス！'}`;}else{streak=0;btns[i].classList.add('wrong');btns[s.ans].classList.add('correct');fb.className='feedback bad';fb.innerHTML='おしい！ 正解は「'+s.choices[s.ans]+'」。<br>'+s.exp+'<br>⚡ れんぞく正解はリセット。でも次からまたためられるよ！';}document.getElementById('score').textContent=score;document.getElementById('nextBtn').style.display='inline-block';document.getElementById('quizBox').classList.add('flash');setTimeout(()=>document.getElementById('quizBox').classList.remove('flash'),500);}
+function nextStage(){current++;if(current>=stages.length){finish();}else{renderStage();}}
+function finish(){document.getElementById('quizBox').style.display='none';document.getElementById('final').style.display='block';document.getElementById('progress').style.width='100%';renderBadges();document.querySelectorAll('.badge').forEach(b=>b.classList.add('on'));let max=stages.reduce((a,s)=>a+pointMap[s.diff],0)+Math.floor(stages.length/3)*20;let rank=score>=max*.9?'👑 関東レジェンド':score>=max*.7?'🏆 関東マスター':score>=max*.5?'⭐ 関東たんけん隊長':'🌱 見習いたんけん隊';let msg=score>=max*.7?'すばらしい！関東地方の重要ポイントをしっかり覚えたね。':score>=max*.5?'いい調子！まちがえた問題をもう一度見直すと、もっと強くなるよ。':'よくがんばったね！ヒントカードをもう一度読んで、満点を目指そう。';document.getElementById('finalMsg').innerHTML=`あなたの点数は <b>${score}点</b> / 目標満点 ${max}点<br>集めた宝石：<b>${gems}こ</b><br>ランク：<b>${rank}</b><br>${msg}`;}
+function resetGame(){current=0;score=0;streak=0;gems=0;document.getElementById('quizBox').style.display='block';document.getElementById('final').style.display='none';renderStage();}
+</script>
+</body>
+</html>
