@@ -701,10 +701,16 @@
       </div>
       <div class="progress-stats">
         <div class="stat-item">
-          <div class="stat-label">🧭 社会の進捗</div>
+          <div class="stat-label">🧭 関東地方の進捗</div>
           <div class="progress-bar-container"><div id="progress-social" class="progress-bar" style="width: 0%;"></div></div>
           <span id="progress-text-social" class="stat-val">0% (0/5)</span>
           <span id="quiz-best-social" class="quiz-best">🏆 ベスト: 未挑戦</span>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">🗺️ 東北・北海道の進捗</div>
+          <div class="progress-bar-container"><div id="progress-social17" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="progress-text-social17" class="stat-val">0% (0/5)</span>
+          <span id="quiz-best-social17" class="quiz-best">🏆 ベスト: 未挑戦</span>
         </div>
         <div class="stat-item">
           <div class="stat-label">🧪 理科の進捗</div>
@@ -727,6 +733,7 @@
         <label for="subject-select" style="font-weight: bold; margin-right: 5px;">📚 きょうか：</label>
         <select id="subject-select" onchange="changeSubject()">
           <option value="social">🗺️ 社会（関東地方）</option>
+          <option value="social17">🗺️ 社会（東北・北海道地方）</option>
           <option value="science">🧪 理科（気体の性質）</option>
           <option value="japanese">📖 国語（随筆文・因果関係）</option>
         </select>
@@ -741,6 +748,15 @@
       <button class="tab-btn" onclick="switchSocialTab(2)">🏭 3. 工業</button>
       <button class="tab-btn" onclick="switchSocialTab(3)">✈️ 4. 交通・観光</button>
       <button class="tab-btn" onclick="switchSocialTab(4)">🏙️ 5. 東京と都市の問題</button>
+    </div>
+
+    <!-- =============== 【社会（東北・北海道地方）】タブメニュー =============== -->
+    <div id="social17-tabs" class="nav-tabs" style="display: none;">
+      <button class="tab-btn active" onclick="switchSocial17Tab(0)">🧭 1. 歴史と地名</button>
+      <button class="tab-btn" onclick="switchSocial17Tab(1)">⛰️ 2. 自然と気候</button>
+      <button class="tab-btn" onclick="switchSocial17Tab(2)">🌾 3. 農業の特色</button>
+      <button class="tab-btn" onclick="switchSocial17Tab(3)">🌲 4. 林業・水産業</button>
+      <button class="tab-btn" onclick="switchSocial17Tab(4)">🏭 5. 工業・交通・観光</button>
     </div>
 
     <!-- =============== 【理科】タブメニュー =============== -->
@@ -1098,6 +1114,215 @@
       </div>
     </div>
 
+    <!-- ==============================================
+         =============== 社会科（東北・北海道）コンテンツ ================
+         ============================================== -->
+    <div id="social17-content" style="display: none;">
+      <!-- =============== 【1. 歴史と地名】 =============== -->
+      <div id="social17-tab-0" class="section-card active">
+        <div class="section-header">
+          <span class="section-icon">🧭</span>
+          <h2 class="section-title">北海道の歴史と地名</h2>
+        </div>
+
+        <h3>1. 本州からの開拓団と新しい地名</h3>
+        <p>
+          北海道には、「北広島市（きたひろしまし）」のほかに、「福井（ふくい）」や「鳥取（とっとり）」など、本州の地名と同じ名前が各地にあります。これは、明治時代以降に本州や四国、九州の各地からたくさんの人々が<ruby>開拓<rt>かいたく</rt></ruby>（未開の土地を切り開くこと）のために移り住んできたため、自分たちの出身地の名前を新しい土地につけたことがきっかけです。
+        </p>
+
+        <h3>2. 開拓使と屯田兵の役割</h3>
+        <p>
+          明治政府は1869年に、北海道の開拓を本格的に進めるために<strong><ruby>開拓使<rt>かいたくし</rt></ruby></strong>という特別な役所を置きました。そして、日本各地から集められた<strong><ruby>屯田兵<rt>とんでんへい</rt></ruby></strong>と呼ばれる兵士たちが、厳しい自然の中で土地を切り開くとともに、北からのロシアに対する防備にあたりました。
+        </p>
+
+        <div class="explain-bubble">
+          📖 <strong>屯田兵（とんでんへい）ってなに？：</strong>普段は農業をして土地を耕し、いざという時には兵士として戦う仕組みの人たちのことだよ。とても厳しい寒さの中で開拓を進める、大変な仕事だったんだ。
+        </div>
+
+        <h3>3. アイヌの人々の暮らしと「ウポポイ」</h3>
+        <p>
+          北海道は昔、<strong>蝦夷地（えぞち）</strong>と呼ばれていました。そこには、古くから自然を敬い、独自の言語や文化を持つ<strong>アイヌの人々</strong>が暮らしていました。北海道にある多くの地名（例えば、札幌や小樽、室蘭など）は、アイヌ語がもとになっています。
+        </p>
+        <p>
+          明治以降の急速な開拓によって、アイヌの人々の生活や文化はおびやかされるようになってしまいましたが、現在ではその文化を守り、広く伝えていくために、北海道の白老町（しらおいちょう）に<strong>「ウポポイ（民族共生象徴空間）」</strong>という国立の施設がつくられ、復興の取り組みが進められています。
+        </p>
+      </div>
+
+      <!-- =============== 【2. 自然と気候】 =============== -->
+      <div id="social17-tab-1" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">⛰️</span>
+          <h2 class="section-title">東北・北海道の自然環境と気候</h2>
+        </div>
+
+        <h3>1. 東北地方の地形</h3>
+        <p>
+          東北地方の中央には、日本で一番長い<strong><ruby>奥羽山脈<rt>おううさんみゃく</rt></ruby></strong>が南北に連なり、地方を日本海側と太平洋側に分けています。
+        </p>
+        <ul>
+          <li><strong>太平洋側：</strong>なだらかな「北上高地（きたかみこうち）」と「阿武隈高地（あぶくまこうち）」があります。</li>
+          <li><strong>日本海側：</strong>「出羽山地（でわさんち）」が広がっています。</li>
+          <li><strong>川と平野：</strong>太平洋側には流域面積が広い「北上川」や「阿武隈川」が流れ、日本海側には日本三大急流の一つである「最上川（もがみがわ）」が流れており、その流域に庄内平野（しょうないへいや）などの豊かな平野や盆地をつくっています。</li>
+          <li><strong>湖：</strong>火山活動でできた美しいカルデラ湖である「十和田湖」や、日本で一番深い「田沢湖（たざわこ・約423m）」、東北で最大の面積を持つ「猪苗代湖（いなわしろこ）」があります。</li>
+        </ul>
+
+        <div class="illustration-box">
+          <!-- 東北地方の簡易地図風SVG -->
+          <svg viewBox="0 0 400 240" width="100%" height="160" style="background:#eef5fc; border-radius:15px;">
+            <!-- 陸地 -->
+            <path d="M 120,20 C 180,10 240,30 220,100 C 260,130 240,190 200,230 L 120,230 Z" fill="#e8f5e9" stroke="#81c784" stroke-width="2"/>
+            <!-- 奥羽山脈 -->
+            <path d="M 170,30 Q 185,120 180,220" fill="none" stroke="#8d6e63" stroke-width="8" stroke-dasharray="5 5" stroke-linecap="round"/>
+            <text x="180" y="110" font-family="var(--font-family)" font-weight="bold" fill="#5d4037" font-size="12" text-anchor="middle">奥羽山脈</text>
+            <!-- 日本海側・太平洋側 -->
+            <text x="110" y="120" font-family="var(--font-family)" font-weight="bold" fill="#1e70e5" font-size="14">日本海側</text>
+            <text x="250" y="120" font-family="var(--font-family)" font-weight="bold" fill="#e67e22" font-size="14">太平洋側</text>
+            <!-- 川 -->
+            <path d="M 175,80 Q 140,90 125,100" fill="none" stroke="#2980b9" stroke-width="3"/>
+            <text x="135" y="80" font-family="var(--font-family)" fill="#2980b9" font-size="10">最上川</text>
+          </svg>
+          <div class="illustration-caption">【図1】奥羽山脈による地形と気候の境界</div>
+        </div>
+
+        <h3>2. 東北地方の３つの気候</h3>
+        <p>
+          奥羽山脈が障壁（かべ）となることで、東北地方は地域によって気候が全く異なります。
+        </p>
+        <ol>
+          <li><strong>日本海側の気候（秋田など）：</strong>冬は北西からの季節風が山脈にぶつかるため、雪が非常に多く降る<strong>豪雪地帯（ごうせつちたい）</strong>になります。</li>
+          <li><strong>内陸部の気候（山形など）：</strong>山に囲まれた盆地が多く、海からの影響を受けにくいため、夏と冬の気温の差（年較差）がとても大きく、雨は少なめです。</li>
+          <li><strong>太平洋側の気候（宮古など）：</strong>冬は雪が少なく晴れますが、初夏に冷たく湿った北東風の<strong>「やませ」</strong>が吹き込み、気温が上がらず冷害を引き起こす原因になります。</li>
+        </ol>
+
+        <h3>3. 北海道地方の自然環境と気候</h3>
+        <p>
+          北海道の中央部には「石狩山地（いしかりさんち）」がそびえ、そこから南へ「日高山脈」が伸びています。
+        </p>
+        <ul>
+          <li><strong>川と平野：</strong>日本で２番目に流域面積が広い「石狩川（いしかりがわ）」が石狩平野を流れ、十勝平野を流れる「十勝川」があります。</li>
+          <li><strong>湖：</strong>摩周湖、阿寒湖、洞爺湖などの美しいカルデラ湖のほか、オホーツク海沿岸部には、砂州によって海と切り離された日本で３番目に大きいサロマ湖（汽水湖）があります。</li>
+          <li><strong>気候：</strong>日本で唯一<strong>冷帯（亜寒帯）</strong>に属し、冬の寒さは非常に厳しいです。ただし、梅雨（つゆ）がなく、台風が上陸することも少ないです。東部の太平洋側（根室など）では、初夏に冷たい寒流（親潮）の上を吹く風によって<strong>「海霧（うみぎり）」</strong>という濃い霧が発生し、気温が上がりにくくなります。</li>
+        </ul>
+      </div>
+
+      <!-- =============== 【3. 農業の特色】 =============== -->
+      <div id="social17-tab-2" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🌾</span>
+          <h2 class="section-title">米どころ東北と広大な北海道の農業</h2>
+        </div>
+
+        <h3>1. 東北地方：日本一の米どころと果樹王国</h3>
+        <p>
+          東北地方は、日本の米の生産量の約４分の１を占める「日本一の米どころ」です。
+        </p>
+        <ul>
+          <li><strong>米づくりのさかんな平野：</strong>秋田県の「八郎潟（はちろうがた）」を干拓してつくった大潟村（おおがたむら）や、最上川の下流に広がる山形県の「庄内平野」、宮城県の「仙台平野」などで大規模な稲作が行われています。</li>
+          <li><strong>果樹の栽培：</strong>すずしくて雨が比較的少ない気候をいかして、青森県の「津軽平野」では<strong>りんご（日本一）</strong>、山形県の山形盆地では<strong>おうとう（さくらんぼ・日本一）</strong>、福島盆地では<strong>もも（全国有数）</strong>がそれぞれ盛んに栽培されています。</li>
+        </ul>
+
+        <h3>2. 北海道地方：スケールの大きな畑作と酪農</h3>
+        <p>
+          北海道は、日本の耕地面積の約４分の１を占める日本最大の食料基地です。
+        </p>
+        <ul>
+          <li><strong>十勝平野（とかちへいや）の畑作：</strong>広大で平らな土地をいかして、じゃがいも、てんさい（砂糖の原料）、小麦、豆類を同じ土地で順番に植え替えて育てる<strong><ruby>輪作<rt>りんさく</rt></ruby></strong>を行っています。これにより、土がやせるのを防ぎ、連作障害（同じ作物を続けて作ると病気になること）を防いでいます。</li>
+          <li><strong>石狩平野（いしかりへいや）の稲作：</strong>かつては<strong><ruby>泥炭地<rt>でいたんち</rt></ruby></strong>と呼ばれる水はけの悪い湿地でしたが、他の土地から良い土を運ぶ「客土（きゃくど）」や、排水路の整備といった土壌改良を行うことで、日本有数の米づくり地帯に生まれ変わりました。</li>
+          <li><strong>根釧台地（こんせんだいち）の酪農（らくのう）：</strong>火山灰におおわれた土地で、夏でも気温が低く霧が多いため畑作には向きません。そのため、牧草を育てて乳牛を飼う大規模な<strong>酪農</strong>が発達しています。</li>
+        </ul>
+
+        <div class="point-box">
+          <div class="point-box-title">💡 北海道の農業のちがい</div>
+          <ul>
+            <li><strong>石狩平野：</strong>泥炭地を改良した<strong>稲作（米づくり）</strong></li>
+            <li><strong>十勝平野：</strong>広大な土地での<strong>畑作（輪作）</strong></li>
+            <li><strong>根釧台地：</strong>すずしい気候をいかした<strong>酪農（牛乳やチーズ）</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- =============== 【4. 林業・水産業】 =============== -->
+      <div id="social17-tab-3" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🌲</span>
+          <h2 class="section-title">豊かな森林と三陸沖の海</h2>
+        </div>
+
+        <h3>1. 東北と北海道の林業</h3>
+        <p>
+          東北地方には、青森県の「津軽ひば」、秋田県の「秋田すぎ」など、建築用として非常にすぐれた木材を生み出す<strong>日本三大美林</strong>があります。北海道には「えぞまつ」や「とどまつ」などの針葉樹が多く、製紙用の木材パルプの原料として広く利用されています。
+        </p>
+
+        <h3>2. 三陸海岸のリアス海岸と養殖</h3>
+        <p>
+          岩手県から宮城県にかけての太平洋沿岸は、海岸線が複雑に入り組んだ<strong><ruby>リアス海岸<rt>りあすかいがん</rt></ruby></strong>（三陸海岸）が続いています。
+          入り江の内側は波がとても静かなため、海面での<strong>養殖（ようしょく）</strong>に最適です。宮城県の仙台湾では「かき」や「わかめ」、青森県の陸奥湾（むつわん）や北海道のサロマ湖では「ほたて貝」の養殖が大変盛んです。
+        </p>
+
+        <div class="illustration-box">
+          <!-- 潮目の図解SVG -->
+          <svg viewBox="0 0 400 180" width="100%" height="140" style="background:#e0f2f1; border-radius:15px;">
+            <!-- 寒流 -->
+            <path d="M 30,20 Q 150,20 180,85" fill="none" stroke="#2980b9" stroke-width="12" stroke-linecap="round"/>
+            <text x="60" y="45" font-family="var(--font-family)" font-weight="bold" fill="#1b4f72" font-size="12">寒流（親潮）冷たく栄養たっぷり</text>
+            <!-- 暖流 -->
+            <path d="M 30,160 Q 150,160 180,95" fill="none" stroke="#e74c3c" stroke-width="12" stroke-linecap="round"/>
+            <text x="60" y="145" font-family="var(--font-family)" font-weight="bold" fill="#78281f" font-size="12">暖流（黒潮）暖かく魚が集まる</text>
+            <!-- 潮目 -->
+            <circle cx="210" cy="90" r="30" fill="none" stroke="#f1c40f" stroke-width="3" stroke-dasharray="5 3"/>
+            <text x="210" y="95" font-family="var(--font-family)" font-weight="bold" fill="#d35400" font-size="14" text-anchor="middle">潮目（しおめ）</text>
+            <text x="320" y="95" font-family="var(--font-family)" font-weight="bold" fill="#1b4f72" font-size="12">プランクトンが多く<br>魚がよく獲れる！</text>
+          </svg>
+          <div class="illustration-caption">【図2】寒流と暖流がぶつかる三陸沖の潮目</div>
+        </div>
+
+        <h3>3. 世界的な漁場：三陸沖の潮目</h3>
+        <p>
+          三陸海岸の沖合は、北からの冷たい<strong>親潮（おやしお・寒流）</strong>と、南からの暖かい<strong>黒潮（くろしお・暖流）</strong>がちょうどぶつかり合う<strong><ruby>潮目<rt>しおめ</rt></ruby></strong>になっています。
+          親潮が運ぶ豊富なプランクトンを食べるために、黒潮にのってたくさんの魚（さんま、さば、かつおなど）が集まるため、世界三大漁場の一つに数えられるほど豊かな海になっています。
+        </p>
+      </div>
+
+      <!-- =============== 【5. 工業・交通・観光】 =============== -->
+      <div id="social17-tab-4" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🏭</span>
+          <h2 class="section-title">工業・交通と北国の世界遺産</h2>
+        </div>
+
+        <h3>1. 高速道路や空港とむすぶ新しい工業</h3>
+        <p>
+          東北地方の工業は、かつては繊維工業が中心でしたが、東北自動車道などの高速道路や空港が整備されたことで大きく変わりました。
+          原材料や完成した製品をトラックで素早く運べるため、高速道路のインターチェンジや空港の近くに、IC（集積回路）などの電子部品をつくる工場や、自動車の組み立て工場が進出しています。
+        </p>
+        <p>
+          また、伝統的な工芸品として、岩手県の<strong>南部鉄器（なんぶてっき）</strong>, 山形県の<strong>天童将棋駒（てんどうしょうぎこま）</strong>, 福島県の<strong>会津塗（あいづぬり）</strong>などが有名で、今も手作業でつくられています。
+        </p>
+
+        <h3>2. 多様なクリーンエネルギーへの取り組み</h3>
+        <p>
+          東北・北海道地方では、地球にやさしいエネルギーの開発が進められています。
+          岩手県には、日本で最初の地熱発電所である<strong>松川（まつかわ）地熱発電所</strong>があります。また、風の強い日本海側の沿岸部や北海道では、風力発電用の大きな風車がたくさん並んでいます。
+          2011年の東日本大震災による原子力発電所の事故以降、福島県などでは太陽光や風力などの「再生可能エネルギー」を広める取り組みがとくに強まっています。
+        </p>
+
+        <h3>3. 新幹線と青函トンネル</h3>
+        <p>
+          本州と北海道は、海の底を通る全長約53.85kmの<strong>青函トンネル（せいかんトンネル）</strong>で結ばれており、新幹線や貨物列車が走っています。
+          東北新幹線（東京〜新青森）のほか、山形新幹線、秋田新幹線、そして青函トンネルをくぐる北海道新幹線（現在は新函館北斗まで、札幌へ向けて工事中）があり、首都圏と短時間で行き来できるようになりました。
+        </p>
+
+        <div class="point-box">
+          <div class="point-box-title">🍀 東北・北海道の世界遺産</div>
+          <ul>
+            <li><strong>白神山地（しらかみさんち・青森県/秋田県）：</strong>人の手が入っていない、世界最大級の「ブナの原生林」が広がっています（世界自然遺産）。</li>
+            <li><strong>知床（しれとこ・北海道）：</strong>流氷が運ぶ栄養をもとに、海と陸の多様な生き物（シャチやヒグマなど）が豊かに関わり合って暮らしています（世界自然遺産）。</li>
+            <li><strong>平泉（ひらいずみ・岩手県）：</strong>奥州藤原氏がつくった、きらびやかな中尊寺金色堂（ちゅうそんじこんじきどう）など、仏教の「浄土（天国）」を表した美しい寺院群です（世界文化遺産）。</li>
+            <li><strong>北海道・北東北の縄文遺跡群：</strong>大昔の縄文人が長年にわたって自然と共生しながら暮らしていた定住集落の遺跡群です（世界文化遺産）。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <!-- ==============================================
          =============== 理科コンテンツ ==================
@@ -1755,7 +1980,7 @@
 
     let currentStudent = null;
     let readingProgressData = []; // Array of { subject, tab_index }
-    let quizHighScores = { social: null, science: null, japanese: null };
+    let quizHighScores = { social: null, social17: null, science: null, japanese: null };
 
     // 学生のログイン状態を確認
     function checkStudentLogin() {
@@ -1871,7 +2096,7 @@
           
         if (quizError) throw quizError;
         
-        quizHighScores = { social: null, science: null, japanese: null };
+        quizHighScores = { social: null, social17: null, science: null, japanese: null };
         if (quizData) {
           quizData.forEach(row => {
             const sub = row.subject;
@@ -1890,7 +2115,7 @@
     }
 
     function updateDashboardUI() {
-      const subjects = ['social', 'science', 'japanese'];
+      const subjects = ['social', 'social17', 'science', 'japanese'];
       subjects.forEach(sub => {
         const readCount = readingProgressData.filter(item => item.subject === sub).length;
         const totalTabs = 5;
@@ -1933,6 +2158,9 @@
     function initReadButtons() {
       const socialCards = document.querySelectorAll('#social-content .section-card');
       socialCards.forEach((card, idx) => appendReadButton(card, 'social', idx));
+
+      const social17Cards = document.querySelectorAll('#social17-content .section-card');
+      social17Cards.forEach((card, idx) => appendReadButton(card, 'social17', idx));
 
       const scienceCards = document.querySelectorAll('#science-content .section-card');
       scienceCards.forEach((card, idx) => appendReadButton(card, 'science', idx));
@@ -2042,10 +2270,12 @@
       const root = document.documentElement;
       
       const socialContent = document.getElementById('social-content');
+      const social17Content = document.getElementById('social17-content');
       const scienceContent = document.getElementById('science-content');
       const japaneseContent = document.getElementById('japanese-content');
       
       const socialTabs = document.getElementById('social-tabs');
+      const social17Tabs = document.getElementById('social17-tabs');
       const scienceTabs = document.getElementById('science-tabs');
       const japaneseTabs = document.getElementById('japanese-tabs');
       
@@ -2059,10 +2289,12 @@
         root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #4fa4f3 0%, #1e70e5 100%)');
         
         socialContent.style.display = 'block';
+        social17Content.style.display = 'none';
         scienceContent.style.display = 'none';
         japaneseContent.style.display = 'none';
         
         socialTabs.style.display = 'flex';
+        social17Tabs.style.display = 'none';
         scienceTabs.style.display = 'none';
         japaneseTabs.style.display = 'none';
         
@@ -2070,6 +2302,26 @@
         headerDesc.textContent = '関東地方の自然・農業・工業をマスターしよう！';
         
         switchSocialTab(0);
+      } else if (val === 'social17') {
+        // 社会科（東北・北海道地方）テーマ
+        root.style.setProperty('--color-primary', '#1e70e5');
+        root.style.setProperty('--color-primary-light', '#e6f0fa');
+        root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #4fa4f3 0%, #1e70e5 100%)');
+        
+        socialContent.style.display = 'none';
+        social17Content.style.display = 'block';
+        scienceContent.style.display = 'none';
+        japaneseContent.style.display = 'none';
+        
+        socialTabs.style.display = 'none';
+        social17Tabs.style.display = 'flex';
+        scienceTabs.style.display = 'none';
+        japaneseTabs.style.display = 'none';
+        
+        headerTitle.innerHTML = 'たのしく学ぶ！社会科「<ruby>東北・北海道地方<rt>とうほく・ほっかいどうちほう</rt></ruby>」';
+        headerDesc.textContent = '東北・北海道地方の自然・気候・農業・水産業をマスターしよう！';
+        
+        switchSocial17Tab(0);
       } else if (val === 'science') {
         // 理科テーマ
         root.style.setProperty('--color-primary', '#1e824c');
@@ -2077,10 +2329,12 @@
         root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #42b983 0%, #1e824c 100%)');
         
         socialContent.style.display = 'none';
+        social17Content.style.display = 'none';
         scienceContent.style.display = 'block';
         japaneseContent.style.display = 'none';
         
         socialTabs.style.display = 'none';
+        social17Tabs.style.display = 'none';
         scienceTabs.style.display = 'flex';
         japaneseTabs.style.display = 'none';
         
@@ -2095,10 +2349,12 @@
         root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #a55eea 0%, #8e44ad 100%)');
         
         socialContent.style.display = 'none';
+        social17Content.style.display = 'none';
         scienceContent.style.display = 'none';
         japaneseContent.style.display = 'block';
         
         socialTabs.style.display = 'none';
+        social17Tabs.style.display = 'none';
         scienceTabs.style.display = 'none';
         japaneseTabs.style.display = 'flex';
         
@@ -2120,6 +2376,18 @@
       
       tabButtons[index].classList.add('active');
       document.getElementById(`social-tab-${index}`).classList.add('active');
+    }
+
+    // 社会科17（東北・北海道地方）タブ切り替え
+    function switchSocial17Tab(index) {
+      const tabButtons = document.querySelectorAll('#social17-tabs .tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      
+      const cards = document.querySelectorAll('#social17-content .section-card');
+      cards.forEach(card => card.classList.remove('active'));
+      
+      tabButtons[index].classList.add('active');
+      document.getElementById(`social17-tab-${index}`).classList.add('active');
     }
 
     // 理科タブ切り替え
@@ -2179,6 +2447,69 @@
         options: ["京浜工業地帯", "京葉工業地域", "関東内陸工業地域", "鹿島臨海工業地域"],
         answer: 1,
         hint: "千葉の「葉」の文字が入る名前だよ。"
+      }
+    ];
+
+    const social17Quizzes = [
+      {
+        question: "明治時代に北海道を開拓するために置かれた、特別な役所の名前はどれ？",
+        options: ["開拓使（かいたくし）", "屯田兵（とんでんへい）", "蝦夷地庁", "防衛使"],
+        answer: 0,
+        hint: "1869年に置かれた役所で、本州から多くの人々を呼び寄せる中心になったよ。"
+      },
+      {
+        question: "東北地方の気候を太平洋側と日本海側に大きく分ける、日本一長い山脈の名前はどれ？",
+        options: ["日高山脈", "越後山脈", "奥羽山脈（おううさんみゃく）", "飛騨山脈"],
+        answer: 2,
+        hint: "東北地方のほぼ中央を南北に「かべ」のように走っているよ。"
+      },
+      {
+        question: "初夏にオホーツク海高気圧から東北の太平洋側に吹く、冷たくて湿った北東の風を何という？",
+        options: ["からっ風", "やませ", "季節風（モンスーン）", "台風"],
+        answer: 1,
+        hint: "この風が吹き続けると気温が上がらず、冷害の原因になるよ。"
+      },
+      {
+        question: "北海道の十勝平野で、連作障害や土の栄養不足を防ぐために行われている工夫はどれ？",
+        options: ["二毛作（にもうさく）", "客土（きゃくど）", "輪作（りんさく）", "促成栽培"],
+        answer: 2,
+        hint: "じゃがいも、てんさい、小麦、豆類を数年かけて順番に育てていく方法だよ。"
+      },
+      {
+        question: "かつて耕作に適さない湿地だった石狩平野を、有数の稲作地帯にした土壌改良の取り組みはどれ？",
+        options: ["干拓（かんたく）", "客土（きゃくど）や排水路の整備", "二期作", "段々畑の建設"],
+        answer: 1,
+        hint: "泥炭地（でいたんち）の水を抜き、別の土地から良い土を運んで混ぜたよ。"
+      },
+      {
+        question: "寒くて霧が多いため畑作が難しく、日本最大級の酪農が発達している北海道の台地はどこ？",
+        options: ["武蔵野台地", "シラス台地", "根釧台地（こんせんだいち）", "牧之原台地"],
+        answer: 2,
+        hint: "火山灰におおわれ、夏の気温が上がらない厳しい条件をいかして牛乳をつくっているよ。"
+      },
+      {
+        question: "暖流の黒潮と寒流の親潮がぶつかり、プランクトンや魚が非常に多く集まる場所を何という？",
+        options: ["リアス海岸", "潮目（しおめ）", "干潟（ひがた）", "砂州（さす）"],
+        answer: 1,
+        hint: "三陸沖にあり、世界的な好漁場になっているよ。"
+      },
+      {
+        question: "岩手県盛岡市周辺などでつくられている、ずっしりとして錆びにくい伝統的工芸品はどれ？",
+        options: ["天童将棋駒", "南部鉄器（なんぶてっき）", "会津塗", "箱根寄木細工"],
+        answer: 1,
+        hint: "鉄でできており、鉄瓶（お湯を沸かす釜）などが有名だよ。"
+      },
+      {
+        question: "青森県と秋田県にまたがる、世界最大級のブナの原生林で知られる世界自然遺産はどれ？",
+        options: ["小笠原諸島", "日光の社寺", "白神山地（しらかみさんち）", "知床"],
+        answer: 2,
+        hint: "人の手が入っていない美しい森がそのまま残っている場所だよ。"
+      },
+      {
+        question: "本州と北海道を海の底で結び、北海道新幹線も通っているトンネルの名前はどれ？",
+        options: ["関門トンネル", "青函トンネル（せいかんとんねる）", "アクアライン海底トンネル", "瀬戸大橋トンネル"],
+        answer: 1,
+        hint: "青森（青）と函館（函）から一文字ずつとった名前だよ。"
       }
     ];
 
@@ -2258,6 +2589,8 @@
       const select = document.getElementById('subject-select').value;
       if (select === 'social') {
         currentQuizSet = socialQuizzes;
+      } else if (select === 'social17') {
+        currentQuizSet = social17Quizzes;
       } else if (select === 'science') {
         currentQuizSet = scienceQuizzes;
       } else {
@@ -2265,7 +2598,10 @@
       }
       const currentQuiz = currentQuizSet[currentQuizIndex];
       
-      document.getElementById('quiz-title').textContent = (select === 'social') ? "関東地方クイズ！" : ((select === 'science') ? "気体マスタークイズ！" : "国語・読解チェッククイズ！");
+      document.getElementById('quiz-title').textContent = 
+        (select === 'social') ? "関東地方クイズ！" : 
+        ((select === 'social17') ? "東北・北海道地方クイズ！" : 
+        ((select === 'science') ? "気体マスタークイズ！" : "国語・読解チェッククイズ！"));
       document.getElementById('q-text').textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
       
       const optionsContainer = document.getElementById('q-options');
