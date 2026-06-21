@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="小学校5年生向けの社会科「東北地方・北海道地方」のわかりやすいまとめページです。イラスト図解、ふりがな切り替え機能、クイズ付き。">
+  <title>たのしく学ぶ！「東北地方・北海道地方」のかんたんまとめ</title>
+  
+  <!-- Google Fonts から丸文字のフォントをインポート -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap');
+  </style>
+
+  <style>
+    /* デザインシステム定義 */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      --header-gradient: linear-gradient(135deg, #4fa4f3 0%, #1e70e5 100%);
+      --card-bg: #ffffff;
+      --text-main: #2c3e50;
+      --text-sub: #5a738e;
+      --color-primary: #1e70e5;
+      --color-primary-light: #e6f0fa;
+      --color-accent: #ff9f43;
+      --color-accent-light: #fff2e6;
+      --color-success: #2ecc71;
+      --color-success-light: #e6f9ed;
+      --font-family: 'M PLUS Rounded 1c', sans-serif;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      --border-radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.8;
+      padding-bottom: 60px;
+    }
+
+    /* 用語強調 */
+    strong {
+      color: #e67e22;
+      font-weight: 700;
+    }
+
+    /* ふりがな（ルビ）の調整 */
+    ruby {
+      ruby-position: over;
+    }
+    rt {
+      font-size: 0.55em;
+      color: #1e70e5;
+      letter-spacing: 0.05em;
+      padding-bottom: 0.1em;
+    }
+    /* ふりがな非表示用クラス */
+    body.hide-ruby rt {
+      display: none;
+    }
+
+    /* ヘッダーデザイン */
+    header {
+      background: var(--header-gradient);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 10px 30px rgba(30, 112, 229, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* コンテナ */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* コントロールパネル */
+    .control-panel {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 25px;
+    }
+
+    .toggle-btn {
+      background: white;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .toggle-btn:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    /* タブメニュー */
+    .nav-tabs {
+      display: flex;
+      justify-content: space-between;
+      background: white;
+      padding: 8px;
+      border-radius: 30px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+      gap: 5px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 12px 10px;
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: var(--text-sub);
+      cursor: pointer;
+      border-radius: 25px;
+      transition: all 0.3s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn.active {
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+    }
+
+    /* カード・学習コンテンツ */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: none; /* 初期状態では非表示（JSで制御） */
+    }
+
+    .section-card.active {
+      display: block;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      border-bottom: 4px solid var(--color-primary-light);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-icon {
+      font-size: 2.2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    /* コンテンツパーツ */
+    h3 {
+      font-size: 1.25rem;
+      margin: 25px 0 15px;
+      color: var(--text-main);
+      border-left: 5px solid var(--color-accent);
+      padding-left: 12px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+      text-align: justify;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    /* 重要ポイント表示用ボックス */
+    .point-box {
+      background: var(--color-accent-light);
+      border-left: 6px solid var(--color-accent);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .point-box-title {
+      font-weight: bold;
+      color: #cc6600;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 用語解説吹き出し */
+    .explain-bubble {
+      background: var(--color-primary-light);
+      padding: 15px 20px;
+      border-radius: 15px;
+      margin: 15px 0;
+      position: relative;
+      font-size: 0.95rem;
+      color: #1e5bb5;
+    }
+
+    /* 図解イラスト用ボックス */
+    .illustration-box {
+      background: #f7fafc;
+      border: 1px dashed #cbd5e0;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .illustration-caption {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      font-weight: bold;
+    }
+
+    /* クイズセクション */
+    .quiz-container {
+      background: #ffffff;
+      border-radius: var(--border-radius);
+      padding: 35px;
+      box-shadow: var(--shadow);
+      border: 3px solid var(--color-accent);
+      margin-top: 40px;
+    }
+
+    .quiz-question {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: var(--color-accent-light);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border-left: 6px solid var(--color-accent);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option-btn {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      font-family: var(--font-family);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-option-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      transform: scale(1.01);
+    }
+
+    .quiz-option-btn.correct {
+      background: var(--color-success-light);
+      border-color: var(--color-success);
+      color: #155724;
+    }
+
+    .quiz-option-btn.incorrect {
+      background: #fde8e8;
+      border-color: #f8b4b4;
+      color: #721c24;
+    }
+
+    .quiz-feedback {
+      display: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    .quiz-feedback.show-correct {
+      display: block;
+      background: var(--color-success-light);
+      color: var(--color-success);
+      border: 2px solid var(--color-success);
+    }
+
+    .quiz-feedback.show-incorrect {
+      display: block;
+      background: #fde8e8;
+      color: #e53e3e;
+      border: 2px solid #f8b4b4;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quiz-score {
+      font-weight: bold;
+      color: var(--text-sub);
+    }
+
+    .next-quiz-btn {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-family: var(--font-family);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 159, 67, 0.3);
+      transition: all 0.2s;
+    }
+
+    .next-quiz-btn:hover {
+      background: #e67e22;
+      transform: scale(1.03);
+    }
+
+    .next-quiz-btn:disabled {
+      background: #cbd5e0;
+      color: #a0aec0;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 600px) {
+      .nav-tabs {
+        padding: 5px;
+      }
+      .tab-btn {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-badge">社会科・地理シリーズ</div>
+    <h1 id="header-title">たのしく学ぶ！「東北地方・北海道地方」のまとめ</h1>
+    <p class="subtitle" id="header-desc">歴史、豊かな自然、さかんな農業と水産業をばっちりマスターしよう！</p>
+  </header>
+
+  <div class="container">
+    <!-- コントロールボタン -->
+    <div class="control-panel">
+      <button id="ruby-toggle" class="toggle-btn" onclick="toggleRuby()">ふりがな：ON</button>
+    </div>
+
+    <!-- タブメニュー -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab(0)">🧭 1. 歴史と地名</button>
+      <button class="tab-btn" onclick="switchTab(1)">⛰️ 2. 自然と気候</button>
+      <button class="tab-btn" onclick="switchTab(2)">🌾 3. 農業の特色</button>
+      <button class="tab-btn" onclick="switchTab(3)">🌲 4. 林業・水産業</button>
+      <button class="tab-btn" onclick="switchTab(4)">🏭 5. 工業・交通・観光</button>
+    </div>
+
+    <!-- =============== 【1. 歴史と地名】 =============== -->
+    <div id="tab-0" class="section-card active">
+      <div class="section-header">
+        <span class="section-icon">🧭</span>
+        <h2 class="section-title">北海道の歴史と地名</h2>
+      </div>
+
+      <h3>1. 本州からの開拓団と新しい地名</h3>
+      <p>
+        北海道には、「北広島市（きたひろしまし）」のほかに、「福井（ふくい）」や「鳥取（とっとり）」など、本州の地名と同じ名前が各地にあります。これは、明治時代以降に本州や四国、九州の各地からたくさんの人々が<ruby>開拓<rt>かいたく</rt></ruby>（未開の土地を切り開くこと）のために移り住んできたため、自分たちの出身地の名前を新しい土地につけたことがきっかけです。
+      </p>
+
+      <h3>2. 開拓使と屯田兵の役割</h3>
+      <p>
+        明治政府は1869年に、北海道の開拓を本格的に進めるために<strong><ruby>開拓使<rt>かいたくし</rt></ruby></strong>という特別な役所を置きました。そして、日本各地から集められた<strong><ruby>屯田兵<rt>とんでんへい</rt></ruby></strong>と呼ばれる兵士たちが、厳しい自然の中で土地を切り開くとともに、北からのロシアに対する防備にあたりました。
+      </p>
+
+      <div class="explain-bubble">
+        📖 <strong>屯田兵（とんでんへい）ってなに？：</strong>普段は農業をして土地を耕し、いざという時には兵士として戦う仕組みの人たちのことだよ。とても厳しい寒さの中で開拓を進める、大変な仕事だったんだ。
+      </div>
+
+      <h3>3. アイヌの人々の暮らしと「ウポポイ」</h3>
+      <p>
+        北海道は昔、<strong>蝦夷地（えぞち）</strong>と呼ばれていました。そこには、古くから自然を敬い、独自の言語や文化を持つ<strong>アイヌの人々</strong>が暮らしていました。北海道にある多くの地名（例えば、札幌や小樽、室蘭など）は、アイヌ語がもとになっています。
+      </p>
+      <p>
+        明治以降の急速な開拓によって、アイヌの人々の生活や文化はおびやかされるようになってしまいましたが、現在ではその文化を守り、広く伝えていくために、北海道の白老町（しらおいちょう）に<strong>「ウポポイ（民族共生象徴空間）」</strong>という国立の施設がつくられ、復興の取り組みが進められています。
+      </p>
+    </div>
+
+    <!-- =============== 【2. 自然と気候】 =============== -->
+    <div id="tab-1" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">⛰️</span>
+        <h2 class="section-title">東北・北海道の自然環境と気候</h2>
+      </div>
+
+      <h3>1. 東北地方の地形</h3>
+      <p>
+        東北地方の中央には、日本で一番長い<strong><ruby>奥羽山脈<rt>おううさんみゃく</rt></ruby></strong>が南北に連なり、地方を日本海側と太平洋側に分けています。
+      </p>
+      <ul>
+        <li><strong>太平洋側：</strong>なだらかな「北上高地（きたかみこうち）」と「阿武隈高地（あぶくまこうち）」があります。</li>
+        <li><strong>日本海側：</strong>「出羽山地（でわさんち）」が広がっています。</li>
+        <li><strong>川と平野：</strong>太平洋側には流域面積が広い「北上川」や「阿武隈川」が流れ、日本海側には日本三大急流の一つである「最上川（もがみがわ）」が流れており、その流域に庄内平野（しょうないへいや）などの豊かな平野や盆地をつくっています。</li>
+        <li><strong>湖：</strong>火山活動でできた美しいカルデラ湖である「十和田湖」や、日本で一番深い「田沢湖（たざわこ・約423m）」、東北で最大の面積を持つ「猪苗代湖（いなわしろこ）」があります。</li>
+      </ul>
+
+      <div class="illustration-box">
+        <!-- 東北地方の簡易地図風SVG -->
+        <svg viewBox="0 0 400 240" width="100%" height="160" style="background:#eef5fc; border-radius:15px;">
+          <!-- 陸地 -->
+          <path d="M 120,20 C 180,10 240,30 220,100 C 260,130 240,190 200,230 L 120,230 Z" fill="#e8f5e9" stroke="#81c784" stroke-width="2"/>
+          <!-- 奥羽山脈 -->
+          <path d="M 170,30 Q 185,120 180,220" fill="none" stroke="#8d6e63" stroke-width="8" stroke-dasharray="5 5" stroke-linecap="round"/>
+          <text x="180" y="110" font-family="var(--font-family)" font-weight="bold" fill="#5d4037" font-size="12" text-anchor="middle">奥羽山脈</text>
+          <!-- 日本海側・太平洋側 -->
+          <text x="110" y="120" font-family="var(--font-family)" font-weight="bold" fill="#1e70e5" font-size="14">日本海側</text>
+          <text x="250" y="120" font-family="var(--font-family)" font-weight="bold" fill="#e67e22" font-size="14">太平洋側</text>
+          <!-- 川 -->
+          <path d="M 175,80 Q 140,90 125,100" fill="none" stroke="#2980b9" stroke-width="3"/>
+          <text x="135" y="80" font-family="var(--font-family)" fill="#2980b9" font-size="10">最上川</text>
+        </svg>
+        <div class="illustration-caption">【図1】奥羽山脈による地形と気候の境界</div>
+      </div>
+
+      <h3>2. 東北地方の３つの気候</h3>
+      <p>
+        奥羽山脈が障壁（かべ）となることで、東北地方は地域によって気候が全く異なります。
+      </p>
+      <ol>
+        <li><strong>日本海側の気候（秋田など）：</strong>冬は北西からの季節風が山脈にぶつかるため、雪が非常に多く降る<strong>豪雪地帯（ごうせつちたい）</strong>になります。</li>
+        <li><strong>内陸部の気候（山形など）：</strong>山に囲まれた盆地が多く、海からの影響を受けにくいため、夏と冬の気温の差（年較差）がとても大きく、雨は少なめです。</li>
+        <li><strong>太平洋側の気候（宮古など）：</strong>冬は雪が少なく晴れますが、初夏に冷たく湿った北東風の<strong>「やませ」</strong>が吹き込み、気温が上がらず冷害を引き起こす原因になります。</li>
+      </ol>
+
+      <h3>3. 北海道地方の自然環境と気候</h3>
+      <p>
+        北海道の中央部には「石狩山地（いしかりさんち）」がそびえ、そこから南へ「日高山脈」が伸びています。
+      </p>
+      <ul>
+        <li><strong>川と平野：</strong>日本で２番目に流域面積が広い「石狩川（いしかりがわ）」が石狩平野を流れ、十勝平野を流れる「十勝川」があります。</li>
+        <li><strong>湖：</strong>摩周湖、阿寒湖、洞爺湖などの美しいカルデラ湖のほか、オホーツク海沿岸には、砂州によって海と切り離された日本で３番目に大きいサロマ湖（汽水湖）があります。</li>
+        <li><strong>気候：</strong>日本で唯一<strong>冷帯（亜寒帯）</strong>に属し、冬の寒さは非常に厳しいです。ただし、梅雨（つゆ）がなく、台風が上陸することも少ないです。東部の太平洋側（根室など）では、初夏に冷たい寒流（親潮）の上を吹く風によって<strong>「海霧（うみぎり）」</strong>という濃い霧が発生し、気温が上がりにくくなります。</li>
+      </ul>
+    </div>
+
+    <!-- =============== 【3. 農業の特色】 =============== -->
+    <div id="tab-2" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🌾</span>
+        <h2 class="section-title">米どころ東北と広大な北海道の農業</h2>
+      </div>
+
+      <h3>1. 東北地方：日本一の米どころと果樹王国</h3>
+      <p>
+        東北地方は、日本の米の生産量の約４分の１を占める「日本一の米どころ」です。
+      </p>
+      <ul>
+        <li><strong>米づくりのさかんな平野：</strong>秋田県の「八郎潟（はちろうがた）」を干拓してつくった大潟村（おおがたむら）や、最上川の下流に広がる山形県の「庄内平野」、宮城県の「仙台平野」などで大規模な稲作が行われています。</li>
+        <li><strong>果樹の栽培：</strong>すずしくて雨が比較的少ない気候をいかして、青森県の「津軽平野」では<strong>りんご（日本一）</strong>、山形県の山形盆地では<strong>おうとう（さくらんぼ・日本一）</strong>、福島盆地では<strong>もも（全国有数）</strong>がそれぞれ盛んに栽培されています。</li>
+      </ul>
+
+      <h3>2. 北海道地方：スケールの大きな畑作と酪農</h3>
+      <p>
+        北海道は、日本の耕地面積の約４分の１を占める日本最大の食料基地です。
+      </p>
+      <ul>
+        <li><strong>十勝平野（とかちへいや）の畑作：</strong>広大で平らな土地をいかして、じゃがいも、てんさい（砂糖の原料）、小麦、豆類を同じ土地で順番に植え替えて育てる<strong><ruby>輪作<rt>りんさく</rt></ruby></strong>を行っています。これにより、土がやせるのを防ぎ、連作障害（同じ作物を続けて作ると病気になること）を防いでいます。</li>
+        <li><strong>石狩平野（いしかりへいや）の稲作：</strong>かつては<strong><ruby>泥炭地<rt>でいたんち</rt></ruby></strong>と呼ばれる水はけの悪い湿地でしたが、他の土地から良い土を運ぶ「客土（きゃくど）」や、排水路の整備といった土壌改良を行うことで、日本有数の米づくり地帯に生まれ変わりました。</li>
+        <li><strong>根釧台地（こんせんだいち）の酪農（らくのう）：</strong>火山灰におおわれた土地で、夏でも気温が低く霧が多いため畑作には向きません。そのため、牧草を育てて乳牛を飼う大規模な<strong>酪農</strong>が発達しています。</li>
+      </ul>
+
+      <div class="point-box">
+        <div class="point-box-title">💡 北海道の農業のちがい</div>
+        <ul>
+          <li><strong>石狩平野：</strong>泥炭地を改良した<strong>稲作（米づくり）</strong></li>
+          <li><strong>十勝平野：</strong>広大な土地での<strong>畑作（輪作）</strong></li>
+          <li><strong>根釧台地：</strong>すずしい気候をいかした<strong>酪農（牛乳やチーズ）</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =============== 【4. 林業・水産業】 =============== -->
+    <div id="tab-3" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🌲</span>
+        <h2 class="section-title">豊かな森林と三陸沖の海</h2>
+      </div>
+
+      <h3>1. 東北と北海道の林業</h3>
+      <p>
+        東北地方には、青森県の「津軽ひば」、秋田県の「秋田すぎ」など、建築用として非常にすぐれた木材を生み出す<strong>日本三大美林</strong>があります。北海道には「えぞまつ」や「とどまつ」などの針葉樹が多く、製紙用の木材パルプの原料として広く利用されています。
+      </p>
+
+      <h3>2. 三陸海岸のリアス海岸と養殖</h3>
+      <p>
+        岩手県から宮城県にかけての太平洋沿岸は、海岸線が複雑に入り組んだ<strong><ruby>リアス海岸<rt>りあすかいがん</rt></ruby></strong>（三陸海岸）が続いています。
+        入り江の内側は波がとても静かなため、海面での<strong>養殖（ようしょく）</strong>に最適です。宮城県の仙台湾では「かき」や「わかめ」、青森県の陸奥湾（むつわん）や北海道のサロマ湖では「ほたて貝」の養殖が大変盛んです。
+      </p>
+
+      <div class="illustration-box">
+        <!-- 潮目の図解SVG -->
+        <svg viewBox="0 0 400 180" width="100%" height="140" style="background:#e0f2f1; border-radius:15px;">
+          <!-- 寒流 -->
+          <path d="M 30,20 Q 150,20 180,85" fill="none" stroke="#2980b9" stroke-width="12" stroke-linecap="round"/>
+          <text x="60" y="45" font-family="var(--font-family)" font-weight="bold" fill="#1b4f72" font-size="12">寒流（親潮）冷たく栄養たっぷり</text>
+          <!-- 暖流 -->
+          <path d="M 30,160 Q 150,160 180,95" fill="none" stroke="#e74c3c" stroke-width="12" stroke-linecap="round"/>
+          <text x="60" y="145" font-family="var(--font-family)" font-weight="bold" fill="#78281f" font-size="12">暖流（黒潮）暖かく魚が集まる</text>
+          <!-- 潮目 -->
+          <circle cx="210" cy="90" r="30" fill="none" stroke="#f1c40f" stroke-width="3" stroke-dasharray="5 3"/>
+          <text x="210" y="95" font-family="var(--font-family)" font-weight="bold" fill="#d35400" font-size="14" text-anchor="middle">潮目（しおめ）</text>
+          <text x="320" y="95" font-family="var(--font-family)" font-weight="bold" fill="#1b4f72" font-size="12">プランクトンが多く<br>魚がよく獲れる！</text>
+        </svg>
+        <div class="illustration-caption">【図2】寒流と暖流がぶつかる三陸沖の潮目</div>
+      </div>
+
+      <h3>3. 世界的な漁場：三陸沖の潮目</h3>
+      <p>
+        三陸海岸の沖合は、北からの冷たい<strong>親潮（おやしお・寒流）</strong>と、南からの暖かい<strong>黒潮（くろしお・暖流）</strong>がちょうどぶつかり合う<strong><ruby>潮目<rt>しおめ</rt></ruby></strong>になっています。
+        親潮が運ぶ豊富なプランクトンを食べるために、黒潮にのってたくさんの魚（さんま、さば、かつおなど）が集まるため、世界三大漁場の一つに数えられるほど豊かな海になっています。
+      </p>
+    </div>
+
+    <!-- =============== 【5. 工業・交通・観光】 =============== -->
+    <div id="tab-4" class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🏭</span>
+        <h2 class="section-title">工業・交通と北国の世界遺産</h2>
+      </div>
+
+      <h3>1. 高速道路や空港とむすぶ新しい工業</h3>
+      <p>
+        東北地方の工業は、かつては繊維工業が中心でしたが、東北自動車道などの高速道路や空港が整備されたことで大きく変わりました。
+        原材料や完成した製品をトラックで素早く運べるため、高速道路のインターチェンジや空港の近くに、IC（集積回路）などの電子部品をつくる工場や、自動車の組み立て工場が進出しています。
+      </p>
+      <p>
+        また、伝統的な工芸品として、岩手県の<strong>南部鉄器（なんぶてっき）</strong>、山形県の<strong>天童将棋駒（てんどうしょうぎこま）</strong>、福島県の<strong>会津塗（あいづぬり）</strong>などが有名で、今も手作業でつくられています。
+      </p>
+
+      <h3>2. 多様なクリーンエネルギーへの取り組み</h3>
+      <p>
+        東北・北海道地方では、地球にやさしいエネルギーの開発が進められています。
+        岩手県には、日本で最初の地熱発電所である<strong>松川（まつかわ）地熱発電所</strong>があります。また、風の強い日本海側の沿岸部や北海道では、風力発電用の大きな風車がたくさん並んでいます。
+        2011年の東日本大震災による原子力発電所の事故以降、福島県などでは太陽光や風力などの「再生可能エネルギー」を広める取り組みがとくに強まっています。
+      </p>
+
+      <h3>3. 新幹線と青函トンネル</h3>
+      <p>
+        本州と北海道は、海の底を通る全長約53.85kmの<strong>青函トンネル（せいかんトンネル）</strong>で結ばれており、新幹線や貨物列車が走っています。
+        東北新幹線（東京〜新青森）のほか、山形新幹線、秋田新幹線、そして青函トンネルをくぐる北海道新幹線（現在は新函館北斗まで、札幌へ向けて工事中）があり、首都圏と短時間で行き来できるようになりました。
+      </p>
+
+      <div class="point-box">
+        <div class="point-box-title">🍀 東北・北海道の世界遺産</div>
+        <ul>
+          <li><strong>白神山地（しらかみさんち・青森県/秋田県）：</strong>人の手が入っていない、世界最大級の「ブナの原生林」が広がっています（世界自然遺産）。</li>
+          <li><strong>知床（しれとこ・北海道）：</strong>流氷が運ぶ栄養をもとに、海と陸の多様な生き物（シャチやヒグマなど）が豊かに関わり合って暮らしています（世界自然遺産）。</li>
+          <li><strong>平泉（ひらいずみ・岩手県）：</strong>奥州藤原氏がつくった、きらびやかな中尊寺金色堂（ちゅうそんじこんじきどう）など、仏教の「浄土（天国）」を表した美しい寺院群です（世界文化遺産）。</li>
+          <li><strong>北海道・北東北の縄文遺跡群：</strong>大昔の縄文人が長年にわたって自然と共生しながら暮らしていた定住集落の遺跡群です（世界文化遺産）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =============== クイズコーナー =============== -->
+    <div class="quiz-container">
+      <div class="section-header">
+        <span class="section-icon">📝</span>
+        <h2 class="section-title">たのしい確認クイズ</h2>
+      </div>
+      
+      <div id="quiz-box">
+        <div class="quiz-question" id="q-text">問題を読み込んでいます...</div>
+        <div class="quiz-options" id="q-options"></div>
+        <div class="quiz-feedback" id="q-feedback"></div>
+        <div class="quiz-nav">
+          <span class="quiz-score" id="q-score">正解数: 0 / 0</span>
+          <button class="next-quiz-btn" id="next-btn" onclick="nextQuestion()" disabled>つぎの問題へ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ふりがな（ルビ）切り替え機能
+    function toggleRuby() {
+      const body = document.body;
+      const btn = document.getElementById('ruby-toggle');
+      if (body.classList.contains('hide-ruby')) {
+        body.classList.remove('hide-ruby');
+        btn.textContent = 'ふりがな：ON';
+      } else {
+        body.classList.add('hide-ruby');
+        btn.textContent = 'ふりがな：OFF';
+      }
+    }
+
+    // タブ切り替え機能
+    function switchTab(tabIndex) {
+      // 全てのタブボタンからactiveクラスを消す
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      // 全てのセクションカードを非表示にする
+      const cards = document.querySelectorAll('.section-card');
+      cards.forEach(card => card.classList.remove('active'));
+      
+      // クリックされたタブとカードにactiveクラスをつける
+      tabs[tabIndex].classList.add('active');
+      const targetCard = document.getElementById(`tab-${tabIndex}`);
+      if (targetCard) {
+        targetCard.classList.add('active');
+      }
+    }
+
+    // クイズのデータ
+    const quizData = [
+      {
+        question: "明治時代に北海道を開拓するために置かれた、特別な役所の名前はどれ？",
+        options: ["開拓使（かいたくし）", "屯田兵（とんでんへい）", "蝦夷地庁", "防衛使"],
+        answer: 0,
+        hint: "1869年に置かれた役所で、本州から多くの人々を呼び寄せる中心になったよ。"
+      },
+      {
+        question: "東北地方の気候を太平洋側と日本海側に大きく分ける、日本一長い山脈の名前はどれ？",
+        options: ["日高山脈", "越後山脈", "奥羽山脈（おううさんみゃく）", "飛騨山脈"],
+        answer: 2,
+        hint: "東北地方のほぼ中央を南北に「かべ」のように走っているよ。"
+      },
+      {
+        question: "初夏にオホーツク海高気圧から東北の太平洋側に吹く、冷たくて湿った北東の風を何という？",
+        options: ["からっ風", "やませ", "季節風（モンスーン）", "台風"],
+        answer: 1,
+        hint: "この風が吹き続けると気温が上がらず、冷害の原因になるよ。"
+      },
+      {
+        question: "北海道の十勝平野で、連作障害や土の栄養不足を防ぐために行われている工夫はどれ？",
+        options: ["二毛作（にもうさく）", "客土（きゃくど）", "輪作（りんさく）", "促成栽培"],
+        answer: 2,
+        hint: "じゃがいも、てんさい、小麦、豆類を数年かけて順番に育てていく方法だよ。"
+      },
+      {
+        question: "かつて耕作に適さない湿地だった石狩平野を、有数の稲作地帯にした土壌改良の取り組みはどれ？",
+        options: ["干拓（かんたく）", "客土（きゃくど）や排水路の整備", "二期作", "段々畑の建設"],
+        answer: 1,
+        hint: "泥炭地（でいたんち）の水を抜き、別の土地から良い土を運んで混ぜたよ。"
+      },
+      {
+        question: "寒くて霧が多いため畑作が難しく、日本最大級の酪農が発達している北海道の台地はどこ？",
+        options: ["武蔵野台地", "シラス台地", "根釧台地（こんせんだいち）", "牧之原台地"],
+        answer: 2,
+        hint: "火山灰におおわれ、夏の気温が上がらない厳しい条件をいかして牛乳をつくっているよ。"
+      },
+      {
+        question: "暖流の黒潮と寒流の親潮がぶつかり、プランクトンや魚が非常に多く集まる場所を何という？",
+        options: ["リアス海岸", "潮目（しおめ）", "干潟（ひがた）", "砂州（さす）"],
+        answer: 1,
+        hint: "三陸沖にあり、世界的な好漁場になっているよ。"
+      },
+      {
+        question: "岩手県盛岡市周辺などでつくられている、ずっしりとして錆びにくい伝統的工芸品はどれ？",
+        options: ["天童将棋駒", "南部鉄器（なんぶてっき）", "会津塗", "箱根寄木細工"],
+        answer: 1,
+        hint: "鉄でできており、鉄瓶（お湯を沸かす釜）などが有名だよ。"
+      },
+      {
+        question: "青森県と秋田県にまたがる、世界最大級 of ブナの原生林で知られる世界自然遺産はどれ？",
+        options: ["小笠原諸島", "日光の社寺", "白神山地（しらかみさんち）", "知床"],
+        answer: 2,
+        hint: "人の手が入っていない美しい森がそのまま残っている場所だよ。"
+      },
+      {
+        question: "本州と北海道を海の底で結び、北海道新幹線も通っているトンネルの名前はどれ？",
+        options: ["関門トンネル", "青函トンネル（せいかんとんねる）", "アクアライン海底トンネル", "瀬戸大橋トンネル"],
+        answer: 1,
+        hint: "青森（青）と函館（函）から一文字ずつとった名前だよ。"
+      }
+    ];
+
+    let currentQuizIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function loadQuestion() {
+      answered = false;
+      const currentQuiz = quizData[currentQuizIndex];
+      
+      // 質問文のセット
+      document.getElementById('q-text').textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
+      
+      // 選択肢ボタンの生成
+      const optionsContainer = document.getElementById('q-options');
+      optionsContainer.innerHTML = '';
+      
+      currentQuiz.options.forEach((option, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.textContent = option;
+        btn.onclick = () => selectOption(idx);
+        optionsContainer.appendChild(btn);
+      });
+
+      // フィードバックと進むボタンの初期化
+      const feedback = document.getElementById('q-feedback');
+      feedback.className = 'quiz-feedback';
+      feedback.style.display = 'none';
+      
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.disabled = true;
+      nextBtn.textContent = currentQuizIndex === quizData.length - 1 ? 'クイズの結果を見る' : 'つぎの問題へ';
+
+      // スコアの更新
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${currentQuizIndex}`;
+    }
+
+    function selectOption(selectedIdx) {
+      if (answered) return; // 既に解答済みの場合は何もしない
+      answered = true;
+
+      const currentQuiz = quizData[currentQuizIndex];
+      const options = document.querySelectorAll('.quiz-option-btn');
+      const feedback = document.getElementById('q-feedback');
+      const nextBtn = document.getElementById('next-btn');
+
+      // 全ての選択肢を無効化し、正誤判定の色をつける
+      options.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === currentQuiz.answer) {
+          btn.classList.add('correct');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('incorrect');
+        }
+      });
+
+      // スコア計算とフィードバックの表示
+      if (selectedIdx === currentQuiz.answer) {
+        score++;
+        feedback.textContent = `⭕ 正解！ ${currentQuiz.hint}`;
+        feedback.className = 'quiz-feedback show-correct';
+      } else {
+        feedback.textContent = `❌ 残念！正解は「${currentQuiz.options[currentQuiz.answer]}」だよ。 ${currentQuiz.hint}`;
+        feedback.className = 'quiz-feedback show-incorrect';
+      }
+
+      // 進むボタンを有効化
+      nextBtn.disabled = false;
+      document.getElementById('q-score').textContent = `正解数: ${score} / ${currentQuizIndex + 1}`;
+    }
+
+    function nextQuestion() {
+      if (currentQuizIndex < quizData.length - 1) {
+        currentQuizIndex++;
+        loadQuestion();
+      } else {
+        // クイズ終了画面の表示
+        const quizBox = document.getElementById('quiz-box');
+        let starRating = "⭐";
+        if (score === quizData.length) {
+          starRating = "⭐⭐⭐（満点！カンペキ！）";
+        } else if (score >= 7) {
+          starRating = "⭐⭐（よくがんばったね！）";
+        }
+        
+        quizBox.innerHTML = `
+          <div style="text-align: center; padding: 20px 0;">
+            <p style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">クイズおつかれさまでした！</p>
+            <p style="font-size: 1.3rem; margin-bottom: 10px;">あなたのスコア: <span style="font-size: 2.2rem; color: var(--color-accent);">${score}</span> / ${quizData.length}点</p>
+            <p style="font-size: 1.2rem; font-weight: bold; color: var(--color-primary); margin-bottom: 30px;">評価: ${starRating}</p>
+            <button class="next-quiz-btn" onclick="location.reload()">もういちど挑戦する</button>
+          </div>
+        `;
+      }
+    }
+
+    // 初期化
+    window.onload = function() {
+      loadQuestion();
+    };
+  </script>
+</body>
+</html>
