@@ -719,6 +719,12 @@
           <span id="quiz-best-science" class="quiz-best">🏆 ベスト: 未挑戦</span>
         </div>
         <div class="stat-item">
+          <div class="stat-label">🧪 理科（気体２）の進捗</div>
+          <div class="progress-bar-container"><div id="progress-science17" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="progress-text-science17" class="stat-val">0% (0/5)</span>
+          <span id="quiz-best-science17" class="quiz-best">🏆 ベスト: 未挑戦</span>
+        </div>
+        <div class="stat-item">
           <div class="stat-label">📖 国語の進捗</div>
           <div class="progress-bar-container"><div id="progress-japanese" class="progress-bar" style="width: 0%;"></div></div>
           <span id="progress-text-japanese" class="stat-val">0% (0/5)</span>
@@ -735,6 +741,7 @@
           <option value="social">🗺️ 社会（関東地方）</option>
           <option value="social17">🗺️ 社会（東北・北海道地方）</option>
           <option value="science">🧪 理科（気体の性質）</option>
+          <option value="science17">🧪 理科（気体（２）金属と二酸化炭素）</option>
           <option value="japanese">📖 国語（随筆文・因果関係）</option>
         </select>
       </div>
@@ -766,6 +773,15 @@
       <button class="tab-btn" onclick="switchScienceTab(2)">⚠️ 3. においのある気体</button>
       <button class="tab-btn" onclick="switchScienceTab(3)">🌬️ 4. 空気の成分</button>
       <button class="tab-btn" onclick="switchScienceTab(4)">🔬 5. 実験の注意点</button>
+    </div>
+
+    <!-- =============== 【理科（気体２）】タブメニュー =============== -->
+    <div id="science17-tabs" class="nav-tabs" style="display: none;">
+      <button class="tab-btn active" onclick="switchScience17Tab(0)">🧭 1. 金属と酸の反応</button>
+      <button class="tab-btn" onclick="switchScience17Tab(1)">👑 2. 王水と金・白金</button>
+      <button class="tab-btn" onclick="switchScience17Tab(2)">⚖️ 3. 計算と過不足</button>
+      <button class="tab-btn" onclick="switchScience17Tab(3)">🧪 4. アルカリと金属</button>
+      <button class="tab-btn" onclick="switchScience17Tab(4)">🌬️ 5. 二酸化炭素・酸素</button>
     </div>
 
     <!-- =============== 【国語】タブメニュー =============== -->
@@ -1596,6 +1612,309 @@
       </div>
     </div>
 
+    <!-- ==============================================
+         =============== 理科（気体２）コンテンツ ================
+         ============================================== -->
+    <div id="science17-content" style="display: none;">
+      <!-- =============== 【1. 金属と酸の反応】 =============== -->
+      <div id="science17-tab-0" class="section-card active">
+        <div class="section-header">
+          <span class="section-icon">🧭</span>
+          <h2 class="section-title">金属と酸の反応（水素の発生）</h2>
+        </div>
+
+        <h3>1. 金属と塩酸の反応</h3>
+        <p>
+          アルミニウム（Al）、<ruby>亜鉛<rt>あえん</rt></ruby>（Zn）、鉄（Fe）などの金属をうすい塩酸に入れると、金属の表面から盛んに泡が出て、金属がしだいに溶けていきます。このとき発生する気体は<strong><ruby>水素<rt>すいそ</rt></ruby></strong>です。
+        </p>
+        <p>
+          しかし、すべての金属が塩酸に溶けるわけではありません。<strong>銅（Cu）</strong>や金（Au）、銀（Ag）などは塩酸に入れてもまったく変化せず、気体も発生しません。
+        </p>
+
+        <div class="illustration-box">
+          <!-- 金属と酸の反応性（試験管SVG） -->
+          <svg viewBox="0 0 500 220" width="100%" height="160" style="background:#f8fafc; border-radius:15px; border:1px solid #e2e8f0;">
+            <!-- Test Tube 1: Aluminum (Active) -->
+            <g transform="translate(80, 20)">
+              <rect x="25" y="10" width="30" height="130" rx="15" fill="none" stroke="#64748b" stroke-width="3"/>
+              <!-- Liquid -->
+              <path d="M 26.5,80 L 53.5,80 C 53.5,120 53.5,125 40,138.5 C 26.5,125 26.5,120 26.5,80 Z" fill="#e0f2fe" opacity="0.8"/>
+              <!-- Active bubbles -->
+              <circle cx="33" cy="90" r="3" fill="#38bdf8"/>
+              <circle cx="45" cy="95" r="4" fill="#38bdf8"/>
+              <circle cx="38" cy="110" r="2.5" fill="#38bdf8"/>
+              <circle cx="42" cy="75" r="3.5" fill="#38bdf8"/>
+              <circle cx="32" cy="65" r="4.5" fill="#38bdf8"/>
+              <circle cx="46" cy="55" r="3" fill="#38bdf8"/>
+              <!-- Metal piece dissolving -->
+              <polygon points="35,115 45,120 40,130" fill="#94a3b8"/>
+              <text x="40" y="160" font-family="var(--font-family)" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">アルミニウム</text>
+              <text x="40" y="175" font-family="var(--font-family)" font-size="10" fill="#ef4444" text-anchor="middle">激しく反応・発熱</text>
+            </g>
+            <!-- Test Tube 2: Zinc / Iron (Moderate) -->
+            <g transform="translate(210, 20)">
+              <rect x="25" y="10" width="30" height="130" rx="15" fill="none" stroke="#64748b" stroke-width="3"/>
+              <!-- Liquid -->
+              <path d="M 26.5,80 L 53.5,80 C 53.5,120 53.5,125 40,138.5 C 26.5,125 26.5,120 26.5,80 Z" fill="#e2e8f0" opacity="0.8"/>
+              <!-- Moderate bubbles -->
+              <circle cx="35" cy="110" r="2.5" fill="#94a3b8"/>
+              <circle cx="42" cy="100" r="2" fill="#94a3b8"/>
+              <circle cx="38" cy="85" r="3" fill="#94a3b8"/>
+              <!-- Metal piece -->
+              <rect x="35" y="115" width="10" height="15" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+              <text x="40" y="160" font-family="var(--font-family)" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">亜鉛・鉄</text>
+              <text x="40" y="175" font-family="var(--font-family)" font-size="10" fill="#f59e0b" text-anchor="middle">おだやかに反応</text>
+            </g>
+            <!-- Test Tube 3: Copper (No reaction) -->
+            <g transform="translate(340, 20)">
+              <rect x="25" y="10" width="30" height="130" rx="15" fill="none" stroke="#64748b" stroke-width="3"/>
+              <!-- Liquid -->
+              <path d="M 26.5,80 L 53.5,80 C 53.5,120 53.5,125 40,138.5 C 26.5,125 26.5,120 26.5,80 Z" fill="#e0f2fe" opacity="0.8"/>
+              <!-- Metal piece (copper color) -->
+              <rect x="35" y="120" width="10" height="12" fill="#ca8a04"/>
+              <text x="40" y="160" font-family="var(--font-family)" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">銅</text>
+              <text x="40" y="175" font-family="var(--font-family)" font-size="10" fill="#64748b" text-anchor="middle">変化しない</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図1】塩酸に対する金属の反応性のちがい</div>
+        </div>
+
+        <h3>2. 水素の性質と集め方</h3>
+        <p>
+          水素はすべての気体の中で最も軽く、水に非常に溶けにくいため、<strong>水上置換法</strong>で集めます。
+        </p>
+        <p>
+          集めた水素が入った試験管の口にマッチの火を近づけると、<strong>「ポッ」と音を立てて爆発的に燃え</strong>、空気中の酸素と結びついて<strong>水滴（水）</strong>を作ります。
+        </p>
+
+        <h3>3. 金属が溶けた後の液体に溶けているもの</h3>
+        <p>
+          アルミニウムが溶け終わったあとの塩酸をスライドガラスに1滴とり、水分を蒸発させると、アルミニウムとはまったく性質の異なる白い粉末（<strong>塩化アルミニウム</strong>）が残ります。これは、塩酸（塩化水素）とアルミニウムが化学反応を起こして、別の物質に変化したためです。
+        </p>
+      </div>
+
+      <!-- =============== 【2. 王水と金・白金】 =============== -->
+      <div id="science17-tab-1" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">👑</span>
+          <h2 class="section-title">王水（おうすい）と溶けない金属</h2>
+        </div>
+
+        <h3>1. 金や白金が非常に貴重な理由</h3>
+        <p>
+          金（Au）や白金（プラチナ、Pt）は、とても美しく、空気中で錆びることがなく、普通の酸（塩酸や硫酸など）にもまったく侵されない特別な金属です。また、薄く広げたり（延性・展性）加工しやすいため、古くから高価な装飾品として重宝されてきました。
+        </p>
+
+        <h3>2. 金を溶かす唯一の液体「王水」</h3>
+        <p>
+          このように極めて安定な金や白金も、<strong>王水（おうすい）</strong>と呼ばれる特別な酸の混合液には溶けてしまいます。
+          王水は、<strong>濃塩酸（のうえんさん）</strong>と<strong>濃硝酸（のうしょうさん）</strong>を体積の比で <strong>３：１</strong> の割合で混ぜ合わせた、強力な黄色い酸性液体です。
+        </p>
+
+        <div class="illustration-box">
+          <!-- 王水調合SVG -->
+          <svg viewBox="0 0 450 180" width="100%" height="140" style="background:#fffbeb; border-radius:15px; border:1px solid #fde68a;">
+            <!-- Concentrated Hydrochloric Acid (3 parts) -->
+            <g transform="translate(40, 20)">
+              <rect x="10" y="20" width="35" height="90" rx="5" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+              <rect x="12" y="50" width="31" height="58" rx="2" fill="#bae6fd" opacity="0.9"/>
+              <text x="27" y="45" font-family="var(--font-family)" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">塩酸</text>
+              <text x="27" y="85" font-family="var(--font-family)" font-size="16" font-weight="bold" fill="#0369a1" text-anchor="middle">3</text>
+            </g>
+            <!-- Plus sign -->
+            <text x="110" y="80" font-family="var(--font-family)" font-size="24" font-weight="bold" fill="#475569" text-anchor="middle">+</text>
+            <!-- Concentrated Nitric Acid (1 part) -->
+            <g transform="translate(140, 20)">
+              <rect x="10" y="20" width="35" height="90" rx="5" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+              <rect x="12" y="75" width="31" height="33" rx="2" fill="#fca5a5" opacity="0.9"/>
+              <text x="27" y="45" font-family="var(--font-family)" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">硝酸</text>
+              <text x="27" y="98" font-family="var(--font-family)" font-size="16" font-weight="bold" fill="#b91c1c" text-anchor="middle">1</text>
+            </g>
+            <!-- Arrow -->
+            <text x="220" y="80" font-family="var(--font-family)" font-size="24" font-weight="bold" fill="#475569" text-anchor="middle">➔</text>
+            <!-- Aqua Regia beaker -->
+            <g transform="translate(270, 20)">
+              <!-- Beaker -->
+              <path d="M 10,20 L 10,110 Q 10,115 15,115 L 75,115 Q 80,115 80,110 L 80,20" fill="none" stroke="#475569" stroke-width="3.5"/>
+              <!-- Mixture Liquid -->
+              <path d="M 12,50 L 78,50 L 78,110 C 78,113 75,113 75,113 L 15,113 C 15,113 12,113 12,110 Z" fill="#fef08a" opacity="0.8"/>
+              <!-- Gold Crown dissolving -->
+              <path d="M 30,85 L 35,70 L 45,80 L 55,70 L 60,85 Z" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+              <!-- Tiny gold bubbles -->
+              <circle cx="35" cy="65" r="2" fill="#d97706"/>
+              <circle cx="48" cy="60" r="2.5" fill="#d97706"/>
+              <circle cx="58" cy="65" r="1.5" fill="#d97706"/>
+              <text x="45" y="135" font-family="var(--font-family)" font-weight="bold" fill="#ca8a04" font-size="12" text-anchor="middle">王水（おうすい）</text>
+              <text x="45" y="152" font-family="var(--font-family)" font-size="10" fill="#b45309" text-anchor="middle">金を溶かす唯一の液体！</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図2】王水（濃塩酸３：濃硝酸１）による金の溶解</div>
+        </div>
+      </div>
+
+      <!-- =============== 【3. 計算と過不足】 =============== -->
+      <div id="science17-tab-2" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">⚖️</span>
+          <h2 class="section-title">化学反応の計算と過不足</h2>
+        </div>
+
+        <h3>1. ぴったり反応する「過不足なし」</h3>
+        <p>
+          塩酸と金属が反応して水素が発生するとき、発生する気体の量は、反応する塩酸中の塩化水素の粒と金属の粒の比率（割合）で決まります。
+          両方の薬品がちょうどあまることなく反応し終わることを<strong><ruby>過不足<rt>かふそく</rt></ruby>なく反応する</strong>と言います。
+        </p>
+
+        <h3>2. どちらか一方が余る反応</h3>
+        <ul>
+          <li><strong>金属（アルミニウム）が余る場合</strong>：塩酸に対してアルミニウムの粒が多すぎる場合、塩酸がすべて使われ水素の発生が止まりますが、試験管の底に溶け残った金属が残ります。この液にさらに塩酸を追加すると、再び反応して水素が発生します。</li>
+          <li><strong>塩酸が余る場合</strong>：アルミニウムの粒に対して塩酸が多すぎる場合、すべてのアルミニウムが溶け終わって反応が止まりますが、液の中に未反応の塩化水素が残ります。この液にさらにアルミニウムを加えると、再び反応して水素が発生します。</li>
+        </ul>
+
+        <div class="illustration-box">
+          <!-- 過不足反応グラフSVG -->
+          <svg viewBox="0 0 420 220" width="100%" height="160" style="background:#f0fdf4; border-radius:15px; border:1px solid #bbf7d0;">
+            <!-- Grid lines -->
+            <line x1="50" y1="30" x2="380" y2="30" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="50" y1="80" x2="380" y2="80" stroke="#d1fae5" stroke-width="1"/>
+            <line x1="50" y1="130" x2="380" y2="130" stroke="#d1fae5" stroke-width="1"/>
+            <!-- Y-axis -->
+            <line x1="50" y1="180" x2="50" y2="20" stroke="#047857" stroke-width="2"/>
+            <!-- X-axis -->
+            <line x1="50" y1="180" x2="390" y2="180" stroke="#047857" stroke-width="2"/>
+            <!-- Axis labels -->
+            <text x="45" y="15" font-family="var(--font-family)" font-size="10" fill="#065f46" text-anchor="middle">水素の体積</text>
+            <text x="375" y="195" font-family="var(--font-family)" font-size="10" fill="#065f46" text-anchor="middle">金属の量 (g)</text>
+            <!-- Plot Line -->
+            <path d="M 50,180 L 220,50 L 370,50" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+            <!-- Point A -->
+            <circle cx="220" cy="50" r="6" fill="#ef4444"/>
+            <text x="220" y="35" font-family="var(--font-family)" font-size="12" font-weight="bold" fill="#b91c1c" text-anchor="middle">A点（過不足なし）</text>
+            <!-- Annotations -->
+            <text x="130" y="125" font-family="var(--font-family)" font-size="9" font-weight="bold" fill="#047857" transform="rotate(-37, 130, 125)">塩酸が余る（比例）</text>
+            <text x="300" y="70" font-family="var(--font-family)" font-size="9" font-weight="bold" fill="#047857">金属が余る（一定）</text>
+          </svg>
+          <div class="illustration-caption">【図3】反応する金属の量と水素の発生量の関係</div>
+        </div>
+
+        <h3>3. グラフ of 折れ曲がった点（A点）</h3>
+        <p>
+          一定量の塩酸に金属を少しずつ増やして加えたときのグラフでは、A点までは金属の量に比例して水素の量が増えます（塩酸が余っている領域）。
+          しかし、A点で塩酸がすべて使われ過不足なく反応した後は、それ以上金属を増やしても水素の発生量は増えずに水平になります（金属が余っている領域）。この折れ曲がった点は、ちょうどぴったり過不足なく反応した割合を示しています。
+        </p>
+      </div>
+
+      <!-- =============== 【4. アルカリと金属】 =============== -->
+      <div id="science17-tab-3" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🧪</span>
+          <h2 class="section-title">アルカリと金属の反応</h2>
+        </div>
+
+        <h3>1. 強アルカリに溶ける特殊な金属</h3>
+        <p>
+          多くの金属は酸には溶けますが、アルカリには溶けません。
+          しかし、<strong>アルミニウム</strong>と<strong>亜鉛</strong>の2つは、強いアルカリ性である<strong>水酸化ナトリウム水溶液</strong>に入れると、表面から水素を発生しながら溶けていきます（亜鉛は加熱したときに反応がよく進みます）。
+        </p>
+        <p>
+          このように、酸にも強アルカリにも溶けて水素を発生する性質を持つ金属を<strong><ruby>両性金属<rt>りょうせいきんぞく</rt></ruby></strong>と呼びます。鉄や銅はアルカリ性にはまったく溶けません。
+        </p>
+
+        <div class="point-box">
+          <div class="point-box-title">💡 金属の溶け方のまとめ</div>
+          <ul>
+            <li><strong>塩酸（酸）に溶ける</strong>：アルミニウム、亜鉛、鉄（銅や金は溶けない）</li>
+            <li><strong>水酸化ナトリウム（アルカリ）に溶ける</strong>：アルミニウム、亜鉛（鉄や銅は溶けない）</li>
+            <li><strong>王水にしか溶けない</strong>：金、白金（プラチナ）</li>
+          </ul>
+        </div>
+
+        <h3>2. クリーンなエネルギーとしての水素</h3>
+        <p>
+          水素をガソリンのようにエンジン内で燃やしたり、燃料電池を使って電気に変えてモーターを動かしたりする<strong>水素自動車</strong>の研究・開発が世界中で進められています。
+          ガソリンを燃やすと温室効果ガスである二酸化炭素（$CO_2$）が排出されますが、水素は燃えても<strong>水しか出ない</strong>ため、地球温暖化を防ぐクリーンなエネルギーとして注目されています。
+        </p>
+      </div>
+
+      <!-- =============== 【5. 二酸化炭素・酸素】 =============== -->
+      <div id="science17-tab-4" class="section-card">
+        <div class="section-header">
+          <span class="section-icon">🌬️</span>
+          <h2 class="section-title">二酸化炭素と酸素の発生と計算</h2>
+        </div>
+
+        <h3>1. 二酸化炭素の発生と「空気置換」による測定</h3>
+        <p>
+          <ruby>炭酸カルシウム<rt>たんさんかるしうむ</rt></ruby>（石灰石や貝殻の主成分）に塩酸を加えると、<strong>二酸化炭素（$CO_2$）</strong>が発生します。
+        </p>
+        <p>
+          二酸化炭素は水に少し溶ける性質があるため、水上置換法でそのまま集めると、水に溶けて正確な発生量を測ることができません。
+          そこで、図4のように発生用フラスコとメスシリンダーの間に、水に溶けにくい空気で満たした<strong>空のフラスコを挟み込み</strong>、発生した二酸化炭素に空気を押し出させる（空気に置き換えて水上置換する）方法で、正確な体積を測ります。
+        </p>
+
+        <div class="illustration-box">
+          <!-- 空気置換測定SVG -->
+          <svg viewBox="0 0 500 200" width="100%" height="150" style="background:#f8fafc; border-radius:15px; border:1px solid #cbd5e1;">
+            <!-- Flask 1 (Generating CO2) -->
+            <g transform="translate(40, 40)">
+              <!-- Flask Outline -->
+              <path d="M 30,20 L 30,40 L 10,110 L 80,110 L 60,40 L 60,20 Z" fill="none" stroke="#475569" stroke-width="2"/>
+              <!-- Reaction mixture -->
+              <path d="M 13,100 L 77,100 L 80,110 L 10,110 Z" fill="#cbd5e1"/>
+              <circle cx="20" cy="105" r="4" fill="#64748b"/>
+              <circle cx="40" cy="103" r="5" fill="#64748b"/>
+              <circle cx="65" cy="106" r="3.5" fill="#64748b"/>
+              <!-- Gas bubbles -->
+              <circle cx="35" cy="80" r="3" fill="none" stroke="#64748b" stroke-dasharray="1 1"/>
+              <circle cx="50" cy="65" r="3" fill="none" stroke="#64748b" stroke-dasharray="1 1"/>
+              <text x="45" y="125" font-family="var(--font-family)" font-size="9" font-weight="bold" fill="#334155" text-anchor="middle">石灰石+塩酸</text>
+            </g>
+            <!-- Connecting Tube 1 -->
+            <path d="M 85,48 L 120,48 L 120,10 L 175,10 L 175,48" fill="none" stroke="#0284c7" stroke-width="3"/>
+            <!-- Flask 2 (Air displacement) -->
+            <g transform="translate(140, 40)">
+              <!-- Flask Outline -->
+              <path d="M 30,20 L 30,40 L 10,110 L 80,110 L 60,40 L 60,20 Z" fill="none" stroke="#475569" stroke-width="2"/>
+              <!-- Tube going all the way down -->
+              <line x1="35" y1="8" x2="35" y2="100" stroke="#0284c7" stroke-width="3"/>
+              <!-- Air filling flask -->
+              <text x="45" y="70" font-family="var(--font-family)" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">空気</text>
+              <text x="45" y="125" font-family="var(--font-family)" font-weight="bold" fill="#334155" text-anchor="middle">空瓶（空気置換）</text>
+            </g>
+            <!-- Connecting Tube 2 -->
+            <path d="M 195,48 L 220,48 L 220,10 L 310,10 L 310,110" fill="none" stroke="#0284c7" stroke-width="3"/>
+            <!-- Water Tub and Cylinder -->
+            <g transform="translate(260, 90)">
+              <!-- Water Tub -->
+              <rect x="10" y="40" width="120" height="40" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" opacity="0.8"/>
+              <!-- Cylinder (inverted) -->
+              <rect x="40" y="-30" width="30" height="90" rx="3" fill="none" stroke="#475569" stroke-width="2"/>
+              <rect x="42" y="-28" width="26" height="88" rx="1" fill="#e0f2fe" opacity="0.5"/>
+              <!-- Displaced air (pure gas) -->
+              <circle cx="50" cy="10" r="3" fill="#fff" stroke="#0284c7"/>
+              <circle cx="60" cy="-5" r="4.5" fill="#fff" stroke="#0284c7"/>
+              <text x="110" y="30" font-family="var(--font-family)" font-size="9" font-weight="bold" fill="#0369a1">メスシリンダー</text>
+            </g>
+          </svg>
+          <div class="illustration-caption">【図4】水への溶解を防ぐための二重フラスコ空気置換装置</div>
+        </div>
+
+        <div class="explain-bubble">
+          📖 <strong>ジョセフ・ブラックによる発見：</strong>1700年代にスコットランドの科学者ブラックは、石灰石（炭酸カルシウム）に酸をかけると二酸化炭素の泡が出るが、一度石灰石を熱して「生石灰（酸化カルシウム）」に変化させると、酸をかけても泡が出なくなることを発見し、石灰石には「固定された空気（二酸化炭素）」が閉じ込められていたのだと突き止めました。
+        </div>
+
+        <h3>2. 酸素の発生量と「触媒」二酸化マンガンの量</h3>
+        <p>
+          うすい過酸化水素水に二酸化マンガンを加えると、過酸化水素が分解して<strong>酸素（$O_2$）</strong>が発生します。
+        </p>
+        <p>
+          このとき、<strong>二酸化マンガンは「触媒（しょくばい）」</strong>として働きます。触媒は他の物質の分解反応を助けるだけで、自分自身は変化しません。そのため、加える二酸化マンガンの量を増やしても、<strong>発生する酸素の総量（体積）は一切変わりません</strong>。
+        </p>
+        <p>
+          ただし、触媒の量が多くなるほど過酸化水素とふれあう面積が増えるため、<strong>気体が発生するスピード（速さ）は速く、激しくなります</strong>。酸素の発生量は、過酸化水素水の「濃さ」や「体積（量）」に比例します。
+        </p>
+      </div>
+    </div>
 
     <!-- ==============================================
          =============== 国語コンテンツ ==================
@@ -1980,7 +2299,7 @@
 
     let currentStudent = null;
     let readingProgressData = []; // Array of { subject, tab_index }
-    let quizHighScores = { social: null, social17: null, science: null, japanese: null };
+    let quizHighScores = { social: null, social17: null, science: null, science17: null, japanese: null };
 
     // 学生のログイン状態を確認
     function checkStudentLogin() {
@@ -2096,7 +2415,7 @@
           
         if (quizError) throw quizError;
         
-        quizHighScores = { social: null, social17: null, science: null, japanese: null };
+        quizHighScores = { social: null, social17: null, science: null, science17: null, japanese: null };
         if (quizData) {
           quizData.forEach(row => {
             const sub = row.subject;
@@ -2115,7 +2434,7 @@
     }
 
     function updateDashboardUI() {
-      const subjects = ['social', 'social17', 'science', 'japanese'];
+      const subjects = ['social', 'social17', 'science', 'science17', 'japanese'];
       subjects.forEach(sub => {
         const readCount = readingProgressData.filter(item => item.subject === sub).length;
         const totalTabs = 5;
@@ -2164,6 +2483,9 @@
 
       const scienceCards = document.querySelectorAll('#science-content .section-card');
       scienceCards.forEach((card, idx) => appendReadButton(card, 'science', idx));
+
+      const science17Cards = document.querySelectorAll('#science17-content .section-card');
+      science17Cards.forEach((card, idx) => appendReadButton(card, 'science17', idx));
 
       const japaneseCards = document.querySelectorAll('#japanese-content .section-card');
       japaneseCards.forEach((card, idx) => appendReadButton(card, 'japanese', idx));
@@ -2272,11 +2594,13 @@
       const socialContent = document.getElementById('social-content');
       const social17Content = document.getElementById('social17-content');
       const scienceContent = document.getElementById('science-content');
+      const science17Content = document.getElementById('science17-content');
       const japaneseContent = document.getElementById('japanese-content');
       
       const socialTabs = document.getElementById('social-tabs');
       const social17Tabs = document.getElementById('social17-tabs');
       const scienceTabs = document.getElementById('science-tabs');
+      const science17Tabs = document.getElementById('science17-tabs');
       const japaneseTabs = document.getElementById('japanese-tabs');
       
       const headerTitle = document.getElementById('header-title');
@@ -2291,11 +2615,13 @@
         socialContent.style.display = 'block';
         social17Content.style.display = 'none';
         scienceContent.style.display = 'none';
+        science17Content.style.display = 'none';
         japaneseContent.style.display = 'none';
         
         socialTabs.style.display = 'flex';
         social17Tabs.style.display = 'none';
         scienceTabs.style.display = 'none';
+        science17Tabs.style.display = 'none';
         japaneseTabs.style.display = 'none';
         
         headerTitle.innerHTML = 'たのしく学ぶ！社会科「<ruby>関東地方<rt>かんとうちほう</rt></ruby>」';
@@ -2311,11 +2637,13 @@
         socialContent.style.display = 'none';
         social17Content.style.display = 'block';
         scienceContent.style.display = 'none';
+        science17Content.style.display = 'none';
         japaneseContent.style.display = 'none';
         
         socialTabs.style.display = 'none';
         social17Tabs.style.display = 'flex';
         scienceTabs.style.display = 'none';
+        science17Tabs.style.display = 'none';
         japaneseTabs.style.display = 'none';
         
         headerTitle.innerHTML = 'たのしく学ぶ！社会科「<ruby>東北・北海道地方<rt>とうほく・ほっかいどうちほう</rt></ruby>」';
@@ -2331,17 +2659,41 @@
         socialContent.style.display = 'none';
         social17Content.style.display = 'none';
         scienceContent.style.display = 'block';
+        science17Content.style.display = 'none';
         japaneseContent.style.display = 'none';
         
         socialTabs.style.display = 'none';
         social17Tabs.style.display = 'none';
         scienceTabs.style.display = 'flex';
+        science17Tabs.style.display = 'none';
         japaneseTabs.style.display = 'none';
         
         headerTitle.innerHTML = 'たのしく学ぶ！理科「<ruby>気体<rt>きたい</rt></ruby>の性質」';
         headerDesc.textContent = '酸素、二酸化炭素、水素などのいろいろな気体を大けんきゅう！';
         
         switchScienceTab(0);
+      } else if (val === 'science17') {
+        // 理科（気体２）テーマ
+        root.style.setProperty('--color-primary', '#1e824c');
+        root.style.setProperty('--color-primary-light', '#e6f7ed');
+        root.style.setProperty('--header-gradient', 'linear-gradient(135deg, #42b983 0%, #1e824c 100%)');
+        
+        socialContent.style.display = 'none';
+        social17Content.style.display = 'none';
+        scienceContent.style.display = 'none';
+        science17Content.style.display = 'block';
+        japaneseContent.style.display = 'none';
+        
+        socialTabs.style.display = 'none';
+        social17Tabs.style.display = 'none';
+        scienceTabs.style.display = 'none';
+        science17Tabs.style.display = 'flex';
+        japaneseTabs.style.display = 'none';
+        
+        headerTitle.innerHTML = 'たのしく学ぶ！理科「<ruby>気体<rt>きたい</rt></ruby>（２）金属の反応と計算」';
+        headerDesc.textContent = '金属と酸・アルカリの反応、二酸化炭素や酸素の発生量の計算をマスターしよう！';
+        
+        switchScience17Tab(0);
       } else {
         // 国語テーマ
         root.style.setProperty('--color-primary', '#8e44ad');
@@ -2351,11 +2703,13 @@
         socialContent.style.display = 'none';
         social17Content.style.display = 'none';
         scienceContent.style.display = 'none';
+        science17Content.style.display = 'none';
         japaneseContent.style.display = 'block';
         
         socialTabs.style.display = 'none';
         social17Tabs.style.display = 'none';
         scienceTabs.style.display = 'none';
+        science17Tabs.style.display = 'none';
         japaneseTabs.style.display = 'flex';
         
         headerTitle.innerHTML = 'たのしく学ぶ！国語「<ruby>随筆文<rt>ずいひつぶん</rt></ruby>の読解」';
@@ -2388,6 +2742,18 @@
       
       tabButtons[index].classList.add('active');
       document.getElementById(`social17-tab-${index}`).classList.add('active');
+    }
+
+    // 理科17（気体２）タブ切り替え
+    function switchScience17Tab(index) {
+      const tabButtons = document.querySelectorAll('#science17-tabs .tab-btn');
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      
+      const cards = document.querySelectorAll('#science17-content .section-card');
+      cards.forEach(card => card.classList.remove('active'));
+      
+      tabButtons[index].classList.add('active');
+      document.getElementById(`science17-tab-${index}`).classList.add('active');
     }
 
     // 理科タブ切り替え
@@ -2513,6 +2879,69 @@
       }
     ];
 
+    const science17Quizzes = [
+      {
+        question: "金や白金（プラチナ）を溶かすことができる、濃塩酸と濃硝酸を3:1の割合で混ぜた特別な薬品の名前は何？",
+        options: ["王水（おうすい）", "強酸水", "硝酸カリウム液", "炭酸水"],
+        answer: 0,
+        hint: "金は普通の酸には溶けないけれど、この特別な液体にだけは溶けるんだよ。"
+      },
+      {
+        question: "アルミニウムや亜鉛、鉄などの金属をうすい塩酸に入れると、発生する気体は何？",
+        options: ["酸素", "二酸化炭素", "水素", "窒素"],
+        answer: 2,
+        hint: "集めて火を近づけると、「ポッ」と音を立てて燃える、最も軽い気体だよ。"
+      },
+      {
+        question: "水素を試験管に集めてマッチの火を近づけたとき、燃えた後に試験管の口にできる物質は何？",
+        options: ["白い粉（塩化アルミニウム）", "水滴（すいてき）", "二酸化マンガン", "すす"],
+        answer: 1,
+        hint: "水素が空気中の酸素と結びついて燃えることで、この物質ができるんだ。"
+      },
+      {
+        question: "塩酸とアルミニウムのように、加えた薬品の両方が余ることなくぴったり反応し終わる状態を何という？",
+        options: ["中和反応", "過不足なく（かふそくなく）反応", "比例反応", "飽和反応"],
+        answer: 1,
+        hint: "グラフで水素の発生量が比例して増えたあと、水平に折れ曲がる境界の点（A点）のことだよ。"
+      },
+      {
+        question: "アルミニウムを水酸化ナトリウム水溶液に入れたとき、発生する気体は何？",
+        options: ["水素", "酸素", "二酸化炭素", "アンモニア"],
+        answer: 0,
+        hint: "アルミニウムは酸だけでなく、強いアルカリ性溶液に入れても同じように水素を出すよ。"
+      },
+      {
+        question: "アルミニウムや亜鉛のように、酸（塩酸）とアルカリ（水酸化ナトリウム）の両方に溶けて水素を発生する金属を何という？",
+        options: ["貴金属（ききんぞく）", "アルカリ金属", "両性金属（りょうせいきんぞく）", "重金属"],
+        answer: 2,
+        hint: "酸とアルカリの両方の「性質」に対して反応する金属だからこの名前だよ。"
+      },
+      {
+        question: "石灰石（炭酸カルシウム）にうすい塩酸を加えたときに発生する気体は何？",
+        options: ["酸素", "水素", "二酸化炭素", "アンモニア"],
+        answer: 2,
+        hint: "石灰水に通すと白く濁る性質がある、火を消すはたらきを持つ気体だよ。"
+      },
+      {
+        question: "二酸化炭素の発生量を水上置換法で測る際、水に溶けるのを防ぐため、発生フラスコとメスシリンダーの間に挟むフラスコで何を置き換える？",
+        options: ["空気", "水素", "酸素", "水滴"],
+        answer: 0,
+        hint: "二酸化炭素は水に少し溶けるので、直接通さず、中間のフラスコにあるこの気体を押し出させるんだ。"
+      },
+      {
+        question: "過酸化水素水に二酸化マンガンを加えて酸素を発生させるとき、二酸化マンガンはどのような役割を持つ？",
+        options: ["それ自身が分解して酸素になる", "反応を助けて速める「触媒（しょくばい）」", "酸素を吸収する", "過酸化水素水を薄める"],
+        answer: 1,
+        hint: "それ自身は変化せず、反応を速める働きだけをする物質のことだよ。"
+      },
+      {
+        question: "1700年代に二酸化炭素を発見したジョセフ・ブラックが、石灰石を焼いた後に酸をかけても泡が出ないことから見つけた特別な空気の正体は何？",
+        options: ["酸素", "二酸化炭素", "水素", "アンモニア"],
+        answer: 1,
+        hint: "石灰石に含まれていたガスが熱によって抜けてしまったため、この気体だと突き止めたよ。"
+      }
+    ];
+
     const scienceQuizzes = [
       {
         question: "水に溶けにくい気体を集めるときに使う、一番きれいに気体が集まる方法はどれ？",
@@ -2593,6 +3022,8 @@
         currentQuizSet = social17Quizzes;
       } else if (select === 'science') {
         currentQuizSet = scienceQuizzes;
+      } else if (select === 'science17') {
+        currentQuizSet = science17Quizzes;
       } else {
         currentQuizSet = japaneseQuizzes;
       }
@@ -2601,7 +3032,8 @@
       document.getElementById('quiz-title').textContent = 
         (select === 'social') ? "関東地方クイズ！" : 
         ((select === 'social17') ? "東北・北海道地方クイズ！" : 
-        ((select === 'science') ? "気体マスタークイズ！" : "国語・読解チェッククイズ！"));
+        ((select === 'science') ? "気体マスタークイズ！" : 
+        ((select === 'science17') ? "気体と金属の反応クイズ！" : "国語・読解チェッククイズ！")));
       document.getElementById('q-text').textContent = `Q${currentQuizIndex + 1}. ${currentQuiz.question}`;
       
       const optionsContainer = document.getElementById('q-options');
